@@ -361,34 +361,88 @@ export const HOME_ASSETS = {
 };
 
 export const PROF_BIO: ProfBio = {
-  name: "Professor David A Leigh",
+  name: "David A Leigh",
   titles: ["FRS", "FRSE", "FRSC", "MAE"],
-  education: "BSc PhD (University of Sheffield)",
+  education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
   career: [
-    { year: "2012-", role: "Royal Society Research Professor & Sir Samuel Hall Chair of Chemistry, University of Manchester" },
-    { year: "2016-", role: "Distinguished Professor, East China Normal University, Shanghai" },
-    { year: "2001-2012", role: "Forbes Chair of Organic Chemistry, University of Edinburgh" }
+    { year: "1987-89", role: "Postdoctoral Research Associate, National Research Council of Canada (Ottawa)" },
+    { year: "1989-95", role: "Lecturer in Organic Chemistry, UMIST" },
+    { year: "1996-98", role: "Reader in Organic Chemistry, UMIST" },
+    { year: "1998-01", role: "Chair of Synthetic Chemistry, University of Warwick" },
+    { year: "1998-03", role: "EPSRC Advanced Research Fellow" },
+    { year: "2001-12", role: "Forbes Chair of Organic Chemistry, University of Edinburgh" },
+    { year: "2012-13", role: "Professor of Organic Chemistry, University of Manchester" },
+    { year: "2014-", role: "Sir Samuel Hall Chair of Chemistry, University of Manchester" },
+    { year: "2016-26", role: "Royal Society Research Professor" }
   ],
   awards: [
-    { year: "2023", title: "Royal Medal of the Royal Society" },
-    { year: "2021", title: "ISNSCE Nanoscience Prize" },
-    { year: "2017", title: "RSC Sir David Attenborough Award" }
+    { year: "2026", title: "ACS Ronald Breslow Award for Achievement in Biomimetic Chemistry", link: "https://cen.acs.org/people/awards/ACS-announces-2026-national-award/103/web/2025/08" },
+    { year: "2024", title: "GDCh August Wilhelm von Hofmann Medal", link: "https://en.gdch.de/gdch/prizes-and-awards/gdch-awards/august-wilhelm-von-hofmann-commemorative-medal.html" },
+    { year: "2024", title: "Stoddart Prize" },
+    { year: "2024", title: "Fellow of the American Academy of Arts and Sciences" },
+    { year: "2023", title: "RSC Horizon Prize: Perkin Prize in Physical Organic Chemistry" },
+    { year: "2021", title: "Royal Medal, Royal Society of Edinburgh" },
+    { year: "2019", title: "Nanoscience Prize (ISNSCE)" },
+    { year: "2018", title: "Clarivate Web of Science Highly-Cited Researcher" },
+    { year: "2018", title: "ERC Advanced Grant (MolMacIP)" },
+    { year: "2017", title: "RSC Perkin Prize for Organic Chemistry" },
+    { year: "2014", title: "RSC Pedler Award" },
+    { year: "2013", title: "Royal Society Bakerian Medal" },
+    { year: "2013", title: "ERC Advanced Grant (Molfactory)" },
+    { year: "2010", title: "RSC Tilden Prize" },
+    { year: "2009", title: "Fellow of the Royal Society (London)" },
+    { year: "2009", title: "RSC Merck Award" },
+    { year: "2008", title: "ERC Advanced Grant (WALKINGMOLS)" },
+    { year: "2007", title: "Descartes Prize for Research" },
+    { year: "2007", title: "Feynman Prize for Nanotechnology" },
+    { year: "2007", title: "Chancellor's Award for Research" },
+    { year: "2005", title: "Fellow of the Royal Society of Edinburgh" }
   ],
-  lectures: [],
+  lectures: [
+    { year: "2025", title: "Stoddart Memorial Lecture, ISMSC2025, Kyoto, Japan" },
+    { year: "2025", title: "Organic Syntheses Lecture, University of Toronto, Canada" },
+    { year: "2024", title: "Donald J. Cram Lecture, UCLA, USA" },
+    { year: "2024", title: "Bristol Myers Squibb Lecture, Scripps Research, USA" },
+    { year: "2023", title: "Newlands Lecture, Imperial College London" },
+    { year: "2022", title: "Lansdowne Lecturer, University of Victoria, Canada" },
+    { year: "2021", title: "Stranks Memorial Lecture, RACI, Australia" },
+    { year: "2019", title: "World Distinguished Scholar Forum Lecture, Sun Yat-sen University, China" },
+    { year: "2013", title: "Bakerian Lecture, Royal Society, London" },
+    { year: "2012", title: "Sir Robert Robinson Distinguished Lectureship, Liverpool" }
+  ],
   memberships: [
-    "Fellow of the Royal Society (elected 2009)",
-    "Member of the Academia Europaea (elected 2012)",
-    "Fellow of the Royal Society of Edinburgh (elected 2005)"
+    "American Chemical Society",
+    "American Association for the Advancement of Science",
+    "Manchester Circle of Magicians",
+    "Fellow of the Royal Society of Chemistry",
+    "Fellow of the Royal Society of Edinburgh",
+    "Fellow of the Royal Society (London)",
+    "Academia Europaea",
+    "International Guild of Knot Tyers",
+    "Governor, Withington Girls’ School"
   ],
-  interviews: [],
+  interviews: [
+    { year: "2018", title: "Nanobots & Creativity", source: "a capella science", link: "https://youtu.be/ymC5KkVy8zc", type: 'video' },
+    { year: "2017", title: "In Situ", source: "Chemistry World", link: "https://www.chemistryworld.com/opinion/in-situ-with-david-leigh/3007438.article", type: 'article' },
+    { year: "2017", title: "Rotaxanes", source: "Chemistry World Podcast", link: "https://www.chemistryworld.com/podcasts/rotaxanes/3007468.article", type: 'audio' },
+    { year: "2017", title: "Professor David Leigh: Molecular Machines' Promise", source: "Radio New Zealand", link: "https://www.radionz.co.nz/national/programmes/saturday/audio/201832839/professor-david-leigh-molecular-machines'-promise-for-humanity", type: 'audio' }
+  ],
   contact: {
-    manchester: ["Manchester Institute of Biotechnology", "University of Manchester", "Manchester M1 7DN", "UK"],
-    shanghai: ["School of Chemistry and Molecular Engineering", "East China Normal University", "Shanghai 200241", "China"],
+    manchester: [
+      "Royal Society Research Professor & Sir Samuel Hall Professor of Chemistry",
+      "Department of Chemistry, The University of Manchester",
+      "Oxford Road, MANCHESTER, M139PL, UK"
+    ],
+    shanghai: [
+      "Distinguished Professor",
+      "School of Chemistry and Molecular Engineering",
+      "East China Normal University, SHANGHAI, 200062, China"
+    ],
     email: "david.leigh@manchester.ac.uk",
-    twitter: "@LeighGroup",
-    scholar: "https://scholar.google.com/citations?user=Y_D_S8QAAAAJ",
-    orcid: "0000-0002-1202-1014",
-    researcherId: "B-5301-2009"
+    twitter: "@ProfDaveLeigh",
+    scholar: "https://scholar.google.co.uk/citations?user=jLubszkAAAAJ",
+    orcid: "0000-0002-1202-4507",
+    researcherId: "K-5965-2015"
   }
 };
 
