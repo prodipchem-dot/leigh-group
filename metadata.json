@@ -1,0 +1,8 @@
+{
+  "name": "Leigh Group Molecular Robotics",
+  "description": "A cutting-edge exploration of molecular knots, motors, and robotics led by Professor David Leigh at the University of Manchester.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
