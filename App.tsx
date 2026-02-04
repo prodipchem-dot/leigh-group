@@ -553,6 +553,13 @@ const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => (
 const PublicationsPage = () => {
   const years = Object.keys(PUBLICATIONS).sort((a, b) => parseInt(b) - parseInt(a));
   
+  const scrollToYear = (year: string) => {
+    const element = document.getElementById(`year-${year}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="pt-40 pb-32 px-6 bg-slate-50">
       <div className="max-w-6xl mx-auto space-y-16">
@@ -567,7 +574,13 @@ const PublicationsPage = () => {
           <div className="sticky top-24 z-20 py-4 bg-slate-50/80 backdrop-blur-sm">
             <div className="flex flex-wrap justify-center gap-2">
               {years.map(year => (
-                <a key={year} href={`#year-${year}`} className="px-5 py-2 bg-white border border-slate-200 rounded-full text-xs font-black uppercase tracking-widest text-slate-500 hover:text-[#660099] hover:border-purple-300 hover:bg-purple-50 transition-all shadow-sm">{year}</a>
+                <button 
+                    key={year} 
+                    onClick={() => scrollToYear(year)}
+                    className="px-5 py-2 bg-white border border-slate-200 rounded-full text-xs font-black uppercase tracking-widest text-slate-500 hover:text-[#660099] hover:border-purple-300 hover:bg-purple-50 transition-all shadow-sm focus:outline-none"
+                >
+                    {year}
+                </button>
               ))}
             </div>
           </div>
@@ -575,7 +588,7 @@ const PublicationsPage = () => {
 
         <div className="space-y-32">
           {years.map((year) => (
-            <section key={year} id={`year-${year}`} className="scroll-mt-32 space-y-10">
+            <section key={year} id={`year-${year}`} className="scroll-mt-56 space-y-10">
               <div className="flex items-center space-x-8">
                 <h2 className="text-7xl md:text-9xl font-black text-slate-200 select-none absolute -left-10 md:left-auto opacity-40">{year}</h2>
                 <div className="relative z-10">
