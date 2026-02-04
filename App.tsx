@@ -76,7 +76,6 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
           </div>
         </Link>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-1">
           {navLinks.map((link) => (
             <Link 
@@ -98,13 +97,11 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
           )}
         </div>
 
-        {/* Mobile Toggle */}
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-[#660099] p-2">
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
