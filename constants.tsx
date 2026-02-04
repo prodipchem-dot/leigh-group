@@ -333,7 +333,6 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
   }
 };
 
-// Fix: Define missing research data constants used in the application
 export const SCIENCE_DOMAINS = [
   { id: 'robotics', title: 'Molecular Robotics', description: 'Development of tiny machines for complex tasks.', icon: 'FlaskConical', color: 'purple' },
   { id: 'topology', title: 'Molecular Knots', description: 'Exploring the topology of intertwined molecules.', icon: 'Atom', color: 'blue' }

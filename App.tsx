@@ -135,7 +135,6 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
     const saved = localStorage.getItem('leigh-group-home-content');
     if (saved) {
       const parsed = JSON.parse(saved);
-      // Ensure existing saved state uses internal links if they match titles
       parsed.projects = parsed.projects.map((p: any) => {
         const matching = RESEARCH_PROJECTS.find(rp => rp.title === p.title);
         return matching ? { ...p, link: matching.link, slug: matching.slug } : p;
@@ -565,10 +564,12 @@ const PublicationsPage = () => {
             <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4">Scientific Archive</h1>
             <p className="text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto italic font-medium">"Mapping the topology of the microscopic world through synthesis and innovation."</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-2">
-            {years.map(year => (
-              <a key={year} href={`#year-${year}`} className="px-5 py-2 bg-white border border-slate-200 rounded-full text-xs font-black uppercase tracking-widest text-slate-500 hover:text-[#660099] hover:border-purple-300 hover:bg-purple-50 transition-all shadow-sm">{year}</a>
-            ))}
+          <div className="sticky top-24 z-20 py-4 bg-slate-50/80 backdrop-blur-sm">
+            <div className="flex flex-wrap justify-center gap-2">
+              {years.map(year => (
+                <a key={year} href={`#year-${year}`} className="px-5 py-2 bg-white border border-slate-200 rounded-full text-xs font-black uppercase tracking-widest text-slate-500 hover:text-[#660099] hover:border-purple-300 hover:bg-purple-50 transition-all shadow-sm">{year}</a>
+              ))}
+            </div>
           </div>
         </div>
 
