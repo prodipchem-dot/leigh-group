@@ -23,6 +23,11 @@ export interface GroupMember {
   link?: string;
 }
 
+export interface Responsibility {
+  task: string;
+  person: string;
+}
+
 export interface ProfBio {
   name: string;
   titles: string[];
@@ -333,6 +338,35 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
   }
 };
 
+export const MONKEY_BUSINESS: Responsibility[] = [
+  { task: "Safety Champion", person: "Flavio" },
+  { task: "Bay Bosses", person: "Enzo (A), Prodip (B), Maxime (C), Martin (D), Patrick (E), Flavio (F)" },
+  { task: "Webpage and IT Management", person: "Maria" },
+  { task: "Leigh Group Mailing List", person: "Sau Yin" },
+  { task: "Smelly Büchi", person: "Huakui" },
+  { task: "NMR", person: "Emily, Patrycja, Alex" },
+  { task: "MS", person: "Loli, Axel, Jannik, Jessica" },
+  { task: "HPLC", person: "Toufic, Joaquin" },
+  { task: "Size exclusion", person: "Patrick" },
+  { task: "Automated Columns", person: "Loli, Maxime, Lukas" },
+  { task: "SPS", person: "Lukas" },
+  { task: "Microwave", person: "Victoria" },
+  { task: "UV-vis and photoreactor", person: "Ke, James" },
+  { task: "IR spectrophotometer", person: "Patrick" },
+  { task: "Melting point", person: "Ke" },
+  { task: "Dishwasher", person: "Huakui" },
+  { task: "Water purification system", person: "Huakui" },
+  { task: "Polarimeter", person: "Peng-Lai" },
+  { task: "Centrifuge machine", person: "Peng-Lai" },
+  { task: "pH meter", person: "Victoria" },
+  { task: "Annual Windermere Trip", person: "Valerie" },
+  { task: "Group meeting schedule", person: "Dan" },
+  { task: "Applicants schedule", person: "Dan" },
+  { task: "Old Trafford ticket distribution", person: "Maria, Prodip" },
+  { task: "Solvent, waste rota, Unpacking new chemicals and labcup", person: "Flavio, Ke, Victoria, Peng-Lai, Prodip, Enzo, Maria" },
+  { task: "Glassblower + Electronical/Mechanical Workshops", person: "Toufic" }
+];
+
 export const SCIENCE_DOMAINS = [
   { id: 'robotics', title: 'Molecular Robotics', description: 'Development of tiny machines for complex tasks.', icon: 'FlaskConical', color: 'purple' },
   { id: 'topology', title: 'Molecular Knots', description: 'Exploring the topology of intertwined molecules.', icon: 'Atom', color: 'blue' }
@@ -361,7 +395,7 @@ export const HOME_ASSETS = {
 };
 
 export const PROF_BIO: ProfBio = {
-  name: "David A Leigh",
+    name: "David A Leigh",
   titles: ["FRS", "FRSE", "FRSC", "MAE"],
   education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
   career: [

@@ -38,13 +38,16 @@ import {
   Download,
   Info,
   Maximize2,
-  Book
+  Book,
+  Shield,
+  Ticket,
+  AlertTriangle
 } from 'lucide-react';
-import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS, RESEARCH_HIGHLIGHT_CONTENT } from './constants';
+import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS, RESEARCH_HIGHLIGHT_CONTENT, MONKEY_BUSINESS, Responsibility } from './constants';
 import MolecularCanvas from './components/MolecularCanvas';
 import Assistant from './components/Assistant';
 
-const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditing: boolean }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -62,7 +65,7 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
     { name: 'People', path: '/group', icon: <Users className="w-4 h-4" /> },
     { name: 'Publications', path: '/literature', icon: <BookOpen className="w-4 h-4" /> },
     { name: 'Virtual Tour', path: '/vtour', icon: <Compass className="w-4 h-4" /> },
-    { name: 'Group Matters', path: '#', icon: <MessageSquare className="w-4 h-4" /> },
+    { name: 'Group Matters', path: '/group-matters', icon: <MessageSquare className="w-4 h-4" /> },
   ];
 
   return (
@@ -84,20 +87,11 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
             <Link 
               key={link.name}
               to={link.path}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname.startsWith(link.path) && (link.path !== '/' || location.pathname === '/') ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname === link.path ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
             >
               <span>{link.name}</span>
             </Link>
           ))}
-          {location.pathname === '/' && (
-            <button 
-              onClick={onToggleEdit}
-              className={`ml-4 flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${isEditing ? 'bg-[#ffcc00] text-[#660099]' : 'bg-[#660099] text-white hover:bg-purple-800'}`}
-            >
-              {isEditing ? <Save className="w-4 h-4" /> : <Edit2 className="w-4 h-4" />}
-              <span>{isEditing ? 'Finish' : 'Edit'}</span>
-            </button>
-          )}
         </div>
 
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-[#660099] p-2">
@@ -130,51 +124,18 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
   );
 };
 
-const HomePage = ({ isEditing }: { isEditing: boolean }) => {
-  const [content, setContent] = useState(() => {
-    const saved = localStorage.getItem('leigh-group-home-content');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      parsed.projects = parsed.projects.map((p: any) => {
-        const matching = RESEARCH_PROJECTS.find(rp => rp.title === p.title);
-        return matching ? { ...p, link: matching.link, slug: matching.slug } : p;
-      });
-      return parsed;
-    }
-    return {
-      welcomeTitle: "Welcome to the Leigh group website",
-      researchTitle: "Our Research",
-      researchPara1: "Our group explores, invents and discovers fundamental ways to control molecular-level dynamics and topology. This includes strategies and methods to synthesize interlocked molecular architectures (e.g. benzylic amide and metal ‘passive template’ catenanes, rotaxanes and molecular shuttles [1995-] and catalytic ‘active template’ synthesis [2006-]), molecular machinery [1999-], molecular ratchet mechanisms [2003-], molecular knotting [2011-], molecular assemblers [2013-], molecular robotics [2016-], and molecular weaving [2020-].",
-      researchPara2: "Perhaps the best way to appreciate the technological potential of controlled molecular-level motion is to recognise that nanomotors and molecular-level machines lie at the heart of every significant biological process. Over billions of years of evolution Nature has not repeatedly chosen this solution for achieving complex task performance without good reason. When we learn how to build artificial structures that can control and exploit molecular level motion, and interface their effects directly with other molecular-level substructures and the outside world, it will potentially impact on every aspect of functional molecule and materials design. An improved understanding of physics and biology will surely follow.",
-      quote1: "What I cannot create, I do not understand",
-      quote1Author: "Richard P. Feynman",
-      projects: RESEARCH_PROJECTS,
-      heroGallery: HOME_ASSETS.hero,
-      researchGallery: HOME_ASSETS.research,
-      footerGallery: HOME_ASSETS.footerCards
-    };
-  });
-
-  useEffect(() => {
-    localStorage.setItem('leigh-group-home-content', JSON.stringify(content));
-  }, [content]);
-
-  const updateField = (field: string, value: any) => {
-    setContent((prev: any) => ({ ...prev, [field]: value }));
-  };
-
-  const handleProjectUpdate = (index: number, field: keyof ResearchProject, value: string) => {
-    const newProjects = [...content.projects];
-    newProjects[index] = { ...newProjects[index], [field]: value };
-    updateField('projects', newProjects);
-  };
-
-  const addProject = () => {
-    updateField('projects', [...content.projects, { title: 'New Project', image: 'images/thumbs/Gelthumbnail.png', slug: 'new-project', link: '/research/new-project' }]);
-  };
-
-  const removeProject = (index: number) => {
-    updateField('projects', content.projects.filter((_: any, i: number) => i !== index));
+const HomePage = () => {
+  const content = {
+    welcomeTitle: "Welcome to the Leigh group website",
+    researchTitle: "Our Research",
+    researchPara1: "Our group explores, invents and discovers fundamental ways to control molecular-level dynamics and topology. This includes strategies and methods to synthesize interlocked molecular architectures (e.g. benzylic amide and metal ‘passive template’ catenanes, rotaxanes and molecular shuttles [1995-] and catalytic ‘active template’ synthesis [2006-]), molecular machinery [1999-], molecular ratchet mechanisms [2003-], molecular knotting [2011-], molecular assemblers [2013-], molecular robotics [2016-], and molecular weaving [2020-].",
+    researchPara2: "Perhaps the best way to appreciate the technological potential of controlled molecular-level motion is to recognise that nanomotors and molecular-level machines lie at the heart of every significant biological process. Over billions of years of evolution Nature has not repeatedly chosen this solution for achieving complex task performance without good reason. When we learn how to build artificial structures that can control and exploit molecular level motion, and interface their effects directly with other molecular-level substructures and the outside world, it will potentially impact on every aspect of functional molecule and materials design. An improved understanding of physics and biology will surely follow.",
+    quote1: "What I cannot create, I do not understand",
+    quote1Author: "Richard P. Feynman",
+    projects: RESEARCH_PROJECTS,
+    heroGallery: HOME_ASSETS.hero,
+    researchGallery: HOME_ASSETS.research,
+    footerGallery: HOME_ASSETS.footerCards
   };
 
   return (
@@ -189,15 +150,7 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
           </a>
         </div>
         <div className="text-center mb-12">
-          {isEditing ? (
-            <input 
-              className="text-3xl font-black text-slate-900 serif-font text-center bg-purple-50 p-2 rounded-xl w-full max-w-2xl"
-              value={content.welcomeTitle}
-              onChange={(e) => updateField('welcomeTitle', e.target.value)}
-            />
-          ) : (
-            <h2 className="text-3xl font-black text-slate-900 serif-font">{content.welcomeTitle}</h2>
-          )}
+          <h2 className="text-3xl font-black text-slate-900 serif-font">{content.welcomeTitle}</h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20 bg-slate-50 p-8 rounded-[3rem] border border-slate-100">
           <div className="lg:col-span-6 aspect-video rounded-[2rem] overflow-hidden shadow-2xl">
@@ -216,29 +169,18 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
             <div className="sticky top-28">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xs font-black uppercase tracking-[0.3em] text-[#660099] flex items-center gap-2"><Sparkles className="w-4 h-4 text-[#ffcc00]" /> Recent Highlights</h3>
-                {isEditing && (
-                  <button onClick={addProject} className="p-1 bg-[#660099] text-white rounded-md hover:bg-purple-800 transition-colors"><Plus className="w-3 h-3" /></button>
-                )}
               </div>
               <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2 custom-scrollbar">
                 {content.projects.map((project: ResearchProject, idx: number) => (
                   <div key={idx} className="relative group">
-                    {isEditing ? (
-                      <div className="bg-slate-50 p-3 rounded-2xl border border-dashed border-purple-200 space-y-2">
-                        <input className="w-full text-[10px] font-bold p-1 bg-white border border-slate-200 rounded" value={project.title} onChange={(e) => handleProjectUpdate(idx, 'title', e.target.value)} />
-                        <input className="w-full text-[8px] p-1 bg-white border border-slate-200 rounded" value={project.image} onChange={(e) => handleProjectUpdate(idx, 'image', e.target.value)} />
-                        <button onClick={() => removeProject(idx)} className="text-red-500 hover:text-red-700 transition-colors"><Trash2 className="w-3 h-3" /></button>
-                      </div>
-                    ) : (
-                      <Link to={project.link} className="block">
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all group-hover:shadow-md group-hover:border-purple-300">
-                          <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                            <span className="text-white text-[10px] font-black uppercase tracking-widest">{project.title}</span>
-                          </div>
+                    <Link to={project.link} className="block">
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all group-hover:shadow-md group-hover:border-purple-300">
+                        <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                          <span className="text-white text-[10px] font-black uppercase tracking-widest">{project.title}</span>
                         </div>
-                      </Link>
-                    )}
+                      </div>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -263,35 +205,17 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
             </div>
             <section className="space-y-10">
               <div className="flex items-center gap-4">
-                {isEditing ? <input className="text-2xl font-black text-slate-900 serif-font bg-purple-50 p-2 rounded-xl" value={content.researchTitle} onChange={(e) => updateField('researchTitle', e.target.value)} /> : <h3 className="text-2xl font-black text-slate-900 serif-font">{content.researchTitle}</h3>}
+                <h3 className="text-2xl font-black text-slate-900 serif-font">{content.researchTitle}</h3>
                 <div className="h-px flex-1 bg-slate-100"></div>
               </div>
               <div className="grid grid-cols-1 gap-8 text-slate-700 leading-relaxed text-lg serif-font italic pr-4">
-                {isEditing ? (
-                  <>
-                    <textarea className="w-full bg-purple-50 p-4 rounded-3xl border border-purple-100 min-h-[150px]" value={content.researchPara1} onChange={(e) => updateField('researchPara1', e.target.value)} />
-                    <textarea className="w-full bg-purple-50 p-4 rounded-3xl border border-purple-100 min-h-[150px]" value={content.researchPara2} onChange={(e) => updateField('researchPara2', e.target.value)} />
-                  </>
-                ) : (
-                  <>
-                    <p>{content.researchPara1} For some highlights see <Link to="/research" className="text-[#660099] font-bold underline">HERE</Link>.</p>
-                    <p>{content.researchPara2}</p>
-                  </>
-                )}
+                <p>{content.researchPara1} For some highlights see <Link to="/research" className="text-[#660099] font-bold underline">HERE</Link>.</p>
+                <p>{content.researchPara2}</p>
               </div>
               <div className="bg-purple-50 p-10 rounded-[3rem] border border-purple-100 relative overflow-hidden group">
                  <Quote className="absolute top-4 right-8 w-20 h-20 text-[#660099] opacity-10 group-hover:scale-110 transition-transform" />
-                 {isEditing ? (
-                   <div className="space-y-4">
-                     <textarea className="text-2xl font-bold text-[#660099] italic serif-font bg-white/50 p-2 rounded-xl w-full" value={content.quote1} onChange={(e) => updateField('quote1', e.target.value)} />
-                     <input className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60 bg-white/50 p-2 rounded-xl w-full" value={content.quote1Author} onChange={(e) => updateField('quote1Author', e.target.value)} />
-                   </div>
-                 ) : (
-                   <>
-                    <p className="text-2xl font-bold text-[#660099] italic serif-font mb-4">"{content.quote1}"</p>
-                    <p className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60">— {content.quote1Author}</p>
-                   </>
-                 )}
+                 <p className="text-2xl font-bold text-[#660099] italic serif-font mb-4">"{content.quote1}"</p>
+                 <p className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60">— {content.quote1Author}</p>
               </div>
               <div className="space-y-12">
                  {content.researchGallery.map((asset: any, idx: number) => (
@@ -313,6 +237,176 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
             </section>
           </main>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const GroupMattersPage = () => {
+  const downloadManual = () => {
+    const password = prompt('Please enter your password to download the lab manual', ' ');
+    if (password === 'leigh406') {
+      window.open('https://www.catenane.net/images/general/DLvLeigh%20Group%20New%20Worker%20Information.html', '_blank');
+    } else {
+      alert('Incorrect password');
+    }
+  };
+
+  return (
+    <div className="pt-40 pb-32 px-6 bg-slate-50 min-h-screen">
+      <div className="max-w-6xl mx-auto space-y-24">
+        <div className="text-center space-y-8">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-24 h-24 bg-purple-50 text-[#660099] rounded-[2rem] flex items-center justify-center mx-auto border border-purple-100 shadow-xl">
+            <MessageSquare className="w-12 h-12" />
+          </motion.div>
+          <div>
+            <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4 uppercase">Group Matters</h1>
+            <p className="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto italic font-medium leading-relaxed">
+              Internal information, safety protocols, and group perks.
+            </p>
+          </div>
+          <div className="w-24 h-1 bg-[#ffcc00] mx-auto rounded-full"></div>
+        </div>
+
+        <div className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-2xl overflow-hidden relative group">
+           <img src="images/GroupPhoto2023.jpg" alt="Leigh Group Windermere 2023" className="w-full h-auto rounded-[2rem] transition-transform duration-1000 group-hover:scale-[1.01]" />
+           <div className="absolute bottom-12 right-12 glass px-6 py-3 rounded-full shadow-xl">
+             <span className="text-xs font-black uppercase tracking-widest text-[#660099]">Windermere • 2023</span>
+           </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <section className="space-y-8">
+            <div className="flex items-center gap-4">
+               <Shield className="text-[#660099] w-8 h-8" />
+               <h2 className="text-3xl font-black text-slate-900 serif-font">Safety First</h2>
+            </div>
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-6">
+               <p className="text-slate-600 font-medium">The current designated first aiders in our research group are:</p>
+               <div className="flex flex-wrap gap-4">
+                  <a href="/#/group" className="flex items-center gap-3 px-5 py-3 bg-purple-50 rounded-2xl hover:bg-[#660099] hover:text-white transition-all group/pill">
+                    <Users className="w-4 h-4 text-[#660099] group-hover/pill:text-white" />
+                    <span className="text-sm font-bold">Valerie Bruyr</span>
+                  </a>
+                  <a href="/#/group" className="flex items-center gap-3 px-5 py-3 bg-purple-50 rounded-2xl hover:bg-[#660099] hover:text-white transition-all group/pill">
+                    <Users className="w-4 h-4 text-[#660099] group-hover/pill:text-white" />
+                    <span className="text-sm font-bold">Daniel Tetlow</span>
+                  </a>
+               </div>
+               <div className="pt-6 border-t border-slate-50">
+                  <button 
+                    onClick={downloadManual}
+                    className="w-full py-5 bg-[#ffcc00] text-[#660099] rounded-[1.5rem] font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:shadow-xl transition-all"
+                  >
+                    <Download className="w-5 h-5" /> Download Group Lab Manual
+                  </button>
+                  <p className="text-[10px] text-slate-400 text-center mt-4 font-bold uppercase tracking-tighter flex items-center justify-center gap-2">
+                    <AlertTriangle className="w-3 h-3" /> Password Required for Download
+                  </p>
+               </div>
+            </div>
+          </section>
+
+          <section className="space-y-8">
+            <div className="flex items-center gap-4">
+               <Briefcase className="text-[#660099] w-8 h-8" />
+               <h2 className="text-3xl font-black text-slate-900 serif-font">Monkey Business</h2>
+            </div>
+            <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm overflow-hidden">
+               <div className="overflow-x-auto">
+                 <table className="w-full text-left">
+                   <thead className="bg-purple-50 border-b border-purple-100">
+                     <tr>
+                       <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-[#660099]">Responsibility</th>
+                       <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-[#660099]">Monkey</th>
+                     </tr>
+                   </thead>
+                   <tbody className="divide-y divide-slate-50">
+                     {MONKEY_BUSINESS.map((item, idx) => (
+                       <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
+                         <td className="px-6 py-4 text-sm font-bold text-slate-900">{item.task}</td>
+                         <td className="px-6 py-4 text-sm text-slate-600 font-medium italic">{item.person}</td>
+                       </tr>
+                     ))}
+                   </tbody>
+                 </table>
+               </div>
+            </div>
+          </section>
+        </div>
+
+        <section className="space-y-12">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-slate-200 pb-8">
+             <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                   <Ticket className="text-[#ffcc00] w-10 h-10" />
+                   <h2 className="text-4xl md:text-5xl font-black text-slate-900 serif-font uppercase">Old Trafford Tickets</h2>
+                </div>
+                <p className="text-slate-500 max-w-2xl leading-relaxed font-medium">
+                  The Leigh Group and their guests have use of a pair of Season Tickets for Manchester United. 
+                  For the 2023-24 season the seats are in the <span className="text-[#660099] font-bold">Sir Alex Ferguson Stand</span>.
+                </p>
+             </div>
+             <a href="http://www.manutd.com/en/Visit-Old-Trafford/Maps-And-Directions.aspx" target="_blank" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#660099] bg-purple-50 px-6 py-3 rounded-full hover:bg-[#660099] hover:text-white transition-all">
+                <MapPin className="w-4 h-4" /> Get Directions
+             </a>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+             <div className="lg:col-span-2 space-y-8">
+                <div className="bg-white p-4 rounded-[2.5rem] border border-slate-100 shadow-xl space-y-4">
+                   <img src="images/general/OldTrafford2.bmp" alt="Old Trafford Seating" className="w-full rounded-[1.5rem]" />
+                   <div className="p-4 bg-slate-50 rounded-2xl">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                         <div className="space-y-1">
+                            <p className="text-[10px] font-black uppercase text-slate-400">Stand</p>
+                            <p className="text-sm font-bold text-slate-900">Sir Alex Ferguson</p>
+                         </div>
+                         <div className="space-y-1">
+                            <p className="text-[10px] font-black uppercase text-slate-400">Block</p>
+                            <p className="text-sm font-bold text-slate-900">N3406</p>
+                         </div>
+                         <div className="space-y-1">
+                            <p className="text-[10px] font-black uppercase text-slate-400">Row</p>
+                            <p className="text-sm font-bold text-slate-900">25</p>
+                         </div>
+                         <div className="space-y-1">
+                            <p className="text-[10px] font-black uppercase text-slate-400">Seats</p>
+                            <p className="text-sm font-bold text-slate-900">81 & 82</p>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl space-y-6">
+                   <h3 className="text-2xl font-black text-slate-900 serif-font">Booking Process</h3>
+                   <div className="space-y-4 text-slate-600 leading-relaxed text-sm">
+                      <p>Everyone in the group who wishes to should be able to see at least one game a season. <span className="font-bold text-slate-900">Prodip</span> or <span className="font-bold text-slate-900">Maria</span> keep the membership details necessary to allocate tickets electronically.</p>
+                      <p>All home games in the Premier League, FA Cup and Champions League are available. Games marked with an * may or may not be played at Old Trafford.</p>
+                      <div className="pt-4">
+                        <img src="images/general/ManU2023.jpg" alt="Booking List" className="w-full rounded-2xl border border-slate-100" />
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div className="space-y-8">
+                <div className="bg-slate-900 p-4 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
+                   <img src="images/general/OldTraffordView.png" alt="View from seats" className="w-full rounded-[1.5rem] opacity-90 group-hover:scale-105 transition-transform duration-700" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent flex items-end p-8">
+                      <div className="space-y-2">
+                        <p className="text-[#ffcc00] text-[10px] font-black uppercase tracking-[0.3em]">Stadium Preview</p>
+                        <p className="text-white font-bold text-lg">Pitch-perfect view from row 25</p>
+                      </div>
+                   </div>
+                </div>
+                <div className="bg-purple-900 p-8 rounded-[2.5rem] shadow-2xl text-white space-y-6 relative overflow-hidden">
+                   <Atom className="absolute -bottom-10 -right-10 w-40 h-40 text-white/5 rotate-12" />
+                   <h3 className="text-2xl font-black serif-font">Game Day?</h3>
+                   <p className="text-purple-200 text-sm leading-relaxed">Tickets will be sent to you electronically a few days before kick-off. Make sure you have the official United app installed.</p>
+                   <button className="w-full py-4 bg-white text-[#660099] rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#ffcc00] hover:text-[#660099] transition-all">Request Ticket Allocation</button>
+                </div>
+             </div>
+          </div>
+        </section>
       </div>
     </div>
   );
@@ -918,22 +1012,21 @@ const Footer = () => (
 );
 
 const App: React.FC = () => {
-  const [isEditing, setIsEditing] = useState(false);
-
   return (
     <Router>
       <div className="min-h-screen flex flex-col selection:bg-purple-100">
-        <Navbar onToggleEdit={() => setIsEditing(!isEditing)} isEditing={isEditing} />
+        <Navbar />
         <main className="flex-1">
           <AnimatePresence mode="wait">
             <Routes>
-              <Route path="/" element={<motion.div key="home" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><HomePage isEditing={isEditing} /></motion.div>} />
+              <Route path="/" element={<motion.div key="home" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><HomePage /></motion.div>} />
               <Route path="/research" element={<motion.div key="research" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchPage /></motion.div>} />
               <Route path="/research/:slug" element={<motion.div key="research-slug" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchHighlightPage /></motion.div>} />
               <Route path="/david" element={<motion.div key="david" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><DavidLeighPage /></motion.div>} />
               <Route path="/group" element={<motion.div key="group" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupPage /></motion.div>} />
               <Route path="/literature" element={<motion.div key="literature" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><PublicationsPage /></motion.div>} />
               <Route path="/vtour" element={<motion.div key="vtour" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><VirtualTourPage /></motion.div>} />
+              <Route path="/group-matters" element={<motion.div key="group-matters" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupMattersPage /></motion.div>} />
             </Routes>
           </AnimatePresence>
         </main>
