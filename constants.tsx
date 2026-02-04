@@ -400,7 +400,7 @@ export const HOME_ASSETS = {
 };
 
 export const PROF_BIO: ProfBio = {
-  name: "David A Leigh",
+ name: "David A Leigh",
   titles: ["FRS", "FRSE", "FRSC", "MAE"],
   education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
   career: [
@@ -486,7 +486,7 @@ export const PROF_BIO: ProfBio = {
 };
 
 export const GROUP_MEMBERS: GroupMember[] = [
-  { name: "Adam Lehchilli", qualification: "MSci, University of Strasbourg, France", email: "ku.ca.retsehcnam.dargtsop@illihchel.mada", image: "images/team/Adam.jpg" },
+    { name: "Adam Lehchilli", qualification: "MSci, University of Strasbourg, France", email: "ku.ca.retsehcnam.dargtsop@illihchel.mada", image: "images/team/Adam.jpg" },
   { name: "Alex Betts", qualification: "MChem, University of Aberdeen, UK", email: "ku.ca.retsehcnam.dargtsop@stteb.rednaxela", image: "images/team/AlexB.jpg" },
   { name: "Axel Troncossi", qualification: "MChem, Wageningen University & Research, Netherlands", email: "ku.ca.retsehcnam.dargtsop@issocnort.lexa", image: "images/team/axelt.jpg" },
   { name: "Chuan Gao", qualification: "PhD, University of Strasbourg, France", email: "ku.ca.retsehcnam@oag.nauhc", image: "images/team/Chuan.jpg" },
@@ -510,8 +510,15 @@ export const GROUP_MEMBERS: GroupMember[] = [
   { name: "Lab Monkey", qualification: "PhD, University of Manchester, UK", email: "", image: "images/team/labmonkey.jpg" }
 ];
 
+export const SHANGHAI_MEMBERS: GroupMember[] = [
+  { name: "Dr Peng Chen", qualification: "PhD, East China Normal University, China", email: "nc.ude.unce.mehc@nehcp", image: "images/current_members/ecnu/peng_web.jpg" },
+  { name: "Dr Sujun Chen", qualification: "PhD, East China University of Science and Technology, China", email: "nc.ude.unce.mehc@nehcjs", image: "images/current_members/ecnu/sujun_web.jpg" },
+  { name: "Dr Zhanhu Sun", qualification: "PhD, RWTH Aachen University, Germany", email: "nc.ude.unce.mehc@nushz", image: "images/current_members/ecnu/Zhanhu_web.jpg" },
+  { name: "Dr Zhi-Hui Zhang", qualification: "PhD, University of Southampton, UK", email: "nc.ude.unce.mehc@iuhihzgnahz", image: "images/current_members/ecnu/Peggyweb.jpg" }
+];
+
 export const PUBLICATIONS: Record<string, Publication[]> = {
-  "2026": [
+"2026": [
     {
       year: "2026",
       title: "Chiral catalysis-driven rotary molecular motors",

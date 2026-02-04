@@ -41,9 +41,11 @@ import {
   Book,
   Shield,
   Ticket,
-  AlertTriangle
+  AlertTriangle,
+  Building2,
+  Flag
 } from 'lucide-react';
-import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS, RESEARCH_HIGHLIGHT_CONTENT, MONKEY_BUSINESS, Responsibility } from './constants';
+import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, SHANGHAI_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS, RESEARCH_HIGHLIGHT_CONTENT, MONKEY_BUSINESS, Responsibility } from './constants';
 import MolecularCanvas from './components/MolecularCanvas';
 import Assistant from './components/Assistant';
 
@@ -87,7 +89,7 @@ const Navbar = () => {
             <Link 
               key={link.name}
               to={link.path}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname === link.path ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname.startsWith(link.path) && (link.path !== '/' || location.pathname === '/') ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
             >
               <span>{link.name}</span>
             </Link>
@@ -923,23 +925,34 @@ const DavidLeighPage = () => {
 
 const GroupMemberCard: React.FC<{ member: GroupMember }> = ({ member }) => {
   const [hasError, setHasError] = useState(false);
-  const [triedFallback, setTriedFallback] = useState(false);
   const reverseEmail = (str: string) => str.split('').reverse().join('');
   const email = member.email ? reverseEmail(member.email) : '';
 
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    if (!triedFallback) {
-      setTriedFallback(true);
-      const filename = member.image.split('/').pop();
-      (e.target as HTMLImageElement).src = `https://www.catenane.net/images/team/${filename}`;
-    } else if (!hasError) {
+    if (!hasError) {
       setHasError(true);
+      const filename = member.image.split('/').pop();
+      // Try official site fallback based on typical path
+      if (member.image.includes('ecnu')) {
+        (e.target as HTMLImageElement).src = `https://www.catenane.net/images/current_members/ecnu/${filename}`;
+      } else {
+        (e.target as HTMLImageElement).src = `https://www.catenane.net/images/team/${filename}`;
+      }
+    } else {
+      // Final generic fallback
       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400";
     }
   };
 
   return (
-    <motion.div whileHover={{ y: -10 }} className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl overflow-hidden transition-all group">
+    <motion.div 
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      whileHover={{ y: -10 }} 
+      className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl overflow-hidden transition-all group"
+    >
       <div className="aspect-[4/5] overflow-hidden bg-slate-100 relative">
         <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onError={handleError} />
         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -957,27 +970,62 @@ const GroupMemberCard: React.FC<{ member: GroupMember }> = ({ member }) => {
   );
 };
 
-const GroupPage = () => (
-  <div className="pt-40 pb-32 px-6 bg-slate-50">
-    <div className="max-w-7xl mx-auto space-y-20">
-      <div className="text-center space-y-8">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-24 h-24 bg-purple-50 text-[#660099] rounded-[2rem] flex items-center justify-center mx-auto border border-purple-100 shadow-xl">
-          <Users className="w-12 h-12" />
-        </motion.div>
-        <div>
-          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4 uppercase">Manchester Team</h1>
-          <p className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto italic font-medium">"A diverse community of international researchers dedicated to exploring the boundaries of chemical synthesis."</p>
+const GroupPage = () => {
+  const [activeTab, setActiveTab] = useState<'manchester' | 'shanghai'>('manchester');
+  const members = activeTab === 'manchester' ? GROUP_MEMBERS : SHANGHAI_MEMBERS;
+
+  return (
+    <div className="pt-40 pb-32 px-6 bg-slate-50 min-h-screen">
+      <div className="max-w-7xl mx-auto space-y-16">
+        <div className="text-center space-y-8">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-24 h-24 bg-purple-50 text-[#660099] rounded-[2rem] flex items-center justify-center mx-auto border border-purple-100 shadow-xl">
+            <Users className="w-12 h-12" />
+          </motion.div>
+          <div>
+            <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4 uppercase">Leigh Group Team</h1>
+            <p className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto italic font-medium">
+              "A diverse global community of researchers dedicated to exploring the boundaries of chemical synthesis."
+            </p>
+          </div>
+          
+          <div className="flex justify-center">
+            <div className="bg-white p-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-1">
+              <button 
+                onClick={() => setActiveTab('manchester')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'manchester' ? 'bg-[#660099] text-white shadow-lg' : 'text-slate-500 hover:bg-slate-50'}`}
+              >
+                <Building2 className="w-4 h-4" /> Manchester Team
+              </button>
+              <button 
+                onClick={() => setActiveTab('shanghai')}
+                className={`flex items-center gap-2 px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all ${activeTab === 'shanghai' ? 'bg-[#660099] text-white shadow-lg' : 'text-slate-500 hover:bg-slate-50'}`}
+              >
+                <Flag className="w-4 h-4" /> Shanghai Team
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="w-24 h-1 bg-[#ffcc00] mx-auto rounded-full"></div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {GROUP_MEMBERS.map((member, idx) => (
-          <GroupMemberCard key={idx} member={member} />
-        ))}
+
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {members.map((member, idx) => (
+              <GroupMemberCard key={`${activeTab}-${member.name}`} member={member} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {activeTab === 'shanghai' && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pt-12 text-center">
+             <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Affiliated with the School of Chemistry and Molecular Engineering, ECNU</p>
+          </motion.div>
+        )}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Footer = () => (
   <footer className="pt-12 pb-12 px-6 border-t border-slate-100 bg-white relative overflow-hidden">
