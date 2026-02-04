@@ -382,20 +382,25 @@ export const MISSION_STATEMENT = "Mapping the topology of the microscopic world 
 
 export const HOME_ASSETS = {
   hero: [
-    { image: "images/thumbs/Gelthumbnail.png", alt: "Gel Contraction", link: "/research/2025-gel-contraction" },
-    { image: "images/thumbs/TapeThumb.png", alt: "Tape Reading Ratchet", link: "/research/2022-tape-reading" }
+    { image: "images/manchester1.png", alt: "Manchester University 1", link: "https://www.youtube.com/watch?v=BmSKF5hdIpw" },
+    { image: "images/manchester2.png", alt: "Manchester University 2", link: "https://www.youtube.com/watch?v=BmSKF5hdIpw" }
   ],
   research: [
-    { image: "images/article_pictures/2022RotaryMotor/Feynman.png", alt: "Research Frontiers Map", link: "/research" }
+    { image: "images/general/research-map.png", alt: "Group's Research Interests Map", link: "/research" },
+    { image: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg", alt: "Knot Catalysis Visual", link: "/research" }
   ],
   footerCards: [
-    { title: "Virtual Tour", subtitle: "EXPLORE THE LAB", image: "images/general/vtourmap_web.jpg", link: "/vtour" },
-    { title: "The Group", subtitle: "OUR TEAM", image: "images/GroupPhoto2025.jpg", link: "/group" }
+    { title: "Virtual Tour", subtitle: "EXPLORE THE LAB", image: "images/thumbs/vtourmap_web.jpg", link: "/vtour" },
+    { title: "World of Molecular Machines", subtitle: "RESEARCHER MAP", image: "images/general/chemmap_thumb.jpg", link: "https://www.catenane.net/pages/links.html" }
+  ],
+  quotes: [
+    { text: "What I cannot create, I do not understand", author: "Richard P. Feynman" },
+    { text: "If you want to conquer the ocean and reach out for new continents don't tell your men to get wood and nails to build a ship, just instil in them the yearning for the expanse of the seas and distant lands", author: "Antoine de Saint-Exupery" }
   ]
 };
 
 export const PROF_BIO: ProfBio = {
-    name: "David A Leigh",
+  name: "David A Leigh",
   titles: ["FRS", "FRSE", "FRSC", "MAE"],
   education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
   career: [

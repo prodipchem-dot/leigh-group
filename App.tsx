@@ -130,8 +130,7 @@ const HomePage = () => {
     researchTitle: "Our Research",
     researchPara1: "Our group explores, invents and discovers fundamental ways to control molecular-level dynamics and topology. This includes strategies and methods to synthesize interlocked molecular architectures (e.g. benzylic amide and metal ‘passive template’ catenanes, rotaxanes and molecular shuttles [1995-] and catalytic ‘active template’ synthesis [2006-]), molecular machinery [1999-], molecular ratchet mechanisms [2003-], molecular knotting [2011-], molecular assemblers [2013-], molecular robotics [2016-], and molecular weaving [2020-].",
     researchPara2: "Perhaps the best way to appreciate the technological potential of controlled molecular-level motion is to recognise that nanomotors and molecular-level machines lie at the heart of every significant biological process. Over billions of years of evolution Nature has not repeatedly chosen this solution for achieving complex task performance without good reason. When we learn how to build artificial structures that can control and exploit molecular level motion, and interface their effects directly with other molecular-level substructures and the outside world, it will potentially impact on every aspect of functional molecule and materials design. An improved understanding of physics and biology will surely follow.",
-    quote1: "What I cannot create, I do not understand",
-    quote1Author: "Richard P. Feynman",
+    quotes: HOME_ASSETS.quotes,
     projects: RESEARCH_PROJECTS,
     heroGallery: HOME_ASSETS.hero,
     researchGallery: HOME_ASSETS.research,
@@ -152,18 +151,20 @@ const HomePage = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-black text-slate-900 serif-font">{content.welcomeTitle}</h2>
         </div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20 bg-slate-50 p-8 rounded-[3rem] border border-slate-100">
-          <div className="lg:col-span-6 aspect-video rounded-[2rem] overflow-hidden shadow-2xl">
+          <div className="lg:col-span-8 aspect-video rounded-[2rem] overflow-hidden shadow-2xl">
             <iframe className="w-full h-full" src="https://www.youtube.com/embed/ObvxPSQNMGc?rel=0&showinfo=0" title="Nanobot Intro" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
           </div>
-          <div className="lg:col-span-6 flex justify-center gap-4">
+          <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4">
              {content.heroGallery.map((hero: any, idx: number) => (
-                <Link key={idx} to={hero.link} className="w-1/2 block">
-                  <img src={hero.image} alt={hero.alt} className="w-full h-auto rounded-[2rem] shadow-lg hover:scale-105 transition-transform" />
-                </Link>
+                <a key={idx} href={hero.link} target="_blank" rel="noopener noreferrer" className="block transform transition-transform hover:scale-105">
+                  <img src={hero.image} alt={hero.alt} className="w-full h-auto rounded-2xl shadow-lg border-2 border-white" />
+                </a>
              ))}
           </div>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <aside className="lg:col-span-3 space-y-6">
             <div className="sticky top-28">
@@ -188,21 +189,22 @@ const HomePage = () => {
           </aside>
           <main className="lg:col-span-9 space-y-16">
             <div className="flex flex-col md:flex-row gap-8 items-start pt-4">
-               <img src="images/general/daveleigh2006.jpg" alt="Professor David Leigh" className="w-48 h-48 rounded-[2rem] shadow-xl border-4 border-white grayscale hover:grayscale-0 transition-all" />
-               <div className="space-y-2">
+               <div className="space-y-4">
+                  <img src="images/GroupPhoto2025.jpg" alt="Leigh Group 2025" className="w-64 rounded-2xl shadow-lg border border-slate-100" />
+                  <div className="bg-[#ffcc00] p-4 rounded-2xl shadow-md border-2 border-white max-w-[256px]">
+                    <p className="text-[#660099] font-black text-[10px] uppercase tracking-tight leading-tight">INTERESTED IN JOINING THE LEIGH GROUP? <a href="https://www.catenane.net/pages/apply.html" target="_blank" className="underline ml-1">SEE HERE.</a></p>
+                  </div>
+               </div>
+               <div className="space-y-2 flex-1">
                  <h2 className="text-4xl md:text-5xl font-black text-slate-900 serif-font">Professor David A Leigh</h2>
                  <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">FRS FRSE FRSC MAE</p>
                  <div className="w-20 h-1 bg-[#ffcc00] rounded-full mt-4"></div>
+                 <Link to="/david" className="block mt-4">
+                    <img src="images/general/daveleigh2006.jpg" alt="Professor David Leigh" className="w-48 h-auto rounded-[2rem] shadow-xl border-4 border-white grayscale hover:grayscale-0 transition-all" />
+                 </Link>
                </div>
             </div>
-            <div className="space-y-8">
-              <div className="relative group">
-                <img src="images/GroupPhoto2025.jpg" alt="Leigh Group 2025" className="w-full rounded-[3rem] shadow-2xl" />
-                <div className="absolute top-8 right-8 bg-[#ffcc00] p-6 rounded-3xl shadow-2xl border-4 border-white max-w-sm z-10 transition-all hover:-translate-y-2">
-                  <p className="text-[#660099] font-black text-sm uppercase tracking-tight leading-tight">INTERESTED IN JOINING THE LEIGH GROUP AS A PhD OR POSTDOC? <a href="https://www.catenane.net/pages/apply.html" target="_blank" className="underline ml-1 hover:text-purple-800">SEE HERE.</a></p>
-                </div>
-              </div>
-            </div>
+
             <section className="space-y-10">
               <div className="flex items-center gap-4">
                 <h3 className="text-2xl font-black text-slate-900 serif-font">{content.researchTitle}</h3>
@@ -212,27 +214,45 @@ const HomePage = () => {
                 <p>{content.researchPara1} For some highlights see <Link to="/research" className="text-[#660099] font-bold underline">HERE</Link>.</p>
                 <p>{content.researchPara2}</p>
               </div>
+              
               <div className="bg-purple-50 p-10 rounded-[3rem] border border-purple-100 relative overflow-hidden group">
                  <Quote className="absolute top-4 right-8 w-20 h-20 text-[#660099] opacity-10 group-hover:scale-110 transition-transform" />
-                 <p className="text-2xl font-bold text-[#660099] italic serif-font mb-4">"{content.quote1}"</p>
-                 <p className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60">— {content.quote1Author}</p>
+                 <p className="text-2xl font-bold text-[#660099] italic serif-font mb-4">"{content.quotes[0].text}"</p>
+                 <p className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60">— {content.quotes[0].author}</p>
               </div>
+
               <div className="space-y-12">
-                 {content.researchGallery.map((asset: any, idx: number) => (
-                    <div key={idx} className="space-y-4">
-                      <Link to={asset.link} className="block"><img src={asset.image} alt={asset.alt} className="w-full rounded-[3rem] shadow-xl hover:shadow-2xl transition-all" /></Link>
-                      {idx === 0 && <p className="text-xs text-slate-400 font-bold uppercase text-center tracking-[0.2em]">Group's Research Interests Map</p>}
-                    </div>
-                 ))}
+                 <div className="space-y-6">
+                    <img src="images/general/research-map.png" alt="Group's Research Interests" className="w-full rounded-[3rem] shadow-xl hover:shadow-2xl transition-all" />
+                    <p className="text-xs text-slate-400 font-bold uppercase text-center tracking-[0.2em]">Group's Research Interests Map</p>
+                 </div>
+                 
+                 <div className="space-y-6">
+                    <img src="images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg" alt="Knot Catalysis Visual" className="w-full max-w-2xl mx-auto rounded-[3rem] shadow-xl hover:shadow-2xl transition-all" />
+                 </div>
               </div>
+
+              <div className="bg-purple-50 p-10 rounded-[3rem] border border-purple-100 relative overflow-hidden group">
+                 <Quote className="absolute top-4 right-8 w-20 h-20 text-[#660099] opacity-10 group-hover:scale-110 transition-transform" />
+                 <p className="text-xl font-bold text-[#660099] italic serif-font mb-4">"{content.quotes[1].text}"</p>
+                 <p className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60">— {content.quotes[1].author}</p>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
-                 {content.footerGallery.map((card: any, idx: number) => (
-                    <Link key={idx} to={card.link} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
-                      <h4 className="text-lg font-black text-slate-900 mb-2 flex items-center gap-3">{idx === 0 ? <Compass className="text-[#660099]" /> : <Map className="text-[#ffcc00]" />}{card.title}</h4>
-                      <p className="text-xs text-slate-400 font-bold uppercase mb-6 tracking-widest">{card.subtitle}</p>
-                      <img src={card.image} alt={card.title} className="w-full h-40 object-cover rounded-2xl group-hover:scale-[1.02] transition-transform" />
-                    </Link>
-                 ))}
+                 {content.footerGallery.map((card: any, idx: number) => {
+                    const CardWrapper = card.link.startsWith('http') ? 'a' : Link;
+                    const wrapperProps = card.link.startsWith('http') 
+                      ? { href: card.link, target: "_blank", rel: "noopener noreferrer" } 
+                      : { to: card.link };
+                    
+                    return (
+                      <CardWrapper key={idx} {...wrapperProps as any} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                        <h4 className="text-lg font-black text-slate-900 mb-2 flex items-center gap-3">{idx === 0 ? <Compass className="text-[#660099]" /> : <Map className="text-[#ffcc00]" />}{card.title}</h4>
+                        <p className="text-xs text-slate-400 font-bold uppercase mb-6 tracking-widest">{card.subtitle}</p>
+                        <img src={card.image} alt={card.title} className="w-full h-40 object-cover rounded-2xl group-hover:scale-[1.02] transition-transform" />
+                      </CardWrapper>
+                    );
+                 })}
               </div>
             </section>
           </main>
