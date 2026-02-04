@@ -13,8 +13,6 @@ import {
   ArrowRight,
   Sparkles,
   Search,
-  Cpu,
-  Scissors,
   Home as HomeIcon,
   ExternalLink,
   FileText,
@@ -29,14 +27,20 @@ import {
   Calendar,
   Briefcase,
   GraduationCap,
-  Play,
-  MessageSquare
+  MessageSquare,
+  Map,
+  Compass,
+  Send,
+  Edit2,
+  Save,
+  Plus,
+  Trash2
 } from 'lucide-react';
-import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject } from './constants';
+import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS } from './constants';
 import MolecularCanvas from './components/MolecularCanvas';
 import Assistant from './components/Assistant';
 
-const Navbar = () => {
+const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditing: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -50,9 +54,11 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/', icon: <HomeIcon className="w-4 h-4" /> },
     { name: 'Research', path: '/research', icon: <FlaskConical className="w-4 h-4" /> },
-    { name: 'The Group', path: '/group', icon: <Users className="w-4 h-4" /> },
-    { name: 'David Leigh', path: '/david', icon: <Award className="w-4 h-4" /> },
+    { name: 'Prof. Leigh', path: '/david', icon: <Award className="w-4 h-4" /> },
+    { name: 'People', path: '/group', icon: <Users className="w-4 h-4" /> },
     { name: 'Publications', path: '/literature', icon: <BookOpen className="w-4 h-4" /> },
+    { name: 'Virtual Tour', path: '#', icon: <Compass className="w-4 h-4" /> },
+    { name: 'Group Matters', path: '#', icon: <MessageSquare className="w-4 h-4" /> },
   ];
 
   return (
@@ -64,8 +70,8 @@ const Navbar = () => {
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#ffcc00] rounded-full border-2 border-white"></div>
           </div>
           <div>
-            <h1 className="text-xl font-extrabold tracking-tight text-[#660099] group-hover:text-purple-700 transition-colors">Leigh Group</h1>
-            <p className="text-[9px] uppercase tracking-[0.3em] text-slate-500 font-bold">University of Manchester</p>
+            <h1 className="text-xl font-extrabold tracking-tight text-[#660099] group-hover:text-purple-700 transition-colors uppercase">Leigh group</h1>
+            <p className="text-[10px] text-slate-400 font-bold tracking-widest leading-none">University of Manchester</p>
           </div>
         </Link>
 
@@ -75,16 +81,20 @@ const Navbar = () => {
             <Link 
               key={link.name}
               to={link.path}
-              className={`flex items-center space-x-2 px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname === link.path ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname === link.path ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
             >
-              {link.icon}
               <span>{link.name}</span>
             </Link>
           ))}
-          <div className="h-6 w-px bg-slate-200 mx-4"></div>
-          <button className="p-2 text-slate-400 hover:text-[#660099] transition-colors">
-            <Search className="w-5 h-5" />
-          </button>
+          {location.pathname === '/' && (
+            <button 
+              onClick={onToggleEdit}
+              className={`ml-4 flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 ${isEditing ? 'bg-[#ffcc00] text-[#660099]' : 'bg-[#660099] text-white hover:bg-purple-800'}`}
+            >
+              {isEditing ? <Save className="w-4 h-4" /> : <Edit2 className="w-4 h-4" />}
+              <span>{isEditing ? 'Finish' : 'Edit'}</span>
+            </button>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -109,7 +119,6 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center space-x-4 p-4 rounded-2xl font-bold transition-colors ${location.pathname === link.path ? 'bg-purple-50 text-[#660099]' : 'bg-slate-50 text-slate-600'}`}
               >
-                {link.icon}
                 <span>{link.name}</span>
               </Link>
             ))}
@@ -117,6 +126,271 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </nav>
+  );
+};
+
+const HomePage = ({ isEditing }: { isEditing: boolean }) => {
+  // Persistence logic for home page content
+  const [content, setContent] = useState(() => {
+    const saved = localStorage.getItem('leigh-group-home-content');
+    if (saved) return JSON.parse(saved);
+    return {
+      welcomeTitle: "Welcome to the Leigh group website",
+      researchTitle: "Our Research",
+      researchPara1: "Our group explores, invents and discovers fundamental ways to control molecular-level dynamics and topology. This includes strategies and methods to synthesize interlocked molecular architectures (e.g. benzylic amide and metal ‘passive template’ catenanes, rotaxanes and molecular shuttles [1995-] and catalytic ‘active template’ synthesis [2006-]), molecular machinery [1999-], molecular ratchet mechanisms [2003-], molecular knotting [2011-], molecular assemblers [2013-], molecular robotics [2016-] and molecular weaving [2020-].",
+      researchPara2: "Perhaps the best way to appreciate the technological potential of controlled molecular-level motion is to recognise that nanomotors and molecular-level machines lie at the heart of every significant biological process. Over billions of years of evolution Nature has not repeatedly chosen this solution for achieving complex task performance without good reason. When we learn how to build artificial structures that can control and exploit molecular level motion, and interface their effects directly with other molecular-level substructures and the outside world, it will potentially impact on every aspect of functional molecule and materials design. An improved understanding of physics and biology will surely follow.",
+      quote1: "What I cannot create, I do not understand",
+      quote1Author: "Richard P. Feynman",
+      projects: RESEARCH_PROJECTS,
+      heroGallery: HOME_ASSETS.hero,
+      researchGallery: HOME_ASSETS.research,
+      footerGallery: HOME_ASSETS.footerCards
+    };
+  });
+
+  useEffect(() => {
+    localStorage.setItem('leigh-group-home-content', JSON.stringify(content));
+  }, [content]);
+
+  const updateField = (field: string, value: any) => {
+    setContent((prev: any) => ({ ...prev, [field]: value }));
+  };
+
+  const handleProjectUpdate = (index: number, field: keyof ResearchProject, value: string) => {
+    const newProjects = [...content.projects];
+    newProjects[index] = { ...newProjects[index], [field]: value };
+    updateField('projects', newProjects);
+  };
+
+  const addProject = () => {
+    updateField('projects', [...content.projects, { title: 'New Project', image: 'https://images.unsplash.com/photo-1532187875685-d60320641329?auto=format&fit=crop&q=80&w=400', link: '#' }]);
+  };
+
+  const removeProject = (index: number) => {
+    updateField('projects', content.projects.filter((_: any, i: number) => i !== index));
+  };
+
+  return (
+    <div className="pt-32 pb-10 bg-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Header Banners */}
+        <div className="flex justify-center gap-8 mb-10 opacity-80 hover:opacity-100 transition-opacity">
+          <a href="https://www.ucl.ac.uk/sustainable/take-action/staff-action/leaf-laboratory-efficiency-assessment-framework" target="_blank" rel="noopener noreferrer">
+            <img src="images/Leaflogo.jpg" alt="LEAF logo" className="h-16 w-auto rounded shadow-sm border border-slate-100" />
+          </a>
+          <a href="#">
+            <img src="images/CAMERA_banner.jpg" alt="CAMERA banner" className="h-16 w-auto rounded shadow-sm border border-slate-100" />
+          </a>
+        </div>
+
+        <div className="text-center mb-12">
+          {isEditing ? (
+            <input 
+              className="text-3xl font-black text-slate-900 serif-font text-center bg-purple-50 p-2 rounded-xl w-full max-w-2xl"
+              value={content.welcomeTitle}
+              onChange={(e) => updateField('welcomeTitle', e.target.value)}
+            />
+          ) : (
+            <h2 className="text-3xl font-black text-slate-900 serif-font">{content.welcomeTitle}</h2>
+          )}
+        </div>
+
+        {/* Intro Section with Video and Manchester Pics */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20 bg-slate-50 p-8 rounded-[3rem] border border-slate-100">
+          <div className="lg:col-span-6 aspect-video rounded-[2rem] overflow-hidden shadow-2xl">
+            <iframe 
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/ObvxPSQNMGc?rel=0&showinfo=0" 
+              title="Nanobot Intro"
+              frameBorder="0" 
+              allow="autoplay; encrypted-media" 
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div className="lg:col-span-6 flex justify-center gap-4">
+             {content.heroGallery.map((hero: any, idx: number) => (
+                <a key={idx} href={hero.link} target="_blank" rel="noopener noreferrer" className="w-1/2 block">
+                  <img 
+                    src={hero.image} 
+                    alt={hero.alt} 
+                    className="w-full h-auto rounded-[2rem] shadow-lg hover:scale-105 transition-transform" 
+                  />
+                </a>
+             ))}
+          </div>
+        </div>
+
+        {/* Main Content Layout: Sidebar + Main */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* Sidebar: Some Highlights (Scrollable list) */}
+          <aside className="lg:col-span-3 space-y-6">
+            <div className="sticky top-28">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-[#660099] flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#ffcc00]" />
+                  Recent Highlights
+                </h3>
+                {isEditing && (
+                  <button onClick={addProject} className="p-1 bg-[#660099] text-white rounded-md hover:bg-purple-800 transition-colors">
+                    <Plus className="w-3 h-3" />
+                  </button>
+                )}
+              </div>
+              <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2 custom-scrollbar">
+                {content.projects.map((project: ResearchProject, idx: number) => (
+                  <div key={idx} className="relative group">
+                    {isEditing ? (
+                      <div className="bg-slate-50 p-3 rounded-2xl border border-dashed border-purple-200 space-y-2">
+                        <input 
+                          className="w-full text-[10px] font-bold p-1 bg-white border border-slate-200 rounded"
+                          value={project.title}
+                          onChange={(e) => handleProjectUpdate(idx, 'title', e.target.value)}
+                        />
+                        <input 
+                          className="w-full text-[8px] p-1 bg-white border border-slate-200 rounded"
+                          value={project.image}
+                          onChange={(e) => handleProjectUpdate(idx, 'image', e.target.value)}
+                        />
+                        <button onClick={() => removeProject(idx)} className="text-red-500 hover:text-red-700 transition-colors">
+                          <Trash2 className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ) : (
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="block">
+                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all group-hover:shadow-md group-hover:border-purple-300">
+                          <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span className="text-white text-[10px] font-black uppercase tracking-widest">{project.title}</span>
+                          </div>
+                        </div>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </aside>
+
+          {/* Main Content Column */}
+          <main className="lg:col-span-9 space-y-16">
+            
+            {/* Professor Header */}
+            <div className="flex flex-col md:flex-row gap-8 items-start pt-4">
+               <img src="images/general/daveleigh2006.jpg" alt="Professor David Leigh" className="w-48 h-48 rounded-[2rem] shadow-xl border-4 border-white grayscale hover:grayscale-0 transition-all" />
+               <div className="space-y-2">
+                 <h2 className="text-4xl md:text-5xl font-black text-slate-900 serif-font">Professor David A Leigh</h2>
+                 <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">FRS FRSE FRSC MAE</p>
+                 <div className="w-20 h-1 bg-[#ffcc00] rounded-full mt-4"></div>
+               </div>
+            </div>
+
+            {/* Group Photo Section with FIXED JOIN US BANNER */}
+            <div className="space-y-8">
+              <div className="relative group">
+                <img src="images/GroupPhoto2025.jpg" alt="Leigh Group 2025" className="w-full rounded-[3rem] shadow-2xl" />
+                <div className="absolute top-8 right-8 bg-[#ffcc00] p-6 rounded-3xl shadow-2xl border-4 border-white max-w-sm z-10 transition-all hover:-translate-y-2 hover:shadow-manchester-gold/20">
+                  <p className="text-[#660099] font-black text-sm uppercase tracking-tight leading-tight">
+                    INTERESTED IN JOINING THE LEIGH GROUP AS A PhD OR POSTDOC? 
+                    <a href="https://www.catenane.net/pages/apply.html" target="_blank" className="underline ml-1 hover:text-purple-800">SEE HERE.</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Research Text Section */}
+            <section className="space-y-10">
+              <div className="flex items-center gap-4">
+                {isEditing ? (
+                  <input 
+                    className="text-2xl font-black text-slate-900 serif-font bg-purple-50 p-2 rounded-xl"
+                    value={content.researchTitle}
+                    onChange={(e) => updateField('researchTitle', e.target.value)}
+                  />
+                ) : (
+                  <h3 className="text-2xl font-black text-slate-900 serif-font">{content.researchTitle}</h3>
+                )}
+                <div className="h-px flex-1 bg-slate-100"></div>
+              </div>
+              
+              <div className="grid grid-cols-1 gap-8 text-slate-700 leading-relaxed text-lg serif-font italic pr-4">
+                {isEditing ? (
+                  <>
+                    <textarea 
+                      className="w-full bg-purple-50 p-4 rounded-3xl border border-purple-100 min-h-[150px]"
+                      value={content.researchPara1}
+                      onChange={(e) => updateField('researchPara1', e.target.value)}
+                    />
+                    <textarea 
+                      className="w-full bg-purple-50 p-4 rounded-3xl border border-purple-100 min-h-[150px]"
+                      value={content.researchPara2}
+                      onChange={(e) => updateField('researchPara2', e.target.value)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <p>{content.researchPara1} For some highlights see <Link to="/research" className="text-[#660099] font-bold underline">HERE</Link>.</p>
+                    <p>{content.researchPara2}</p>
+                  </>
+                )}
+              </div>
+
+              {/* Quote 1 */}
+              <div className="bg-purple-50 p-10 rounded-[3rem] border border-purple-100 relative overflow-hidden group">
+                 <Quote className="absolute top-4 right-8 w-20 h-20 text-[#660099] opacity-10 group-hover:scale-110 transition-transform" />
+                 {isEditing ? (
+                   <div className="space-y-4">
+                     <textarea 
+                      className="text-2xl font-bold text-[#660099] italic serif-font bg-white/50 p-2 rounded-xl w-full"
+                      value={content.quote1}
+                      onChange={(e) => updateField('quote1', e.target.value)}
+                     />
+                     <input 
+                      className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60 bg-white/50 p-2 rounded-xl w-full"
+                      value={content.quote1Author}
+                      onChange={(e) => updateField('quote1Author', e.target.value)}
+                     />
+                   </div>
+                 ) : (
+                   <>
+                    <p className="text-2xl font-bold text-[#660099] italic serif-font mb-4">"{content.quote1}"</p>
+                    <p className="text-right font-black uppercase text-xs tracking-widest text-[#660099]/60">— {content.quote1Author}</p>
+                   </>
+                 )}
+              </div>
+
+              {/* Research Map Images (Wrapped in Links) */}
+              <div className="space-y-12">
+                 {content.researchGallery.map((asset: any, idx: number) => (
+                    <div key={idx} className="space-y-4">
+                      <a href={asset.link} target="_blank" rel="noopener noreferrer" className="block">
+                        <img src={asset.image} alt={asset.alt} className="w-full rounded-[3rem] shadow-xl hover:shadow-2xl transition-all" />
+                      </a>
+                      {idx === 0 && <p className="text-xs text-slate-400 font-bold uppercase text-center tracking-[0.2em]">Group's Research Interests Map</p>}
+                    </div>
+                 ))}
+              </div>
+
+              {/* Footer Links (Tour/Map) - Generated from constants */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
+                 {content.footerGallery.map((card: any, idx: number) => (
+                    <a key={idx} href={card.link} target="_blank" rel="noopener noreferrer" className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                      <h4 className="text-lg font-black text-slate-900 mb-2 flex items-center gap-3">
+                        {idx === 0 ? <Compass className="text-[#660099]" /> : <Map className="text-[#ffcc00]" />}
+                        {card.title}
+                      </h4>
+                      <p className="text-xs text-slate-400 font-bold uppercase mb-6 tracking-widest">{card.subtitle}</p>
+                      <img src={card.image} alt={card.title} className="w-full h-40 object-cover rounded-2xl group-hover:scale-[1.02] transition-transform" />
+                    </a>
+                 ))}
+              </div>
+            </section>
+
+          </main>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -212,11 +486,9 @@ const DavidLeighPage = () => {
               </div>
               <div className="space-y-8">
                 <h4 className="text-sm font-black uppercase tracking-widest text-[#660099]">Career Timeline</h4>
-                <div className="space-y-6 relative">
-                  <div className="absolute left-1 top-0 bottom-0 w-0.5 bg-slate-100"></div>
+                <div className="space-y-6">
                   {PROF_BIO.career.map((c, i) => (
-                    <div key={i} className="flex gap-8 relative">
-                      <div className="w-3 h-3 rounded-full bg-white border-2 border-[#660099] absolute left-[-4px] top-1 z-10 shadow-sm"></div>
+                    <div key={i} className="flex relative">
                       <div className="flex flex-col sm:flex-row sm:gap-6">
                         <span className="text-xs font-black text-[#660099] w-20 flex-shrink-0 pt-0.5">{c.year}</span>
                         <span className="text-sm text-slate-700 font-medium">{c.role}</span>
@@ -309,164 +581,6 @@ const DavidLeighPage = () => {
   );
 };
 
-const Hero = () => (
-  <section className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-32 pb-20 overflow-hidden bg-white">
-    <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-purple-500/5 rounded-full blur-[120px] animate-pulse"></div>
-    <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] animate-pulse delay-700"></div>
-    
-    <div className="max-w-5xl mx-auto text-center relative z-10">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <span className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-100 text-[#660099] text-xs font-bold uppercase tracking-widest mb-8">
-          <Sparkles className="w-3 h-3 text-[#ffcc00]" />
-          <span>Molecular Robotics & Topology</span>
-        </span>
-        <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[1.05] serif-font text-slate-900">
-          Engineering the <br />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#660099] via-purple-600 to-indigo-600">Nanoscale World</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-12 font-medium">
-          {MISSION_STATEMENT}
-        </p>
-      </motion.div>
-
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.8 }}
-        className="flex flex-col sm:flex-row items-center justify-center gap-6"
-      >
-        <Link to="/research" className="w-full sm:w-auto px-10 py-5 bg-[#660099] text-white rounded-2xl font-bold text-lg hover:bg-purple-800 transition-all flex items-center justify-center shadow-xl shadow-purple-500/20 group">
-          Research Portfolio
-          <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-        </Link>
-        <Link to="/david" className="w-full sm:w-auto px-10 py-5 bg-white text-slate-800 rounded-2xl font-bold text-lg border border-slate-200 hover:border-purple-300 hover:bg-slate-50 transition-all flex items-center justify-center">
-          David Leigh
-        </Link>
-      </motion.div>
-    </div>
-
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1, duration: 1.5 }}
-      className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-400 flex flex-col items-center space-y-4"
-    >
-      <span className="text-xs uppercase tracking-[0.4em] font-bold">Scroll to explore</span>
-      <div className="w-px h-16 bg-gradient-to-b from-purple-300 to-transparent"></div>
-    </motion.div>
-  </section>
-);
-
-const ScienceOverview = () => (
-  <section className="py-32 px-6 bg-slate-50">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        <div className="space-y-10">
-          <div>
-            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-[#660099] mb-4">Scientific Frontiers</h2>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight serif-font">Engineering <br />Molecular Topology</h3>
-          </div>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            The Leigh Group pioneers the development of artificial molecular machines and complex molecular topologies. We weave matter at the smallest scales to create the robots of the future.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {SCIENCE_DOMAINS.map((domain) => (
-              <motion.div 
-                key={domain.id}
-                whileHover={{ y: -5 }}
-                className="p-8 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all group"
-              >
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${domain.color} flex items-center justify-center text-3xl mb-6 shadow-md`}>
-                  {domain.icon}
-                </div>
-                <h4 className="text-xl font-bold mb-3 text-slate-900 group-hover:text-[#660099] transition-colors">{domain.title}</h4>
-                <p className="text-sm text-slate-500 leading-relaxed">{domain.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="relative">
-          <div className="absolute -inset-1 bg-gradient-to-r from-[#660099] to-indigo-600 rounded-3xl blur opacity-10 transition duration-1000 group-hover:duration-200"></div>
-          <MolecularCanvas />
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const StatsFeature = () => (
-  <section className="py-24 px-6 relative overflow-hidden bg-white">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-        {Object.entries(GROUP_STATS).map(([key, value]) => (
-          <div key={key} className="space-y-2">
-            <h4 className="text-5xl font-black text-[#660099]">{value}</h4>
-            <p className="text-xs uppercase font-bold text-slate-400 tracking-widest">{key}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-const Footer = () => (
-  <footer className="pt-24 pb-12 px-6 border-t border-slate-100 bg-white">
-    <div className="max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-        <div className="space-y-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-[#660099] rounded-xl flex items-center justify-center text-white font-bold text-xl">L</div>
-            <span className="text-xl font-bold tracking-tight text-[#660099]">Leigh Group</span>
-          </div>
-          <p className="text-slate-500 leading-relaxed text-sm">
-            Pushing the boundaries of molecular machines and chemical topology at the University of Manchester.
-          </p>
-        </div>
-        <div>
-          <h5 className="text-slate-900 font-bold mb-8 uppercase text-xs tracking-[0.2em]">Research</h5>
-          <ul className="space-y-4 text-sm text-slate-500 font-medium">
-            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Molecular Robotics</Link></li>
-            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Knot Synthesis</Link></li>
-            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Information Ratchets</Link></li>
-            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Active Transport</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="text-slate-900 font-bold mb-8 uppercase text-xs tracking-[0.2em]">The Group</h5>
-          <ul className="space-y-4 text-sm text-slate-500 font-medium">
-            <li><Link to="/group" className="hover:text-[#660099] transition-colors">Our People</Link></li>
-            <li><Link to="/david" className="hover:text-[#660099] transition-colors">David Leigh</Link></li>
-            <li><Link to="/literature" className="hover:text-[#660099] transition-colors">Publications</Link></li>
-            <li><a href="https://leighgroup.org" target="_blank" className="hover:text-[#660099] transition-colors">Official Website</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="text-slate-900 font-bold mb-8 uppercase text-xs tracking-[0.2em]">Connect</h5>
-          <p className="text-sm text-slate-500 mb-6">Manchester Institute of Biotechnology</p>
-          <div className="flex space-x-2">
-            <input type="email" placeholder="Email" className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 w-full text-slate-900 placeholder:text-slate-400" />
-            <button className="bg-[#660099] p-2 rounded-xl hover:bg-purple-800 transition-colors">
-              <ChevronRight className="w-5 h-5 text-white" />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-xs text-slate-400 font-medium">© {new Date().getFullYear()} The Leigh Group. University of Manchester.</p>
-        <div className="flex space-x-8 text-xs text-slate-400 font-bold uppercase tracking-widest">
-            <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-slate-900 transition-colors">Accessibility</a>
-            <a href="https://leighgroup.org" target="_blank" className="text-[#660099] hover:underline">Official Site</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-);
-
 const GroupMemberCard: React.FC<{ member: GroupMember }> = ({ member }) => {
   const [hasError, setHasError] = useState(false);
   const [triedFallback, setTriedFallback] = useState(false);
@@ -476,13 +590,10 @@ const GroupMemberCard: React.FC<{ member: GroupMember }> = ({ member }) => {
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     if (!triedFallback) {
       setTriedFallback(true);
-      // Fallback to the live site if local file fails
       const filename = member.image.split('/').pop();
       (e.target as HTMLImageElement).src = `https://www.catenane.net/images/team/${filename}`;
     } else if (!hasError) {
       setHasError(true);
-      console.warn(`Could not load team image locally or from fallback: ${member.image}. Using placeholder.`);
-      // Final placeholder fallback
       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400";
     }
   };
@@ -813,19 +924,90 @@ const ResearchPage = () => (
   </div>
 );
 
+const Footer = () => (
+  <footer className="pt-12 pb-12 px-6 border-t border-slate-100 bg-white relative overflow-hidden">
+    <div className="max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+        
+        {/* Logo and About */}
+        <div className="md:col-span-3 space-y-6">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-[#660099] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">L</div>
+            <span className="text-xl font-bold tracking-tight text-[#660099] uppercase">Leigh Group</span>
+          </div>
+          <p className="text-slate-500 leading-relaxed text-sm max-w-xs">
+            Pushing the boundaries of molecular machines and chemical topology at the University of Manchester.
+          </p>
+        </div>
+
+        {/* Research Column */}
+        <div className="md:col-span-2 space-y-6">
+          <h5 className="text-slate-900 font-black uppercase text-[10px] tracking-[0.25em]">Research</h5>
+          <ul className="space-y-4 text-sm text-slate-500 font-semibold">
+            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Molecular Robotics</Link></li>
+            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Knot Synthesis</Link></li>
+            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Information Ratchets</Link></li>
+            <li><Link to="/research" className="hover:text-[#660099] transition-colors">Active Transport</Link></li>
+          </ul>
+        </div>
+
+        {/* The Group Column */}
+        <div className="md:col-span-2 space-y-6">
+          <h5 className="text-slate-900 font-black uppercase text-[10px] tracking-[0.25em]">The Group</h5>
+          <ul className="space-y-4 text-sm text-slate-500 font-semibold">
+            <li><Link to="/group" className="hover:text-[#660099] transition-colors">Our People</Link></li>
+            <li><Link to="/david" className="hover:text-[#660099] transition-colors">David Leigh</Link></li>
+            <li><Link to="/literature" className="hover:text-[#660099] transition-colors">Publications</Link></li>
+            <li><a href="https://leighgroup.org" target="_blank" className="hover:text-[#660099] transition-colors">Official Website</a></li>
+          </ul>
+        </div>
+
+        {/* Connect Column */}
+        <div className="md:col-span-5 space-y-6">
+          <h5 className="text-slate-900 font-black uppercase text-[10px] tracking-[0.25em]">Connect</h5>
+          <p className="text-sm text-slate-500 font-semibold">Manchester Institute of Biotechnology</p>
+          <div className="flex items-center gap-3">
+            <div className="relative flex-1">
+              <input 
+                type="email" 
+                placeholder="Email" 
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-200 text-slate-900 placeholder:text-slate-400 font-medium transition-all" 
+              />
+            </div>
+            <button className="bg-[#660099] p-4 rounded-full hover:bg-purple-800 transition-all shadow-lg hover:shadow-purple-200 active:scale-95 flex items-center justify-center flex-shrink-0">
+              <ArrowRight className="w-5 h-5 text-white" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-8">
+        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest order-2 md:order-1">© {new Date().getFullYear()} The Leigh Group. University of Manchester.</p>
+        <div className="flex space-x-10 text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] order-1 md:order-2">
+            <a href="#" className="hover:text-[#660099] transition-colors">Privacy</a>
+            <a href="#" className="hover:text-[#660099] transition-colors">Accessibility</a>
+            <a href="https://leighgroup.org" target="_blank" className="text-[#660099] hover:underline">Official Site</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+);
+
 const App: React.FC = () => {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col selection:bg-purple-100">
-        <Navbar />
+        <Navbar onToggleEdit={() => setIsEditing(!isEditing)} isEditing={isEditing} />
         <main className="flex-1">
           <AnimatePresence mode="wait">
             <Routes>
-              <Route path="/" element={<motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><Hero /><ScienceOverview /><StatsFeature /></motion.div>} />
-              <Route path="/research" element={<motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchPage /></motion.div>} />
-              <Route path="/david" element={<motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><DavidLeighPage /></motion.div>} />
-              <Route path="/group" element={<motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupPage /></motion.div>} />
-              <Route path="/literature" element={<motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><PublicationsPage /></motion.div>} />
+              <Route path="/" element={<motion.div key="home" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><HomePage isEditing={isEditing} /></motion.div>} />
+              <Route path="/research" element={<motion.div key="research" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchPage /></motion.div>} />
+              <Route path="/david" element={<motion.div key="david" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><DavidLeighPage /></motion.div>} />
+              <Route path="/group" element={<motion.div key="group" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupPage /></motion.div>} />
+              <Route path="/literature" element={<motion.div key="literature" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><PublicationsPage /></motion.div>} />
             </Routes>
           </AnimatePresence>
         </main>

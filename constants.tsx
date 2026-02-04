@@ -46,6 +46,12 @@ export interface ResearchProject {
   link: string;
 }
 
+export interface HomeAsset {
+  image: string;
+  link: string;
+  alt: string;
+}
+
 export const SCIENCE_DOMAINS: ResearchArea[] = [
   {
     id: 'molecular-knots',
@@ -85,6 +91,21 @@ export const GROUP_STATS = {
 };
 
 export const MISSION_STATEMENT = "We use chemical synthesis to build increasingly complex artificial molecular machines and explore the frontiers of molecular topology.";
+
+export const HOME_ASSETS = {
+  hero: [
+    { image: "images/manchester1.png", link: "https://www.catenane.net/pages/vtour.html", alt: "Manchester Lab" },
+    { image: "images/manchester2.png", link: "https://www.catenane.net/pages/vtour.html", alt: "Manchester View" }
+  ],
+  research: [
+    { image: "images/general/research-map.png", link: "https://www.catenane.net/pages/research_highlights.html", alt: "Research Map" },
+    { image: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg", link: "https://www.catenane.net/pages/2016_knot_catalysis.html", alt: "Carta Marina Knot" }
+  ],
+  footerCards: [
+    { image: "images/thumbs/vtourmap_web.jpg", link: "https://www.catenane.net/pages/vtour.html", title: "Virtual Tour", subtitle: "Explore the Lab Environment" },
+    { image: "images/general/chemmap_thumb.jpg", link: "https://www.catenane.net/pages/links.html", title: "Molecular Map", subtitle: "Global Research Network" }
+  ]
+};
 
 export const PROF_BIO: ProfBio = {
   name: "David A Leigh",
@@ -198,30 +219,27 @@ export const GROUP_MEMBERS: GroupMember[] = [
 ];
 
 export const RESEARCH_PROJECTS: ResearchProject[] = [
-  { title: "Gel Contraction", image: "images/research/Gelthumbnail.png", link: "2025_GelContraction.html" },
-  { title: "Tape Reading Ratchet", image: "images/research/TapeThumb.png", link: "2022_TapeReadingRatchet.html" },
-  { title: "Rotary Motor", image: "images/research/RotaryMotorThumb.png", link: "2022_RotaryMotor.html" },
-  { title: "Phase Transfer Pump", image: "images/research/PhasePumpThumb.png", link: "2022_PhaseTransferPump.html" },
-  { title: "The Vernier", image: "images/research/Vernier_Thumbnail.jpg", link: "2022_Vernier_Knot.html" },
-  { title: "Catalysis Pump", image: "images/research/CatPump_thumbnail.png", link: "2021_Catalysis_Pump.html" },
-  { title: "2D Mol Woven Fabric", image: "images/research/2Dmat_thumbnail.png", link: "2020_2D_Material.html" },
-  { title: "The Endless Knot", image: "images/research/endless_knot_thumbnail.png", link: "2020_endless_knot.html" },
-  { title: "Tying different knots", image: "images/research/5_2_knot_thumbnail.jpg", link: "2020_molecular_5_2_knot.html" },
-  { title: "Pulsed Fuel Motors", image: "images/research/pulsed_fuel_motor_thumbnail.jpg", link: "2017_chemical_fuelled_motor.html" },
-  { title: "A Molecular Assembler", image: "images/research/assembler_thumbnail.jpg", link: "2017_molecular_assembler.html" },
-  { title: "Molecular 819 Knot", image: "images/research/the819knotcover.jpg", link: "2017_819knot.html" },
-  { title: "Knot Catalysis", image: "images/research/knotcatalysiscover.jpg", link: "2016_knot_catalysis.html" },
-  { title: "The NanoMotor", image: "images/research/nanomotorcover.jpg", link: "2016_autonomous_motor.html" },
-  { title: "Small-Molecule Robotics", image: "images/research/Transporter2015.jpg", link: "2015_molecular_transporter.html" },
-  { title: "Star of David Catenane", image: "images/research/StarOfDavid.jpg", link: "2014_star_of_david.html" },
-  { title: "Making Molecules", image: "images/research/pep_synth_thumb.jpg", link: "2013pep_synth.html" },
-  { title: "Pentafoil Knot", image: "images/research/knot_box_2011_stroke3.jpg", link: "2012knot.html" },
-  { title: "Molecular Walker", image: "images/research/natchempaper2009.jpg", link: "2010walker.html" },
-  { title: "Hybrid Rotaxanes", image: "images/research/naturepaper2009.jpg", link: "2009hybrid_rotaxane.html" },
-  { title: "Information Ratchet", image: "images/research/mdhomepaper.jpg", link: "2007mol_info_ratchet1.html" },
-  { title: "Macroscopic Transport", image: "images/research/natmatpaper.jpg", link: "2005droplet.html" },
-  { title: "Reversible Rotary Motor", image: "images/research/nov2004paper.jpg", link: "2004rotary_motor.html" },
-  { title: "Interlocked Rotary Motor", image: "images/research/newpic3.jpg", link: "2003rotary_motor.html" }
+  { title: "Gel Contraction", image: "images/thumbs/Gelthumbnail.png", link: "https://www.catenane.net/pages/2025_GelContraction.html" },
+  { title: "Tape Reading Ratchet", image: "images/thumbs/TapeThumb.png", link: "https://www.catenane.net/pages/2022_TapeReadingRatchet.html" },
+  { title: "Rotary Motor", image: "images/thumbs/RotaryMotorThumb.png", link: "https://www.catenane.net/pages/2022_RotaryMotor.html" },
+  { title: "Phase Transfer Pump", image: "images/thumbs/PhasePumpThumb.png", link: "https://www.catenane.net/pages/2022_PhaseTransferPump.html" },
+  { title: "The Vernier", image: "images/thumbs/Vernier_Thumbnail.jpg", link: "https://www.catenane.net/pages/2022_Vernier_Knot.html" },
+  { title: "Catalysis Pump", image: "images/thumbs/CatPump_thumbnail.png", link: "https://www.catenane.net/pages/2021_Catalysis_Pump.html" },
+  { title: "2D Mol Woven Fabric", image: "images/thumbs/2Dmat_thumbnail.png", link: "https://www.catenane.net/pages/2020_2D_Material.html" },
+  { title: "The Endless Knot", image: "images/thumbs/endless_knot_thumbnail.png", link: "https://www.catenane.net/pages/2020_endless_knot.html" },
+  { title: "Tying different knots", image: "images/thumbs/5_2_knot_thumbnail.jpg", link: "https://www.catenane.net/pages/2020_molecular_5_2_knot.html" },
+  { title: "Pulsed Fuel Motors", image: "images/thumbs/pulsed_fuel_motor_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_chemical_fuelled_motor.html" },
+  { title: "A Molecular Assembler", image: "images/thumbs/assembler_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_molecular_assembler.html" },
+  { title: "Molecular 819 Knot", image: "images/thumbs/the819knotcover.jpg", link: "https://www.catenane.net/pages/2017_819knot.html" },
+  { title: "Knot Catalysis", image: "images/thumbs/knotcatalysiscover.jpg", link: "https://www.catenane.net/pages/2016_knot_catalysis.html" },
+  { title: "The NanoMotor", image: "images/thumbs/nanomotorcover.jpg", link: "https://www.catenane.net/pages/2016_autonomous_motor.html" },
+  { title: "Small-Molecule Robotics", image: "images/thumbs/Transporter2015.jpg", link: "https://www.catenane.net/pages/2015_molecular_transporter.html" },
+  { title: "Star of David Catenane", image: "images/thumbs/StarOfDavid.jpg", link: "https://www.catenane.net/pages/2014_star_of_david.html" },
+  { title: "Making Molecules", image: "images/thumbs/pep_synth_thumb.jpg", link: "https://www.catenane.net/pages/2013pep_synth.html" },
+  { title: "Pentafoil Knot", image: "images/knot_box_2011_stroke3.jpg", link: "https://www.catenane.net/pages/2012knot.html" },
+  { title: "Molecular Walker", image: "images/natchempaper2009.jpg", link: "https://www.catenane.net/pages/2010walker.html" },
+  { title: "Hybrid Rotaxanes", image: "images/naturepaper2009.jpg", link: "https://www.catenane.net/pages/2009hybrid_rotaxane.html" },
+  { title: "Information Ratchet", image: "images/mdhomepaper.jpg", link: "https://www.catenane.net/pages/2007mol_info_ratchet1.html" }
 ];
 
 export const PUBLICATIONS: { [year: string]: Publication[] } = {
@@ -509,599 +527,6 @@ export const PUBLICATIONS: { [year: string]: Publication[] } = {
       pages: "65-75",
       abstractImg: "images/publications/AFMKnot.jpg",
       highlight: "Featured on the cover of Chem."
-    }
-  ],
-  "2022": [
-    {
-      year: "2022",
-      title: "Using catalysis to drive chemistry away from equilibrium: relating kinetic asymmetry, power strokes, and the Curtin-Hammett principle in Brownian ratchets",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.2c08723",
-      authors: "S Amano, M Esposito, E Kreidt, D A Leigh, E Penocchio and B M W Roberts",
-      journal: "J Am Chem Soc",
-      volume: "144",
-      pages: "20153-20164",
-      abstractImg: "images/publications/Curtin-Hammett.jpg"
-    },
-    {
-      year: "2022",
-      title: "A tape-reading molecular ratchet",
-      url: "https://www.nature.com/articles/s41586-022-05305-9",
-      authors: "Y Ren, R Jamagne, D J Tetlow and D A Leigh",
-      journal: "Nature",
-      volume: "612",
-      pages: "78–82",
-      abstractImg: "images/publications/Turing.png",
-      highlight: "Highlighted in Chem World, Phys Org, Wired, and Singularity Hub."
-    },
-    {
-      year: "2022",
-      title: "Tuning the force, speed, and efficiency of an autonomous chemically fuelled information ratchet",
-      url: "https://pubs.acs.org/doi/full/10.1021/jacs.2c07633",
-      authors: "S Borsley, D A Leigh, B M W Roberts and I J Vitorica-Yrezabal",
-      journal: "J Am Chem Soc",
-      volume: "144",
-      pages: "17241-17248",
-      abstractImg: "images/publications/SpeedAndPower.jpg"
-    },
-    {
-      year: "2022",
-      title: "Social self-sorting synthesis of molecular knots",
-      url: "https://pubs.acs.org/doi/full/10.1021/jacs.2c07682",
-      authors: "Z Ashbridge, O M Knapp, E Kreidt, D A Leigh, L Pirvu and F Schaufelberger",
-      journal: "J Am Chem Soc",
-      volume: "144",
-      pages: "17232-17240",
-      abstractImg: "images/publications/SelfSorting.jpg"
-    },
-    {
-      year: "2022",
-      title: "Transamidation-driven molecular pumps",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.2c06807",
-      authors: "L Binks, C Tian, S D P Fielden, I J Vitorica-Yrezabal and D A Leigh",
-      journal: "J Am Chem Soc",
-      volume: "144",
-      pages: "15838-15844",
-      abstractImg: "images/publications/Transamidation.jpg",
-      highlight: "Highlighted in Chem World."
-    },
-    {
-      year: "2022",
-      title: "Knotting matters: orderly molecular entanglements",
-      url: "https://pubs.rsc.org/en/content/articlelanding/2022/cs/d2cs00323f",
-      authors: "Z Ashbridge, S D P Fielden, D A Leigh, L Pirvu, F Schaufelberger and L Zhang",
-      journal: "Chem Soc Rev",
-      volume: "51",
-      pages: "7779-7809",
-      abstractImg: "images/publications/KnottingMatters.png",
-      highlight: "Featured on the cover of Chem Soc Rev."
-    },
-    {
-      year: "2022",
-      title: "Chemical fuels for molecular machinery",
-      url: "https://www.nature.com/articles/s41557-022-00970-9",
-      authors: "S Borsley, D A Leigh and B M W Roberts",
-      journal: "Nat Chem",
-      volume: "14",
-      pages: "728-738",
-      abstractImg: "images/publications/FuelsReview.png",
-      highlight: "Highlighted in Chem & Eng News 101(5), 22-27 (2023)."
-    },
-    {
-      year: "2022",
-      title: "Decorating polymer beads with 10^14 inorganic-organic [2]rotaxanes as shown by spin counting",
-      url: "https://www.nature.com/articles/s42004-022-00689-1",
-      authors: "D Asthana, D Thomas, S J Lockyer, A Brookfield, G A Timco, I J Vitorica-Yrezabal, G F S Whitehead, E J L McInnes, D Collison, D A Leigh and R E P Winpenny",
-      journal: "Commun Chem",
-      volume: "5",
-      pages: "73",
-      abstractImg: "images/publications/InorgRotax.png",
-      highlight: "Highlighted in Chem World."
-    },
-    {
-      year: "2022",
-      title: "Autonomous fuelled directional rotation about a covalent single bond",
-      url: "https://www.nature.com/articles/s41586-022-04450-5",
-      authors: "S Borsley, E Kreidt, D A Leigh and B M W Roberts",
-      journal: "Nature",
-      volume: "604",
-      pages: "80–85",
-      abstractImg: "images/publications/Fig4.png",
-      highlight: "Highlighted in Science, Chem World, Phys Org, and ChemistryViews."
-    },
-    {
-      year: "2022",
-      title: "Pumping between phases with a pulsed-fuel molecular ratchet",
-      url: "https://www.nature.com/articles/s41565-022-01097-1",
-      authors: "D Thomas, D J Tetlow, Y Ren, S Kassem, U Karaca and D A Leigh",
-      journal: "Nat Nanotechnol",
-      volume: "17",
-      pages: "701–707",
-      abstractImg: "images/publications/TopImage.png",
-      highlight: "Highlighted in Science 376, 233 (2022)."
-    },
-    {
-      year: "2022",
-      title: "Insights from an information thermodynamics analysis of a synthetic molecular motor",
-      url: "https://www.nature.com/articles/s41557-022-00899-z",
-      authors: "S Amano, M Esposito, E Kreidt, D A Leigh, E Penocchio and B M W Roberts",
-      journal: "Nat Chem",
-      volume: "14",
-      pages: "530-537",
-      abstractImg: "images/publications/Inftherm.png"
-    },
-    {
-      year: "2022",
-      title: "Vernier template synthesis of molecular knots",
-      url: "https://www.science.org/doi/10.1126/science.abm9247",
-      authors: "Z Ashbridge, E Kreidt, L Pirvu, F Schaufelberger, J Halldin Stenlid, F Abild-Pedersen and D A Leigh",
-      journal: "Science",
-      volume: "375",
-      pages: "1035-1041",
-      abstractImg: "images/publications/Vernier.png",
-      highlight: "Highlighted in C&EN, NPlus1, and X-Mol."
-    },
-    {
-      year: "2022",
-      title: "Molecular weaving",
-      url: "https://www.nature.com/articles/s41563-021-01179-w",
-      authors: "Z-H Zhang, B J Andreassen, D P August, D A Leigh and L Zhang",
-      journal: "Nat Mater",
-      volume: "21",
-      pages: "275-283",
-      abstractImg: "images/publications/IntWov.png",
-      highlight: "Featured on the cover of Nat. Mater."
-    },
-    {
-      year: "2022",
-      title: "Real-time observation of the dynamics of an individual rotaxane molecular shuttle using a single molecule junction",
-      url: "https://www.sciencedirect.com/science/article/pii/S2451929421005830",
-      authors: "S Chen, D Su, C Jia, Y Li, X Li, X Guo, D A Leigh and L Zhang",
-      journal: "Chem",
-      volume: "8",
-      pages: "243-252",
-      abstractImg: "images/publications/SingleMolChem.png"
-    }
-  ],
-  "2021": [
-    {
-      year: "2021",
-      title: "Chemical engines: Driving systems away from equilibrium through catalyst reaction cycles",
-      url: "https://www.nature.com/articles/s41565-021-00975-4",
-      authors: "S Amano, S Borsley, D A Leigh and Z Sun",
-      journal: "Nat Nanotechnol",
-      volume: "16",
-      pages: "1057-1067",
-      abstractImg: "images/publications/Drivsys.png"
-    },
-    {
-      year: "2021",
-      title: "A catalysis-driven artificial molecular pump",
-      url: "https://www.nature.com/articles/s41586-021-03575-3",
-      authors: "S Amano, S D P Fielden and D A Leigh",
-      journal: "Nature",
-      volume: "594",
-      pages: "529-534",
-      abstractImg: "images/publications/VidKey.png"
-    },
-    {
-      year: "2021",
-      title: "Sequence-selective decapeptide synthesis by the parallel operation of two artificial molecular machines",
-      url: "https://pubs.acs.org/doi/full/10.1021/jacs.1c01234",
-      authors: "J Echavarren, M A Y Gall, A Haertsch, D A Leigh, J T J Spence, D J Tetlow and C Tian",
-      journal: "J Am Chem Soc",
-      volume: "143",
-      pages: "5158-5165",
-      abstractImg: "images/publications/spice.png"
-    },
-    {
-      year: "2021",
-      title: "A doubly kinetically-gated information ratchet autonomously driven by carbodiimide hydration",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.1c01172",
-      authors: "S Borsley, D A Leigh and B M W Roberts",
-      journal: "J Am Chem Soc",
-      volume: "143",
-      pages: "4414-4420",
-      abstractImg: "images/publications/ratchet.png"
-    },
-    {
-      year: "2021",
-      title: "Site-to-site peptide transport on a molecular platform using a small-molecule robotic arm",
-      url: "https://pubs.rsc.org/en/content/articlelanding/2021/sc/d0sc05906d",
-      authors: "S Kassem, A T L Lee, D A Leigh, A Markevicius, D J Tetlow and n Toriumi",
-      journal: "Chem Sci",
-      volume: "12",
-      pages: "2065-2070",
-      abstractImg: "images/publications/transporter.png"
-    },
-    {
-      year: "2021",
-      title: "Effects of turn-structure on folding and entanglement in artificial molecular overhand knots",
-      url: "https://pubs-rsc-org.manchester.idm.oclc.org/en/content/articlelanding/2021/sc/d0sc05897a",
-      authors: "Y Song, F Schaufelberger, Z Ashbridge, L Pirvu, I J Vitorica-Yrezabal and D A Leigh",
-      journal: "Chem Sci",
-      volume: "12",
-      pages: "1826-1833",
-      abstractImg: "images/publications/protknot.png"
-    },
-    {
-      year: "2021",
-      title: "Real-time fluctuations in single-molecule rotaxane experiments reveal an intermediate weak binding state during shuttling",
-      url: "https://pubs.acs.org/doi/pdf/10.1021/jacs.0c12161",
-      authors: "D Sluysmans, P Lussis, C-A Fustin, A Bertocco, D A Leigh and A-S Duwez",
-      journal: "J Am Chem Soc",
-      volume: "143",
-      pages: "2348-2352",
-      abstractImg: "images/publications/AFMrotax.png",
-      highlight: "Featured on the cover of J Am Chem Soc."
-    },
-    {
-      year: "2021",
-      title: "A chiral cyclometalated Iridium Star of David [2]catenane",
-      url: "https://pubs.acs.org/doi/full/10.1021/jacs.0c12038",
-      authors: "D P August, J Jaramillo-Garcia, D A Leigh, A Valero and I J Vitorica-Yrezabal",
-      journal: "J Am Chem Soc",
-      volume: "143",
-      pages: "1154-1161",
-      abstractImg: "images/publications/IrKnot.png",
-      highlight: "Highlighted in C&EN and ChemistryViews.Org."
-    },
-    {
-      year: "2021",
-      title: "A molecular endless (74) knot",
-      url: "https://www.nature.com/articles/s41557-020-00594-x",
-      authors: "D A Leigh, J J Danon, S D P Fielden, J-F Lemonnier, G F S Whitehead and S L Woltering",
-      journal: "Nat Chem",
-      volume: "13",
-      pages: "117-122",
-      abstractImg: "images/publications/endless.jpg",
-      highlight: "Featured on the cover of Nat Chem. Numerous global highlights."
-    }
-  ],
-  "2020": [
-    {
-      year: "2020",
-      title: "Self-assembly of a layered two-dimensional molecularly woven fabric",
-      url: "https://www.nature.com/articles/s41586-020-3019-9",
-      authors: "D P August, R A W Dryfe, S J Haigh, P R C Kent, D A Leigh, J-F Lemonnier, Z Li, C A Muryn, L I Palmer, Y Song, G F S Whitehead and R J Young",
-      journal: "Nature",
-      volume: "588",
-      pages: "429-435",
-      abstractImg: "images/publications/2DMatgraph.png",
-      highlight: "Awarded a Guinness World Record for the finest woven fabric."
-    },
-    {
-      year: "2020",
-      title: "Transmembrane ion channels formed by a Star of David [2]catenane and a molecular pentafoil knot",
-      url: "https://pubs.acs.org/articlesonrequest/AOR-DCVGS8D3KX9MKT57QPIM",
-      authors: "D P August, S Borsley, S L Cockroft, F della Sala, D A Leigh and S J Webb",
-      journal: "J Am Chem Soc",
-      volume: "142",
-      pages: "18859-18865",
-      abstractImg: "images/publications/ionchannel.jpg"
-    },
-    {
-      year: "2020",
-      title: "A track-based molecular synthesizer that builds a single-sequence oligomer through iterative carbon-carbon bond formation",
-      url: "http://disq.us/t/3s9vg81",
-      authors: "C T McTernan, G De Bo and D A Leigh",
-      journal: "Chem",
-      volume: "6",
-      pages: "2964-2973",
-      abstractImg: "images/publications/Wittigator.png",
-      highlight: "Featured on the cover of Chem. Editors' Favorite Articles 2020."
-    },
-    {
-      year: "2020",
-      title: "Tying different knots in a molecular strand",
-      url: "https://www.nature.com/articles/s41586-020-2614-0",
-      authors: "D A Leigh, F Schaufelberger, L Pirvu, J Halldin Stenlid, D P August and J Segard",
-      journal: "Nature",
-      volume: "584",
-      pages: "562-568",
-      abstractImg: "images/publications/5_2_knot.jpg",
-      highlight: "C&EN Molecules of the Year 2020."
-    },
-    {
-      year: "2020",
-      title: "Knotting a molecular strand can invert macroscopic effects of chirality",
-      url: "https://www-nature-com.manchester.idm.oclc.org/articles/s41557-020-0517-1",
-      authors: "n Katsonis, F Lancia, D A Leigh, L Pirvu, A Ryabchun and F Schaufelberger",
-      journal: "Nat Chem",
-      volume: "12",
-      pages: "939-944",
-      abstractImg: "images/publications/InversionPitch.png"
-    },
-    {
-      year: "2020",
-      title: "Single-step enantioselective synthesis of mechanically planar chiral [2]rotaxanes using a chiral leaving group strategy",
-      url: "https://doi.org/10.1021/jacs.0c03447",
-      authors: "C Tian, S D P Fielden, B Pérez-Saavedra, I J Vitorica-Yrezabal and D A Leigh",
-      journal: "J Am Chem Soc",
-      volume: "142",
-      pages: "9803-9808",
-      abstractImg: "images/publications/MechRot2020.png"
-    },
-    {
-      year: "2020",
-      title: "Weak functional group interactions revealed through metal-free active template rotaxane synthesis",
-      url: "https://rdcu.be/b1hOp",
-      authors: "C Tian, S D P Fielden, G F S Whitehead, I J Vitorica-Yrezabal and D A Leigh",
-      journal: "Nat Commun",
-      volume: "11",
-      pages: "744",
-      abstractImg: "images/publications/NatComm2020.png"
-    }
-  ],
-  "2019": [
-    {
-      year: "2019",
-      title: "Dynamic control of chiral space through local symmetry breaking in a rotaxane organocatalyst",
-      url: "https://onlinelibrary.wiley.com/doi/pdf/10.1002/anie.201908330",
-      authors: "M Dommaschk, J Echavarren, D A Leigh, V Marcos and T A Singleton",
-      journal: "Angew Chem Int Ed",
-      volume: "58",
-      pages: "14955-14958",
-      abstractImg: "images/publications/Rotaxorgano.png"
-    },
-    {
-      year: "2019",
-      title: "Self-sorting assembly of molecular trefoil knots of single handedness",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.9b06127",
-      authors: "J Zhong, L Zhang, D August, G F S Whitehead and D A Leigh",
-      journal: "J Am Chem Soc",
-      volume: "141",
-      pages: "14249-14256",
-      abstractImg: "images/publications/SelfSortingTrefoils.png"
-    },
-    {
-      year: "2019",
-      title: "Active template rotaxane synthesis through the Ni-catalyzed cross-coupling of alkylzinc reagents with redox-active esters",
-      url: "https://pubs.rsc.org/en/content/articlelanding/2019/sc/c9sc02457c",
-      authors: "J Echavarren, M A Y Gall, A Haertsch, D A Leigh, V Marcos and D J Tetlow",
-      journal: "Chem Sci",
-      volume: "10",
-      pages: "7269-7273",
-      abstractImg: "images/publications/Redoxester.jpg"
-    },
-    {
-      year: "2019",
-      title: "Dissipative catalysis with a molecular machine",
-      url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/anie.201905250",
-      authors: "C Biagini, S D P Fielden, D A Leigh, F Schaufelberger, S Di Stefano and D Thomas",
-      journal: "Angew Chem Int Ed",
-      volume: "58",
-      pages: "9876-9880",
-      abstractImg: "images/publications/Disscatmech.png",
-      highlight: "Hot Paper and Cover feature in Angew Chem Int Ed."
-    },
-    {
-      year: "2019",
-      title: "Stereoselective synthesis of molecular square and granny knots",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.9b01819",
-      authors: "D A Leigh, L Pirvu and F Schaufelberger",
-      journal: "J Am Chem Soc",
-      volume: "141",
-      pages: "6054-6059",
-      abstractImg: "images/publications/GrannyKnots.png"
-    },
-    {
-      year: "2019",
-      title: "Coordination chemistry of a molecular pentafoil knot",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.8b12548",
-      authors: "L Zhang, A J Stephens, J-F Lemonnier, L Pirvu, I J Vitorica-Yrezabal, C J Robinson and D A Leigh",
-      journal: "J Am Chem Soc",
-      volume: "141",
-      pages: "3952-3958",
-      abstractImg: "images/publications/PKmetals.png"
-    },
-    {
-      year: "2019",
-      title: "Probing the dynamics of imine-based pentafoil knot and pentameric circular helicate assembly",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.8b12800",
-      authors: "J-F Ayme, J E Beves, C J Campbell and D A Leigh",
-      journal: "J Am Chem Soc",
-      volume: "141",
-      pages: "3605-3612",
-      abstractImg: "images/publications/PKdynamics.jpg"
-    },
-    {
-      year: "2019",
-      title: "Effects of knot tightness at the molecular level",
-      url: "https://www.pnas.org/content/early/2019/01/24/1815570116.abstract",
-      authors: "L Zhang, J-F Lemonnier, A Acocella, M Calvaresi, F Zerbetto and D A Leigh",
-      journal: "Proc Natl Acad Sci USA",
-      volume: "116",
-      pages: "2452-2457",
-      abstractImg: "images/publications/tightness.png"
-    }
-  ],
-  "2018": [
-    {
-      year: "2018",
-      title: "Analysis of two [2]catenanes based on electron densities from invariom refinement and results from DFT calculations",
-      url: "https://www.degruyter.com/view/j/znb.ahead-of-print/znb-2018-0179/znb-2018-0179.xml",
-      authors: "P Luger, B Dittrich, S Mebs, A M Z Slawin and D A Leigh",
-      journal: "Z. n aturforsch.",
-      volume: "73b",
-      pages: "677-687",
-      abstractImg: "images/publications/DFTcatenane.png"
-    },
-    {
-      year: "2018",
-      title: "Stereoselective synthesis of a composite knot with nine crossings",
-      url: "https://www.nature.com/articles/s41557-018-0124-6",
-      authors: "L Zhang, A J Stephens, A L n ussbaumer, J-F Lemonnier, P Jurček, I J Vitorica-Yrezabal and D A Leigh",
-      journal: "Nature Chem",
-      volume: "10",
-      pages: "1083-1088",
-      abstractImg: "images/publications/compositeknot.png",
-      highlight: "Featured on the cover of n at Chem. Molecules of the Year 2018."
-    },
-    {
-      year: "2018",
-      title: "A six-crossing doubly interlocked [2]catenane with twisted rings, and a molecular granny knot",
-      url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/anie.201807135",
-      authors: "J J Danon, D A Leigh, S Pisano, A Valero and I J Vitorica-Yrezabal",
-      journal: "Angew Chem Int Ed",
-      volume: "57",
-      pages: "13833-13837",
-      abstractImg: "images/publications/623link.png"
-    },
-    {
-      year: "2018",
-      title: "Comment on “Coordination-Driven Self-Assembly of a Molecular Knot Comprising Sixteen Crossings\"",
-      url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/anie.201804904",
-      authors: "D A Leigh, J-F Lemonnier and S L Woltering",
-      journal: "Angew Chem Int Ed",
-      volume: "57",
-      pages: "12212-12214",
-      abstractImg: "images/publications/16crossingknot.png"
-    },
-    {
-      year: "2018",
-      title: "Spontaneous assembly of rotaxanes from a primary amine, crown ether and electrophile",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.8b03394",
-      authors: "S D P Fielden, D A Leigh, C T McTernan, B Pérez-Saavedra and I J Vitorica-Yrezabal",
-      journal: "J Am Chem Soc",
-      volume: "140",
-      pages: "6049-6052",
-      abstractImg: "images/publications/amine-rotaxane.png"
-    },
-    {
-      year: "2018",
-      title: "Securing a supramolecular architecture by tying a stopper knot",
-      url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/anie.201803871",
-      authors: "D A Leigh, L Pirvu, F Schaufelberger, D J Tetlow and L Zhang",
-      journal: "Angew Chem Int Ed",
-      volume: "57",
-      pages: "10484-10488",
-      abstractImg: "images/publications/stopper-knot.png",
-      highlight: "Featured as the Frontispiece."
-    },
-    {
-      year: "2018",
-      title: "An artificial molecular machine that builds an asymmetric catalyst",
-      url: "https://www.nature.com/articles/s41565-018-0105-3",
-      authors: "G De Bo, M A Y Gall, S Kuschel, J De Winter, P Gerbaux and D A Leigh",
-      journal: "Nature Nanotech",
-      volume: "13",
-      pages: "381-385",
-      abstractImg: "images/publications/n atn ano_TOC.png",
-      highlight: "Research of the Year 2018 (Chem World)."
-    },
-    {
-      year: "2018",
-      title: "A molecular trefoil knot from a trimeric circular helicate",
-      url: "https://pubs.acs.org/doi/10.1021/jacs.8b00738",
-      authors: "L Zhang, D P August, J Zhong, G F S Whitehead, I J Vitorica-Yrezabal and D A Leigh",
-      journal: "J Am Chem Soc",
-      volume: "140",
-      pages: "4982-4985",
-      abstractImg: "images/publications/trimeric_helicate.png"
-    },
-    {
-      year: "2018",
-      title: "Molecular machines with bio-inspired mechanisms",
-      url: "http://www.pnas.org/content/early/2018/02/22/1712788115",
-      authors: "L Zhang, V Marcos and D A Leigh",
-      journal: "Proc n atl Acad Sci USA",
-      volume: "115",
-      pages: "9397-9404",
-      abstractImg: "images/publications/bio-inspired.png"
-    }
-  ],
-  "2017": [
-    {
-      year: "2017",
-      title: "Transient two-dimensional vibrational spectroscopy of an operating molecular machine",
-      url: "https://www.nature.com/articles/s41467-017-02278-6",
-      authors: "M R Panman, C n van Dijk, A Huerta-Viga, H J Sanders, B H Bakker, D A Leigh, A M Brouwer, W J Buma and S Woutersen",
-      journal: "Nature Commun",
-      volume: "8",
-      pages: "2206",
-      abstractImg: "images/publications/spectroscopy_shuttle_2017.png"
-    },
-    {
-      year: "2017",
-      title: "Braiding a molecular knot with eight crossings",
-      url: "http://science.sciencemag.org/content/355/6321/159",
-      authors: "J J Danon, A Krüger, D A Leigh, J-F Lemonnier, A J Stephens, I J Vitorica-Yrezabal and S L Woltering",
-      journal: "Science",
-      volume: "355",
-      pages: "159-162",
-      abstractImg: "images/publications/819knot-cut.jpg"
-    }
-  ],
-  "2016": [
-    {
-      year: "2016",
-      title: "An autonomous chemically fuelled small-molecule motor",
-      url: "http://www.nature.com/nature/journal/v534/n7606/full/nature18013.html",
-      authors: "M R Wilson, J Solá, A Carlone, S M Goldup, n Lebrasseur and D A Leigh",
-      journal: "Nature",
-      volume: "534",
-      pages: "235-240",
-      abstractImg: "images/publications/Figure2a.gif"
-    }
-  ],
-  "2015": [
-    {
-      year: "2015",
-      title: "Artificial molecular machines",
-      url: "http://pubs.acs.org/doi/abs/10.1021/acs.chemrev.5b00146",
-      authors: "S Erbas-Cakmak, D A Leigh, C T McTernan and A L n ussbaumer",
-      journal: "Chem Rev",
-      volume: "115",
-      pages: "10081-10206",
-      abstractImg: "images/publications/ArtificialMolecularMachines.png"
-    }
-  ],
-  "2014": [
-    {
-      year: "2014",
-      title: "A Star of David Catenane",
-      url: "http://www.nature.com/nchem/journal/vaop/ncurrent/full/nchem.2056.html",
-      authors: "D A Leigh, R G Pritchard and A J Stephens",
-      journal: "Nature Chem",
-      volume: "6",
-      pages: "978–982",
-      abstractImg: "images/publications/StarOfDavidCat.png"
-    }
-  ],
-  "2013": [
-    {
-      year: "2013",
-      title: "Sequence-Specific Peptide Synthesis by an Artificial Small-Molecule Machine",
-      url: "http://www.sciencemag.org/content/339/6116/189.abstract",
-      authors: "B. Lewandowski, G. De Bo, J. W. Ward, M. Papmeyer, S. Kuschel, M. J. Aldegunde, P. M. E. Gramlich, D. Heckmann, S. M. Goldup, D. M. D’Souza, A. E. Fernandes and D. A. Leigh",
-      journal: "Science",
-      volume: "339",
-      pages: "189-193",
-      abstractImg: "images/publications/peptide_synthesizer_cartoon_small.jpg"
-    }
-  ],
-  "2012": [
-    {
-      year: "2012",
-      title: "A Synthetic Molecular Pentafoil Knot",
-      url: "http://www.nature.com/nchem/journal/v4/n1/abs/nchem.1193.html",
-      authors: "J-F Ayme, J E Beves, D A Leigh, R T McBurney, K Rissanen & D Schultz",
-      journal: "Nature Chem",
-      volume: "4",
-      pages: "15-20",
-      abstractImg: "images/publications/nchem_pentafoil.jpg"
-    }
-  ],
-  "2011": [
-    {
-      year: "2011",
-      title: "A Single Synthetic Small Molecule that Generates Force Against a Load",
-      url: "http://www.nature.com/nnano/journal/v6/n9/abs/nnano.2011.132.html",
-      authors: "P Lussis, T Svaldo-Lanero, A Bertocco, C-A Fustin, D A Leigh and A-S Duwez",
-      journal: "Nature n anotech",
-      volume: "6",
-      pages: "553-557",
-      abstractImg: "images/publications/single_molecule_force.jpg"
     }
   ]
 };
