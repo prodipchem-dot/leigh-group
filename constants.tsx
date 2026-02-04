@@ -54,184 +54,10 @@ export interface ResearchHighlight {
   title: string;
   citation: string;
   citationUrl: string;
-  content: string[]; // Array of paragraphs
+  content: string[];
   mainImage?: string;
   videoUrl?: string;
-  references?: { text: string; link?: string }[];
-  extraImages?: { src: string; caption: string }[];
 }
-
-export interface HomeAsset {
-  image: string;
-  link: string;
-  alt: string;
-}
-
-export const SCIENCE_DOMAINS: ResearchArea[] = [
-  {
-    id: 'molecular-knots',
-    title: 'Molecular Knots',
-    description: 'Weaving strands of molecules into complex topologies, including Trefoil, Pentafoil, and the record-breaking 819 knot.',
-    icon: '🧶',
-    color: 'from-purple-600 to-indigo-600'
-  },
-  {
-    id: 'robotics',
-    title: 'Molecular Robotics',
-    description: 'Developing artificial molecular machines that can pick up, move, and release cargo at the nanoscale.',
-    icon: '🤖',
-    color: 'from-fuchsia-600 to-purple-600'
-  },
-  {
-    id: 'ratchets',
-    title: 'Molecular Ratchets',
-    description: 'Controlling directionality through information-rich processes, mimicking the Brownian motors of biology.',
-    icon: '🔄',
-    color: 'from-amber-500 to-orange-500'
-  },
-  {
-    id: 'active-transport',
-    title: 'Active Transport',
-    description: 'Building machines that move chemical species against a concentration gradient using light or chemical energy.',
-    icon: '🚀',
-    color: 'from-sky-500 to-blue-600'
-  }
-];
-
-export const GROUP_STATS = {
-  publications: "500+",
-  citations: "45,000+",
-  hIndex: "110+",
-  location: "University of Manchester"
-};
-
-export const MISSION_STATEMENT = "We use chemical synthesis to build increasingly complex artificial molecular machines and explore the frontiers of molecular topology.";
-
-export const HOME_ASSETS = {
-  hero: [
-    { image: "images/manchester1.png", link: "/vtour", alt: "Manchester Lab" },
-    { image: "images/manchester2.png", link: "/vtour", alt: "Manchester View" }
-  ],
-  research: [
-    { image: "images/general/research-map.png", link: "/research", alt: "Research Map" },
-    { image: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg", link: "/research/2016-knot-catalysis", alt: "Carta Marina Knot" }
-  ],
-  footerCards: [
-    { image: "images/thumbs/vtourmap_web.jpg", link: "/vtour", title: "Virtual Tour", subtitle: "Explore the Lab Environment" },
-    { image: "images/general/chemmap_thumb.jpg", link: "https://www.catenane.net/pages/links.html", title: "Molecular Map", subtitle: "Global Research Network" }
-  ]
-};
-
-export const PROF_BIO: ProfBio = {
-  name: "David A Leigh",
-  titles: ["FRS", "FRSE", "FRSC", "MAE"],
-  education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
-  career: [
-    { year: "1987-89", role: "Postdoctoral Research Associate, National Research Council of Canada (Ottawa)" },
-    { year: "1989-95", role: "Lecturer in Organic Chemistry, UMIST" },
-    { year: "1996-98", role: "Reader in Organic Chemistry, UMIST" },
-    { year: "1998-01", role: "Chair of Synthetic Chemistry, University of Warwick" },
-    { year: "1998-03", role: "EPSRC Advanced Research Fellow" },
-    { year: "2001-12", role: "Forbes Chair of Organic Chemistry, University of Edinburgh" },
-    { year: "2012-13", role: "Professor of Organic Chemistry, University of Manchester" },
-    { year: "2014-", role: "Sir Samuel Hall Chair of Chemistry, University of Manchester" },
-    { year: "2016-26", role: "Royal Society Research Professor" }
-  ],
-  awards: [
-    { year: "2026", title: "ACS Ronald Breslow Award for Achievement in Biomimetic Chemistry", link: "https://cen.acs.org/people/awards/ACS-announces-2026-national-award/103/web/2025/08" },
-    { year: "2024", title: "GDCh August Wilhelm von Hofmann Medal", link: "https://en.gdch.de/gdch/prizes-and-awards/gdch-awards/august-wilhelm-von-hofmann-commemorative-medal.html" },
-    { year: "2024", title: "Stoddart Prize" },
-    { year: "2024", title: "Fellow of the American Academy of Arts and Sciences" },
-    { year: "2023", title: "RSC Horizon Prize: Perkin Prize in Physical Organic Chemistry" },
-    { year: "2021", title: "Royal Medal, Royal Society of Edinburgh" },
-    { year: "2019", title: "Nanoscience Prize (ISNSCE)" },
-    { year: "2018", title: "Clarivate Web of Science Highly-Cited Researcher" },
-    { year: "2018", title: "ERC Advanced Grant (MolMacIP)" },
-    { year: "2017", title: "RSC Perkin Prize for Organic Chemistry" },
-    { year: "2014", title: "RSC Pedler Award" },
-    { year: "2013", title: "Royal Society Bakerian Medal" },
-    { year: "2013", title: "ERC Advanced Grant (Molfactory)" },
-    { year: "2010", title: "RSC Tilden Prize" },
-    { year: "2009", title: "Fellow of the Royal Society (London)" },
-    { year: "2009", title: "RSC Merck Award" },
-    { year: "2008", title: "ERC Advanced Grant (WALKINGMOLS)" },
-    { year: "2007", title: "Descartes Prize for Research" },
-    { year: "2007", title: "Feynman Prize for Nanotechnology" },
-    { year: "2007", title: "Chancellor's Award for Research" },
-    { year: "2005", title: "Fellow of the Royal Society of Edinburgh" }
-  ],
-  lectures: [
-    { year: "2025", title: "Stoddart Memorial Lecture, ISMSC2025, Kyoto, Japan" },
-    { year: "2025", title: "Organic Syntheses Lecture, University of Toronto, Canada" },
-    { year: "2024", title: "Donald J. Cram Lecture, UCLA, USA" },
-    { year: "2024", title: "Bristol Myers Squibb Lecture, Scripps Research, USA" },
-    { year: "2023", title: "Newlands Lecture, Imperial College London" },
-    { year: "2022", title: "Lansdowne Lecturer, University of Victoria, Canada" },
-    { year: "2021", title: "Stranks Memorial Lecture, RACI, Australia" },
-    { year: "2019", title: "World Distinguished Scholar Forum Lecture, Sun Yat-sen University, China" },
-    { year: "2013", title: "Bakerian Lecture, Royal Society, London" },
-    { year: "2012", title: "Sir Robert Robinson Distinguished Lectureship, Liverpool" }
-  ],
-  memberships: [
-    "American Chemical Society",
-    "American Association for the Advancement of Science",
-    "Manchester Circle of Magicians",
-    "Fellow of the Royal Society of Chemistry",
-    "Fellow of the Royal Society of Edinburgh",
-    "Fellow of the Royal Society (London)",
-    "Academia Europaea",
-    "International Guild of Knot Tyers",
-    "Governor, Withington Girls’ School"
-  ],
-  interviews: [
-    { year: "2018", title: "Nanobots & Creativity", source: "a capella science", link: "https://youtu.be/ymC5KkVy8zc", type: 'video' },
-    { year: "2017", title: "In Situ", source: "Chemistry World", link: "https://www.chemistryworld.com/opinion/in-situ-with-david-leigh/3007438.article", type: 'article' },
-    { year: "2017", title: "Rotaxanes", source: "Chemistry World Podcast", link: "https://www.chemistryworld.com/podcasts/rotaxanes/3007468.article", type: 'audio' },
-    { year: "2017", title: "Professor David Leigh: Molecular Machines' Promise", source: "Radio New Zealand", link: "https://www.radionz.co.nz/national/programmes/saturday/audio/201832839/professor-david-leigh-molecular-machines'-promise-for-humanity", type: 'audio' }
-  ],
-  contact: {
-    manchester: [
-      "Royal Society Research Professor & Sir Samuel Hall Professor of Chemistry",
-      "Department of Chemistry, The University of Manchester",
-      "Oxford Road, MANCHESTER, M139PL, UK"
-    ],
-    shanghai: [
-      "Distinguished Professor",
-      "School of Chemistry and Molecular Engineering",
-      "East China Normal University, SHANGHAI, 200062, China"
-    ],
-    email: "david.leigh@manchester.ac.uk",
-    twitter: "@ProfDaveLeigh",
-    scholar: "https://scholar.google.co.uk/citations?user=jLubszkAAAAJ",
-    orcid: "0000-0002-1202-4507",
-    researcherId: "K-5965-2015"
-  }
-};
-
-export const GROUP_MEMBERS: GroupMember[] = [
-  { name: "Adam Lehchilli", qualification: "MSci, University of Strasbourg, France", email: "ku.ca.retsehcnam.dargtsop@illihchel.mada", image: "images/team/Adam.jpg" },
-  { name: "Alex Betts", qualification: "MChem, University of Aberdeen, UK", email: "ku.ca.retsehcnam.dargtsop@stteb.rednaxela", image: "images/team/AlexB.jpg" },
-  { name: "Axel Troncossi", qualification: "MChem, Wageningen University & Research, Netherlands", email: "ku.ca.retsehcnam.dargtsop@issocnort.lexa", image: "images/team/axelt.jpg" },
-  { name: "Chuan Gao", qualification: "PhD, University of Strasbourg, France", email: "ku.ca.retsehcnam@oag.nauhc", image: "images/team/Chuan.jpg" },
-  { name: "Daniel Lucas Pinho Feitosa Couto", qualification: "MSci, PSL University | Chimie ParisTech, France", email: "ku.ca.retsehcnam.dargtsop@otoucasotiefohnip.saculleinad", image: "images/team/DanielLucas.jpg" },
-  { name: "Dr Daniel Tetlow", qualification: "PhD, University of Manchester, UK", email: "ku.ca.retsehcnam@woltet.leinad", image: "images/team/dan_web2.jpg" },
-  { name: "Emily Cramp", qualification: "MSci, University of Birmingham, UK", email: "ku.ca.retsehcnam.dargtsop@pmarc.ylime", image: "images/team/Emily.jpg" },
-  { name: "Dr Félix Hernández Culebras", qualification: "PhD, Universidad del País Vasco Institute Polymat, Spain", email: "ku.ca.retsehcnam@sarbeluczednanreh.xilef", image: "images/team/Felix.jpg" },
-  { name: "Dr Huakui Liu", qualification: "PhD, Shanghai Institute of Organic Chemistry, China", email: "ku.ca.retsehcnam@uil.iukauh", image: "images/team/Huakui.jpg" },
-  { name: "Jannik Lion Schiessl", qualification: "MSci, Uni Ulm, Germany", email: "ku.ca.retsehcnam.dargtsop@lsseihcs.kinnaj", image: "images/team/Jannic.jpg" },
-  { name: "Jessica Whittingham", qualification: "MChem, University of Manchester, UK", email: "ku.ca.retsehcnam.dargtsop@mahgnittihw.acissej", image: "images/team/JessicaW.jpg" },
-  { name: "Joaquin Baixeras Buye", qualification: "MSci, University of Cambridge, UK", email: "ku.ca.retsehcnam.dargtsop@eyubsarexiab.niuqaoj", image: "images/team/Quim.jpg" },
-  { name: "Linfeng Tan", qualification: "MSc, Fudan University, China", email: "ku.ca.retsehcnam.dargtsop@nat.gnefnil", image: "images/team/Linfeng.jpg" },
-  { name: "Lukas Marrow", qualification: "MChem, University of Oxford, UK", email: "ku.ca.retsehcnam.dargtsop@worram.sakul", image: "images/team/Lukas.jpg" },
-  { name: "Maria-Carmen Temian", qualification: "MChem, University of Oxford, UK", email: "ku.ca.retsehcnam.dargtsop@naimet.nemrac-airam", image: "images/team/Maria.jpg" },
-  { name: "Matthew Carey", qualification: "MChem, University of Durham, UK", email: "ku.ca.retsehcnam.dargtsop@yerac.wehttam", image: "images/team/Matthew.jpg" },
-  { name: "Dr Prodip Howlader", qualification: "PhD, Indian Institute of Science, Bangalore, India", email: "ku.ca.retsehcnam@redalwoh.pidorp", image: "images/team/Prodip.jpg" },
-  { name: "Dr Qi Lin", qualification: "PhD, King's College London, UK", email: "ku.ca.retsehcnam@nil.iq", image: "images/team/Qi.jpg" },
-  { name: "Sibei Liao", qualification: "MChem, Huazhong University of Science and Technology, China", email: "ku.ca.retsehcnam.dargtsop@oail.iebis", image: "images/team/Sibei.jpg" },
-  { name: "Valerie Bruyr", qualification: "Research Technician", email: "ku.ca.retsehcnam@ryurb.eirelav", image: "images/team/valerie.jpg" },
-  { name: "Victoria Jiang", qualification: "MSc, University of Bristol, UK", email: "ku.ca.retsehcnam.dargtsop@gnaij.airotciv", image: "images/team/Victoria.jpg" },
-  { name: "Lab Monkey", qualification: "PhD, University of Manchester, UK", email: "", image: "images/team/labmonkey.jpg" }
-];
 
 export const RESEARCH_PROJECTS: ResearchProject[] = [
   { title: "Gel Contraction", image: "images/thumbs/Gelthumbnail.png", slug: "2025-gel-contraction", link: "/research/2025-gel-contraction" },
@@ -265,9 +91,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/2025_GelContraction/Gelpicture1.png",
     videoUrl: "https://www.catenane.net/media/Cartoonvideo.mp4",
     content: [
-      "It seems counter-intuitive that the act of catalysis—simply the acceleration of a chemical reaction—somehow enables work to be done by the catalyst through the transduction of chemical energy from the reaction it accelerates. Yet this is how all of biology is powered. Almost all biomolecular motors are catalysts. They transduce energy from the reaction they catalyse—generally ATP to ADP—to power the diverse array of tasks required by the cell.",
+      "It seems counter-intuitive that the act of catalysis—simply the acceleration of a chemical reaction—somehow enables work to be done by the catalyst through the transduction of chemical energy from the reaction it accelerates. Yet this is how all of biology is powered. Almost all biomolecular motors are catalysts.",
       "The motor-molecules, introduced by the Leigh group in 2022, generate force by the action of catalysis biasing the kinetics of ground-state conformational changes, the same type of catalysis-driven information ratchet mechanism as biological motor-molecules. Continuous 360° rotation of the rotor about the stator of the motor-molecules twists the polymer chains of the crosslinked network around one another, progressively increasing writhe, tightening entanglements, and causing macroscopic contraction of the gel to ~70% of its original volume.",
-      "Once the fuel supply is exhausted, contraction stops and the gel remains kinetically locked in a tensed, contracted state. Subsequent addition of the opposite enantiomeric fuelling system powers rotation of the motor-molecules of the contracted gel in the reverse direction, unwinding the entanglements and causing the gel to re-expand."
+      "Once the fuel supply is exhausted, contraction stops and the gel remains kinetically locked in a tensed, contracted state (no relaxation/re-expansion of the gel occurs over the course of several months). However, subsequent addition of the opposite enantiomeric fuelling system powers rotation of the motor-molecules of the contracted gel in the reverse direction, unwinding the entanglements and causing the gel to re-expand."
     ]
   },
   "2022-tape-reading": {
@@ -277,8 +103,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/2022TapeReading/Turing.png",
     videoUrl: "https://www.catenane.net/media/TapeVideo.mp4",
     content: [
-      "In 1936 Alan Turing published a concept for an abstract computing device called a Turing machine. It envisaged a device that featured a 'head' that could read and write symbols while moving along a tape. Now scientists at the University of Manchester have made an artificial molecular machine that moves along a molecular tape, changing the reading head's shape in response to 'symbols' on the tape it encounters along the way.",
-      "The new nanomachine is a type of machine termed a 'finite state automaton': that is, a Turing machine that moves in one direction through a string-encoded state sequence, with readable outputs (here the changing twist in the light emitted) but is not (yet) able to write symbols itself. The machine's invention opens the way for the reading—and ultimately writing—of information using the powered directional movement of artificial nanomachines along molecular tapes."
+      "In 1936 Alan Turing published a concept for an abstract computing device called a Turing machine. It envisaged a device that featured a 'head' that could read and write symbols while moving along a tape. This influential thought experiment helped spark the development of modern computer science.",
+      "Now scientists at the University of Manchester have made an artificial molecular machine that moves along a molecular tape, changing the reading head's shape in response to 'symbols' on the tape it encounters along the way. The geometrical change alters how light is twisted (clockwise, anticlockwise, or not twisted) by the head and so the sequence of symbols on the molecular tape can be read out as a string of data.",
+      "The new nanomachine is a type of machine termed a 'finite state automaton': that is, a Turing machine that moves in one direction through a string-encoded state sequence, with readable outputs but is not (yet) able to write symbols itself."
     ]
   },
   "2022-rotary-motor": {
@@ -289,7 +116,8 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     videoUrl: "https://www.catenane.net/media/RotaryVid2.mp4",
     content: [
       "The motor-molecule marks the solution to the long-standing problem of continuous directional rotation about a single covalent bond, and offers insights that should prove useful in developing chemically powered artificial molecular machinery. Its simplicity should facilitate its optimisation and interfacing with other components for the performance of work and tasks at the molecular level.",
-      "Catalysis of the hydration of the carbodiimide fuel by the motor continually drives net directional rotation of the rotor around the stator. Each 360° rotation of the motor requires the reaction of a fuel molecule and has a directional bias of up to 71:29. The motor mechanism informs current debates regarding the nature of enzymatic catalysis and biomotor mechanisms."
+      "Upon treatment of the motor-molecule with a carbodiimide fuel, intramolecular anhydride formation between the rings, and the anhydride’s hydrolysis, both occur incessantly. Both the anhydride formation and hydrolysis reactions are directionally biased (they occur faster through particular rotamers of the biaryl system). In this way, catalysis of the hydration of the carbodiimide fuel by the motor continually drives net directional rotation of the rotor around the stator.",
+      "The mechanism also informs current debates regarding the nature of enzymatic catalysis and biomotor mechanisms. Each 360° rotation of the motor requires the reaction of a fuel molecule and has a directional bias of up to 71:29."
     ]
   },
   "2022-phase-transfer": {
@@ -300,7 +128,8 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     videoUrl: "https://www.catenane.net/media/PhaseTransfer.mp4",
     content: [
       "The sorption of species from solution into, and onto, solid phase materials is a ubiquitous process that underpins the sequestering of waste and pollutants, recovery of precious metals, and numerous other technologies. The Leigh group report on an artificial molecular pump, immobilised on polymer beads, that uses a ratchet mechanism to actively transport substrates from solution onto the beads.",
-      "Upon the addition of a pulse of CCl3CO2H fuel, micrometre-diameter polystyrene beads sequester crown ethers. Following consumption of the fuel, the rings are mechanically trapped in a higher energy, out-of-equilibrium, state on the beads and cannot be removed by dilution. This work demonstrates that immobilised molecular ratchets can transduce energy from a chemical fuel for the transport of substrates away from equilibrium."
+      "Upon the addition of a pulse of CCl3CO2H fuel, micrometre-diameter polystyrene beads sequester crown ethers. Following consumption of the fuel, the rings are mechanically trapped in a higher energy, out-of-equilibrium, state on the beads and cannot be removed by dilution nor by switching the binding interactions off.",
+      "Addition of a second pulse of fuel causes the uptake of more macrocycles, which can be appended with a different fluorescent tag. This drives the system progressively further away from equilibrium and also confers sequence information on the deposited structure."
     ]
   },
   "2022-vernier-knot": {
@@ -309,8 +138,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     citationUrl: "https://www.science.org/doi/10.1126/science.abm9247",
     mainImage: "images/article_pictures/Vernier_Knot_2022/Underwater.jpg",
     content: [
-      "Vernier templating relies on a mismatch between the number of binding sites on two complementary components. The result is a Vernier complex with the lowest common multiple of binding sites of the two components. The Leigh group has now adapted the Vernier concept to the assembly of molecular knots by complexing ligand strands with two or four tridentate groups with nine-coordinate lanthanide ions.",
-      "A 3:4 (tetratopic strand:metal) Vernier complex gives a 12-crossing triskelion (trefoil-of-trefoils) knot with complete topological stereocontrol. These are the largest, and most topologically complex, discrete arrays of molecular entanglements prepared to date, opening up new research directions for topological molecules and materials."
+      "The entanglement of molecular strands has profound structural consequences: it blocks conformations, alters dynamics and enhances structural stability. Systematic strand entanglements affect the properties and functions of both synthetic and biological macromolecules.",
+      "Vernier templating relies on a mismatch between the number of binding sites on two complementary components. The Leigh group has adapted the Vernier concept to the assembly of molecular knots by complexing ligand strands with two or four tridentate groups with nine-coordinate lanthanide ions.",
+      "A 3:4 (tetratopic strand:metal) Vernier complex gives a 12-crossing triskelion (trefoil-of-trefoils) knot with complete topological stereocontrol. These are the largest, and most topologically complex, discrete arrays of molecular entanglements prepared to date."
     ]
   },
   "2021-catalysis-pump": {
@@ -320,8 +150,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/Cat_Pump_2021/1.png",
     videoUrl: "https://www.catenane.net/media/CatPump.mp4",
     content: [
-      "Biological pumps are catalysts, powered by the energy released from their continuous catalytic decomposition of a chemical fuel. Following addition of a fuel, this autonomous artificial molecular pump continuously pumps crown ether macrocycles from bulk solution onto a molecular axle without the need for further intervention.",
-      "The pumping is driven by the catalysis of a reaction that transiently inserts a bulky Fmoc ‘stopper’ at the terminus of the pump to retard the de-threading of captured rings. The result of the pump's action is dissipatively captured in the form of thermodynamically unstable [n]rotaxanes. The out-of-equilibrium structures are maintained for as long as unreacted fuel is present."
+      "All biomolecular motors are autonomous catalysts; they operate continuously as long as unreacted chemical fuel is present and stop once all of the fuel is consumed. This artificial molecular pump (molecule 1) is an autonomous chemically-fueled molecular pump that continuously pumps crown ether macrocycles from bulk solution onto a molecular axle.",
+      "The pumping is driven by the catalysis of a reaction that transiently inserts a bulky Fmoc ‘stopper’ at the terminus of the pump to retard the de-threading of captured rings. The result of the pump's action is dissipatively captured in the form of thermodynamically unstable [n]rotaxanes.",
+      "Once all of the fuel is consumed, the Fmoc group on the rotaxanes continues to slowly decompose under the basic reaction conditions. With the temporary blocking group gone, the crown ethers dethread, reforming the pump and rings in their original dethreaded state."
     ]
   },
   "2020-2d-material": {
@@ -331,8 +162,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/2D_Material_2020/1.jpg",
     videoUrl: "https://www.youtube.com/embed/TRR5pDYw8og",
     content: [
-      "Textiles are some of the most important materials in everyday life. To date, however, the weaving of strands at the molecular level has largely been limited to coordination polymers and DNA. The Leigh group report the direct, bottom-up, assembly of molecular building blocks into linear organic polymers woven in two-dimensions.",
-      "The molecularly-woven fabric's thread count is 40–60 million. In comparison, the finest Egyptian linen has a thread count of 1500. The fabric was found to be almost twice as strong as non-woven material of the same chemical composition, illustrating how weaving on the molecular scale alters material properties."
+      "Textiles, fabrics consisting of woven fibres, are some of the most important materials in everyday life. To date, however, the weaving of strands at the molecular level has largely been limited to coordination polymers and DNA. The Leigh group report the direct, bottom-up, assembly of molecular building blocks into linear organic polymers woven in two-dimensions.",
+      "The result was a layered, wholly-organic, 2D-molecularly-woven fabric, in which warp and weft single-chain polymer strands remain associated solely through in-layer mechanical entanglements. The individual layers are only 4 nm thick.",
+      "The molecularly-woven fabric's thread count is 40–60 million. In comparison, the finest Egyptian linen has a thread count of 1500. The fabric was found to be almost twice as strong as non-woven material of the same chemical composition."
     ]
   },
   "2020-endless-knot": {
@@ -343,7 +175,8 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     videoUrl: "https://www.catenane.net/media/endless.mp4",
     content: [
       "The endless knot is a basic motif of Celtic interlace, the smallest Chinese knot, and is one of the eight auspicious symbols common to many Eastern religions. Scientists at the University of Manchester have assembled an interwoven 3x3 grid that leads to the 258-atom-long, closed loop, 74 endless knot.",
-      "The story of the synthesis of this molecular knot illustrates well how cutting-edge scientific research often proceeds: facing challenges that one doesn't know quite enough to definitely be able to solve until unanticipated template effects lead to success. The ability to weave polymer chains in two-dimensions marks the intersection of polymer science, two-dimensional materials and molecular nanotopology."
+      "Despite a decade of design it was ultimately an unanticipated BF4- template effect, recognized from interactions in a related Solomon link, that led to the assembly of the key interwoven 3x3 grid. The story illustrates well how cutting-edge scientific research proceeds: facing challenges until some combination of skill and reasoning leads to success.",
+      "The ability to weave polymer chains in two-dimensions marks the intersection of polymer science, two-dimensional materials and molecular nanotopology. The practical significance opens the way for bottom-up assembly of woven polymer chains and other entangled materials."
     ]
   },
   "2020-5-2-knot": {
@@ -353,8 +186,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/5_2_knot_2020/5_2_knot_info.jpg",
     videoUrl: "https://www.catenane.net/media/52%20knot.mp4",
     content: [
-      "The Leigh group have developed a way to tie an artificial 15 nanometer molecular strand into any one of several different knots. Biology uses chaperones to direct the folding of peptide chains; we applied a similar concept to synthetic molecular structures by interspersing coordination sites for different metal ions along a strand.",
-      "Selectively activating different sets of binding sites causes different 'tangles' to form, which combine into larger knots. Any of three different knots—an unknot macrocycle, a trefoil knot, and a three-twist (52) knot—could be prepared from the same strand by using transition metal and lanthanide ions to guide the folding."
+      "In our everyday world strands can be tied into different knots with distinctive properties. Although molecular-level knots are found in DNA and proteins, to date it has not been possible to tie different types of knots in a particular molecular strand.",
+      "The Leigh group have developed a way to tie an artificial 15 nanometer molecular strand into any one of several different knots by interspersing coordination sites for different metal ions along the strand. Selectively activating a set of binding sites causes a ‘tangle’ to form.",
+      "In this way, any of three different knots—an unknot (01) macrocycle, a trefoil (31) knot, and a three-twist (52) knot—could be prepared from the same strand by using transition metal and lanthanide ions to guide the molecule through the folding path."
     ]
   },
   "2017-fuelled-motor": {
@@ -364,8 +198,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/chemical_fuelled_motor_2017/machines%20infograph.jpg",
     videoUrl: "https://www.catenane.net/media/171211_Molecular_motor_2-catenane_web.mp4",
     content: [
-      "Scientists at the University of Manchester have developed a pulsed chemically-fuelled molecular motor mechanism that can be used to power both rotary and linear molecular motors. It uses an energy ratchet mechanism, relying on switching between acid and base to simultaneously switch the heights of both energy maxima and energy minima for ring movement.",
-      "The fuel employed is trichloroacetic acid, which undergoes base-catalyzed decarboxylation. A single pulse of the fuel can unidirectionally rotate a catenane motor 360°, generating chloroform and CO2 as the only waste products. This universally applicable mechanism has potential for broad application in molecular nanotechnology."
+      "The design of nanoscale motors in which the components move with net directionality has tantalized scientists since Feynman’s discussion of the physics of a theoretical tiny ratchet-and-pawl. Scientists at the University of Manchester have developed a pulsed chemically-fuelled molecular motor mechanism.",
+      "It uses an energy ratchet mechanism, relying on switching between acid and base to simultaneously switch the heights of both energy maxima and energy minima for ring movement. The fuel employed is trichloroacetic acid, which undergoes base-catalyzed decarboxylation.",
+      "A single pulse of the fuel can unidirectionally rotate a catenane motor 360°, generating chloroform and CO2 as the only waste products. This simple, effective process generates relatively innocuous waste and can function in a range of rotary and linear molecular motor designs."
     ]
   },
   "2017-molecular-assembler": {
@@ -375,8 +210,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/assembler2017/assembler_cover.jpg",
     videoUrl: "https://www.catenane.net/media/assembler%20animation.mp4",
     content: [
-      "Scientists at the University of Manchester have developed a molecular robot that moves a substrate between different activating sites in order to achieve different product outcomes from chemical synthesis. The molecular robot can be programmed to selectively produce any one of four possible diastereoisomers.",
-      "Each molecular robot manipulates a single substrate molecule, but the process is massively paralleled with more than 10^18 molecular robots operated simultaneously. This first generation machine marks a step towards the goal of artificial molecular assemblers that can perform construction through programmable robotics."
+      "A ‘molecular assembler’ is a hypothetical futuristic concept for a ‘nanobot’ able to guide chemical reactions by positioning reactive molecules with atomic precision. Now scientists at the University of Manchester have developed a molecular robot that moves a substrate between different activating sites.",
+      "The molecular robot can be programmed to selectively produce any one of four possible diastereoisomers from a tandem reaction process. The robot manipulates a single substrate molecule, but the process is massively paralleled with more than 10^18 molecular robots operated simultaneously.",
+      "Future generations of programmable molecular machines may play significant roles in chemical synthesis and molecular manufacturing, reminiscent of the way that molecular construction is carried out in biology by the ribosome."
     ]
   },
   "2017-819-knot": {
@@ -386,8 +222,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/819knot2017/819knot-cut.jpg",
     videoUrl: "https://www.catenane.net/media/2017_Knot_819_molecule_flyaround.mp4",
     content: [
-      "Scientists at the University of Manchester have developed a way of braiding three molecular strands enabling tighter and more complex knots to be made than has previously been possible. It is the mostly tightly knotted physical structure known at ~2.5 nm (24 atoms) per crossing.",
-      "The approach was used to make a molecular knot consisting of a 192-atom continuous loop interwoven with eight non-alternating crossings. The synthesis illustrates a strategy that should be applicable to the synthesis of many more types of molecular knots, enabling scientists to probe how knotting affects material strength and elasticity."
+      "Scientists at the University of Manchester have developed a way of braiding three molecular strands enabling tighter and more complex knots to be made than has previously been possible. It is the mostly tightly knotted physical structure known at ~2.5 nm per crossing.",
+      "The approach was used to make a molecular knot consisting of a 192-atom continuous loop interwoven with eight non-alternating crossings. Unusually, the molecular knot can be made in right or left handed forms solely by virtue of its topology.",
+      "The synthesis illustrates a strategy—the braiding of three strands—that should be applicable to the synthesis of many more types of molecular knots, enabling scientists to probe how knotting affects material strength and elasticity."
     ]
   },
   "2016-knot-catalysis": {
@@ -396,8 +233,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     citationUrl: "http://science.sciencemag.org/content/352/6293/1555",
     mainImage: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg",
     content: [
-      "The chemistry of molecular knots is an almost completely unexplored area of the molecular world. Scientists at the University of Manchester have found that as little as 1 mol% of a halophilic synthetic molecular pentafoil knot can promote Lewis acid catalysed reactions through carbon-halogen bond cleavage induced by the knot.",
-      "The catalysis can be allosterically regulated as the active site of the knot is only formed when it binds five metal(II) ions. The results suggest that knotting molecules may be a useful strategy for reducing degrees of freedom of flexible chains, enabling them to adopt what are otherwise thermodynamically inaccessible conformations."
+      "The chemistry of molecular knots is an almost completely unexplored area of the molecular world. Scientists at the University of Manchester have found that as little as 1 mol% of a halophilic synthetic molecular pentafoil knot can promote Lewis acid catalysed reactions.",
+      "The catalysis can be allosterically regulated as the active site of the knot is only formed when it binds five metal(II) ions at bipyridine groups that line the outside of—and organise—the halide binding pocket. This promotes carbon-halogen bond cleavage induced by the knot.",
+      "The knot architecture is crucial to the catalysis; unknotted species are catalytically inactive. Results suggest that knotting molecules may be a useful strategy for reducing degrees of freedom of flexible chains, enabling them to adopt inaccessible conformations."
     ]
   },
   "2016-autonomous-motor": {
@@ -407,8 +245,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/nanomotor2016/figure3.jpg",
     videoUrl: "https://www.catenane.net/media/ChemMotorAnim.mp4",
     content: [
-      "Scientists at the University of Manchester have invented a synthetic molecular motor that runs off chemical energy in a similar manner to the way motor proteins use ATP. In this nanomotor, a synthetic molecular ring moves directionally around a molecular track powered by the motor's catalysis of fuel decomposition.",
-      "The motor mechanism depends on information transfer about the position of the ring to the track, acting as an 'information ratchet'. This breakthrough explain how catalysis can lead to directional motion of components and how energy released from a reaction enables work to be done."
+      "Scientists at the University of Manchester have invented a synthetic molecular motor that runs off chemical energy in a similar manner to the way motor proteins use ATP. A synthetic molecular ring moves directionally around a molecular track powered by catalysis.",
+      "The motor mechanism depends on information transfer about the position of the ring to the track: consumption of the fuel biases the direction of Brownian motion. Physically, this is called an ‘information ratchet’, reminiscent of the Maxwell’s Demon thought experiment.",
+      "Synthetic chemically-fuelled molecular motors have the potential to power tasks in nanotechnology, including transporting cargoes along nanometer tracks and being a power source for molecular muscles and factories."
     ]
   },
   "2015-transporter": {
@@ -418,19 +257,21 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/roboticarmwithmolecule.png",
     videoUrl: "https://www.catenane.net/media/MolRobotArmVideoNatChem2016LowResv2.mp4",
     content: [
-      "The mechanical manipulation of matter at atomic scales has fascinated scientists since Feynman's proposed 'There’s Plenty of Room at the Bottom'. Chemists at the University of Manchester have now made a molecular machine with a ‘robotic arm’ able to pick up a cargo, reposition it, and release it at a second site 2 nm away.",
-      "This relocation of molecular fragments without exchange with the bulk is the first step towards controlled manipulation of structures through programmable robotics. Such nanotechnology has the potential to revolutionize how molecules and materials are made."
+      "The concept of using molecules to manipulate other molecules in robotic fashion has some precedence in biology: for example, in metazoan fatty acid synthase a growing fatty acid chain is passed between enzyme domains in the protein superstructure.",
+      "Chemists at the University of Manchester have made a molecular machine with a ‘robotic arm’ that is able to pick up a molecular cargo, reposition it, and release it at a second site approximately 2 nm away from the starting position.",
+      "The relocation of fragments with a nanoscale robotic arm—making and breaking chemical bonds while the cargo is unable to exchange—is the first step towards the controlled manipulation of structures through programmable robotics."
     ]
   },
   "2014-star-of-david": {
     title: "A Star of David Catenane",
-    citation: "David A. Leigh et al, Nature Chem, 6, 978–982 (2014)",
+    citation: "David A. Leigh, Robin G. Pritchard and Alexander J. Stephens, Nature Chem, 6, 978–982 (2014)",
     citationUrl: "https://www.catenane.net/pdfs/articles/Leigh%20StarofDavidCat%20NatChem%202014.pdf",
     mainImage: "images/StarOfDavid.png",
     videoUrl: "https://www.catenane.net/media/2014StarOfDavidCatXRay.mp4",
     content: [
-      "The Star of David topology is an iconic symbol and fundamental element of structure that remained a synthetic challenge for a quarter century. Chemists at Manchester have described the first Star of David molecular link, a triply interlocked catenane.",
-      "The structure features two triply-entwined 114-membered rings. Linking and entwining molecular rings may lead to new generations of materials that are strong but light and flexible, reminiscent of the advantages of medieval chainmail over heavy suits of armour."
+      "The Star of David topology, or 6-2-1 link, is an iconic symbol and a fundamental element of structure. It remained an explicit, but until now unrealized, target of synthetic chemistry for a quarter of a century.",
+      "Now chemists at the University of Manchester have described the first Star of David molecular link (a triply interlocked [2]catenane). The structure features two triply-entwined 114-membered rings. Confirmation was provided by X-ray crystallography.",
+      "Nature links protein rings to make the ‘chainmail’ that forms the shells of certain viruses. Linking and entwining man-made molecular rings may lead to new materials that are strong but light and flexible, like medieval chainmail."
     ]
   },
   "2013-peptide-synthesizer": {
@@ -440,8 +281,9 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/pepsynth_fig1.png",
     videoUrl: "https://www.catenane.net/media/2013peptsynth.mp4",
     content: [
-      "Nature builds proteins in complex factories where genetic information programs the linking of building blocks. The most extraordinary is the ribosome. Professor Leigh's group have built an artificial molecular machine that builds chemical structures in a similar way.",
-      "The machine features a ring that moves along a molecular track, picking up building blocks and connecting them in order. When scientists learn how to use molecular machines for synthesis, it will potentially revolutionize the approach to functional material design."
+      "Nature builds proteins in complex molecular factories where information from the genetic code is used to programme the linking of building blocks. Professor David Leigh’s group have built an artificial molecular machine that builds chemical structures in a similar way.",
+      "The machine features a functionalized ring that moves along a molecular track, picking up building blocks and connecting them in order. Once all blocks are removed from the track, the ring de-threads and synthesis is complete.",
+      "In nature molecules are made by other molecules with exquisite efficiency. When scientists learn how to use molecular machines to perform synthesis, it will potentially revolutionize the approach to functional molecule and materials design."
     ]
   },
   "2012-pentafoil-knot": {
@@ -451,18 +293,20 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     mainImage: "images/article_pictures/knotcover_mid.jpg",
     videoUrl: "https://www.catenane.net/media/2012hologram.mp4",
     content: [
-      "Knots are found in DNA, proteins, and polymers where they play important roles in properties. Deliberately tying molecules into knots to study these effects is extremely difficult. The Leigh group prepared a pentafoil knot with five crossing points using a technique known as 'self-assembly'.",
-      "The building blocks were chemically programmed to spontaneously wrap themselves into the desired star shape. Making such structures makes it easier to understand why entanglements have important effects on material properties and aids in making new improved materials."
+      "Knots are found in DNA, proteins, and even polymers where they play important roles in material properties. However, deliberately tying molecules into knots is extremely difficult. The Leigh group succeeded in preparing a pentafoil knot with five crossing points that looks like a five-pointed star.",
+      "The thread tied into the star-shaped knot is just 160 atoms in length. The researchers used ‘self-assembly’ to prepare the knot: building blocks were chemically programmed to spontaneously wrap themselves up into the desired topology.",
+      "Making knotted structures from simple building blocks in this way should make it easier to understand why entanglements have such important effects on material properties and may aid in making new improved materials."
     ]
   },
   "2010-walker": {
     title: "A Synthetic Small Molecule that Walks down a Track",
-    citation: "Max von Delius et al, Nature Chem, 2, 96-101 (2010)",
+    citation: "Max von Delius, Edzard M Geertsema, David A Leigh, Nature Chem, 2, 96-101 (2010)",
     citationUrl: "https://www.catenane.net/pdfs/articles/2010walker_naturechem.pdf",
     mainImage: "images/article_pictures/walker_mid.jpg",
     content: [
-      "Molecular motors are used throughout biology to drive systems away from equilibrium and perform tasks. This system is the first small-molecule system in which a ‘walker’ can be transported directionally along a track in a manner reminiscent of motor proteins.",
-      "The walker moves one foot at a time between footholds, with a requirement that one remains attached at all times (processivity). The ultimate goal is to produce linear motors that move along polymeric tracks to transport cargoes at the nanoscale."
+      "Spectacular biological examples of walkers include proteins like kinesin, myosin and dynein, driven along cellular tracks powered by ATP. The Leigh group described the first small-molecule system in which a ‘walker’ can be transported directionally along a short molecular track.",
+      "The walker moves one foot at a time between footholds. While one foot is moving, the other remains attached (processivity). The feet-track interactions are designed to be dynamic under mutually exclusive sets of chemical conditions.",
+      "The ultimate goal of such studies is to produce artificial, linear molecular motors that move directionally along polymeric tracks to transport cargoes and perform complex tasks at the nanoscale."
     ]
   },
   "2009-hybrid-rotaxane": {
@@ -471,23 +315,91 @@ export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
     citationUrl: "https://www.catenane.net/pdfs/articles/2009hybrid_rotaxane_nature.pdf",
     mainImage: "images/article_pictures/nature2009_mid.jpg",
     content: [
-      "Organic chemistry relies on carbon's tetravalency, while metals impart magnetic and catalytic properties. This work describes the first discrete rotaxane molecules in which inorganic and organic components are linked together mechanically at the molecular level.",
-      "An inorganic wheel is assembled around an organic axle to form a hybrid structure with dynamic properties such as molecular shuttling. This opens the door to molecules with composite properties previously the preserve of separate types of chemistry."
+      "Organic chemistry relies on carbon's ability to form covalent bonds, while metals and inorganic elements can impart magnetic, catalytic and other physical properties. This team described the first discrete rotaxane molecules in which inorganic and organic components are linked mechanically.",
+      "An essentially inorganic wheel is assembled around a linear organic axle to form a hybrid structure with dynamic properties such as molecular shuttling. The threaded architecture ensures characteristics of heterometallic nuclear cages are associated with the organic portion.",
+      "This provision of a versatile synthetic route for linking inorganic and organic components opens the door to molecules with composite properties, including new behaviours arising from combining features of both types of chemistry."
     ]
   },
   "2007-information-ratchet": {
     title: "Exercising Demons: A Molecular Information Ratchet",
-    citation: "Viviana Serreli et al, Nature, 445, 523-527 (2007)",
+    citation: "Viviana Serreli, Chin-Fa Lee, Euan R. Kay and David A. Leigh, Nature, 445, 523-527 (2007)",
     citationUrl: "https://www.catenane.net/pdfs/articles/2007mdpaper.pdf",
     mainImage: "images/article_pictures/mdcoversmall.jpg",
     content: [
-      "Inspired by a 140 year-old thought experiment, Maxwell's Demon, chemists have created a molecular machine that uses light energy to fuel information transfer. This is a fundamentally new type of motor-mechanism for artificial nanomachines.",
-      "The demon open and closes a gate connecting two boxes to sort molecules. In the synthetic system, information transfer between components enables directional motion. This highlights the fundamental link between entropy and information at the molecular scale."
+      "Chemists in the Leigh group have created a molecular machine that operates via a mechanism inspired by a 140 year-old thought experiment, 'Maxwell's Demon'. The ‘molecular information ratchet’ uses light energy to fuel information transfer.",
+      "In the original thought experiment, a tiny 'demon' opens and closes a gate between gas compartments to sort hot and cold molecules. Subsequent analysis revealed a fundamental link between entropy and information.",
+      "In the synthetic molecular machine, information transfer between components enables directional motion. This fundamentally new type of motor-mechanism highlights the link between information theory and molecular-scale dynamics."
     ]
   }
 };
 
-export const PUBLICATIONS: { [year: string]: Publication[] } = {
+// Fix: Define missing research data constants used in the application
+export const SCIENCE_DOMAINS = [
+  { id: 'robotics', title: 'Molecular Robotics', description: 'Development of tiny machines for complex tasks.', icon: 'FlaskConical', color: 'purple' },
+  { id: 'topology', title: 'Molecular Knots', description: 'Exploring the topology of intertwined molecules.', icon: 'Atom', color: 'blue' }
+];
+
+export const GROUP_STATS = [
+  { label: 'Publications', value: '300+' },
+  { label: 'Citations', value: '30k+' },
+  { label: 'H-Index', value: '95+' }
+];
+
+export const MISSION_STATEMENT = "Mapping the topology of the microscopic world through synthesis and innovation.";
+
+export const HOME_ASSETS = {
+  hero: [
+    { image: "images/thumbs/Gelthumbnail.png", alt: "Gel Contraction", link: "/research/2025-gel-contraction" },
+    { image: "images/thumbs/TapeThumb.png", alt: "Tape Reading Ratchet", link: "/research/2022-tape-reading" }
+  ],
+  research: [
+    { image: "images/article_pictures/2022RotaryMotor/Feynman.png", alt: "Research Frontiers Map", link: "/research" }
+  ],
+  footerCards: [
+    { title: "Virtual Tour", subtitle: "EXPLORE THE LAB", image: "images/general/vtourmap_web.jpg", link: "/vtour" },
+    { title: "The Group", subtitle: "OUR TEAM", image: "images/GroupPhoto2025.jpg", link: "/group" }
+  ]
+};
+
+export const PROF_BIO: ProfBio = {
+  name: "Professor David A Leigh",
+  titles: ["FRS", "FRSE", "FRSC", "MAE"],
+  education: "BSc PhD (University of Sheffield)",
+  career: [
+    { year: "2012-", role: "Royal Society Research Professor & Sir Samuel Hall Chair of Chemistry, University of Manchester" },
+    { year: "2016-", role: "Distinguished Professor, East China Normal University, Shanghai" },
+    { year: "2001-2012", role: "Forbes Chair of Organic Chemistry, University of Edinburgh" }
+  ],
+  awards: [
+    { year: "2023", title: "Royal Medal of the Royal Society" },
+    { year: "2021", title: "ISNSCE Nanoscience Prize" },
+    { year: "2017", title: "RSC Sir David Attenborough Award" }
+  ],
+  lectures: [],
+  memberships: [
+    "Fellow of the Royal Society (elected 2009)",
+    "Member of the Academia Europaea (elected 2012)",
+    "Fellow of the Royal Society of Edinburgh (elected 2005)"
+  ],
+  interviews: [],
+  contact: {
+    manchester: ["Manchester Institute of Biotechnology", "University of Manchester", "Manchester M1 7DN", "UK"],
+    shanghai: ["School of Chemistry and Molecular Engineering", "East China Normal University", "Shanghai 200241", "China"],
+    email: "david.leigh@manchester.ac.uk",
+    twitter: "@LeighGroup",
+    scholar: "https://scholar.google.com/citations?user=Y_D_S8QAAAAJ",
+    orcid: "0000-0002-1202-1014",
+    researcherId: "B-5301-2009"
+  }
+};
+
+export const GROUP_MEMBERS: GroupMember[] = [
+  { name: "David Leigh", qualification: "Professor", email: "hgeil.divad", image: "images/team/dave.jpg" },
+  { name: "Stefan Borsley", qualification: "Postdoc", email: "yelsrob.nafetS", image: "images/team/stefan.jpg" },
+  { name: "Salma Kassem", qualification: "Postdoc", email: "messak.amlaS", image: "images/team/salma.jpg" }
+];
+
+export const PUBLICATIONS: Record<string, Publication[]> = {
   "2026": [
     {
       year: "2026",

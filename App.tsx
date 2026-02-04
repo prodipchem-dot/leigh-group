@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -133,7 +133,15 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
 const HomePage = ({ isEditing }: { isEditing: boolean }) => {
   const [content, setContent] = useState(() => {
     const saved = localStorage.getItem('leigh-group-home-content');
-    if (saved) return JSON.parse(saved);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Ensure existing saved state uses internal links if they match titles
+      parsed.projects = parsed.projects.map((p: any) => {
+        const matching = RESEARCH_PROJECTS.find(rp => rp.title === p.title);
+        return matching ? { ...p, link: matching.link, slug: matching.slug } : p;
+      });
+      return parsed;
+    }
     return {
       welcomeTitle: "Welcome to the Leigh group website",
       researchTitle: "Our Research",
@@ -163,7 +171,7 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
   };
 
   const addProject = () => {
-    updateField('projects', [...content.projects, { title: 'New Project', image: 'https://images.unsplash.com/photo-1532187875685-d60320641329?auto=format&fit=crop&q=80&w=400', slug: 'new-project', link: '/research/new-project' }]);
+    updateField('projects', [...content.projects, { title: 'New Project', image: 'images/thumbs/Gelthumbnail.png', slug: 'new-project', link: '/research/new-project' }]);
   };
 
   const removeProject = (index: number) => {
@@ -353,8 +361,9 @@ const ResearchHighlightPage = () => {
   if (!content) return (
     <ResearchLayout>
       <div className="text-center py-20">
-        <h2 className="text-3xl font-black serif-font text-slate-900">Project data coming soon...</h2>
-        <Link to="/research" className="text-[#660099] font-bold mt-4 block underline">Back to Overview</Link>
+        <h2 className="text-3xl font-black serif-font text-slate-900">Research Topic Details</h2>
+        <p className="text-slate-500 mt-2">Information for {slug} is being updated. Please check back soon.</p>
+        <Link to="/research" className="text-[#660099] font-bold mt-8 inline-block underline">Back to Overview</Link>
       </div>
     </ResearchLayout>
   );
@@ -377,7 +386,7 @@ const ResearchHighlightPage = () => {
 
         {content.videoUrl && (
           <div className="aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-slate-900">
-            {content.videoUrl.includes('youtube') ? (
+            {content.videoUrl.includes('youtube.com/embed') ? (
                <iframe className="w-full h-full" src={content.videoUrl} title={content.title} frameBorder="0" allowFullScreen></iframe>
             ) : (
               <video className="w-full h-full object-cover" controls autoPlay loop muted>
@@ -415,6 +424,49 @@ const ResearchHighlightPage = () => {
     </ResearchLayout>
   );
 };
+
+const ResearchPage = () => (
+  <div className="pt-40 pb-32 bg-white">
+    <div className="max-w-7xl mx-auto px-6 space-y-32">
+      <section className="space-y-12 text-center">
+        <div className="space-y-6">
+          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight uppercase">Research Frontiers</h1>
+          <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">In 2018 our group commissioned a short video from <strong>A Capella Science</strong> to introduce the topic of molecular robotics. The result was <strong>‘Nanobot’</strong>.</p>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+           <div className="aspect-video bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-purple-50 relative group">
+              <iframe className="w-full h-full" src="https://www.youtube.com/embed/ObvxPSQNMGc?rel=0&showinfo=0" title="Nanobot Intro" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+           </div>
+           <div className="aspect-video bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-purple-50 relative group">
+              <iframe className="w-full h-full" src="https://www.youtube-nocookie.com/embed/ymC5KkVy8zc?rel=0&showinfo=0" title="Nanobots & Creativity" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+           </div>
+        </div>
+      </section>
+      <section className="space-y-16">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-8">
+          <div className="space-y-2">
+            <h2 className="text-4xl font-black text-slate-900 serif-font">Research Highlights</h2>
+            <p className="text-slate-500 font-medium">Click on the thumbnails to explore our key breakthroughs.</p>
+          </div>
+          <FlaskConical className="w-12 h-12 text-[#660099] opacity-20 hidden md:block" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {RESEARCH_PROJECTS.map((project, idx) => (
+            <motion.div key={idx} whileHover={{ y: -8 }} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl overflow-hidden transition-all group">
+              <Link to={project.link} className="block relative aspect-[4/3] bg-slate-100">
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                   <div className="flex items-center text-white font-bold text-sm gap-2">Learn More <ArrowRight className="w-4 h-4" /></div>
+                </div>
+              </Link>
+              <div className="p-6"><h4 className="text-lg font-bold text-slate-900 group-hover:text-[#660099] transition-colors line-clamp-1">{project.title}</h4></div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+);
 
 const PublicationCard: React.FC<{ pub: Publication }> = ({ pub }) => (
   <motion.div 
@@ -795,49 +847,6 @@ const GroupPage = () => (
           <GroupMemberCard key={idx} member={member} />
         ))}
       </div>
-    </div>
-  </div>
-);
-
-const ResearchPage = () => (
-  <div className="pt-40 pb-32 bg-white">
-    <div className="max-w-7xl mx-auto px-6 space-y-32">
-      <section className="space-y-12 text-center">
-        <div className="space-y-6">
-          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight uppercase">Research Frontiers</h1>
-          <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">In 2018 our group commissioned a short video from <strong>A Capella Science</strong> to introduce the topic of molecular robotics. The result was <strong>‘Nanobot’</strong>.</p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-           <div className="aspect-video bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-purple-50 relative group">
-              <iframe className="w-full h-full" src="https://www.youtube.com/embed/ObvxPSQNMGc?rel=0&showinfo=0" title="Nanobot Intro" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-           </div>
-           <div className="aspect-video bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl border border-purple-50 relative group">
-              <iframe className="w-full h-full" src="https://www.youtube-nocookie.com/embed/ymC5KkVy8zc?rel=0&showinfo=0" title="Nanobots & Creativity" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-           </div>
-        </div>
-      </section>
-      <section className="space-y-16">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-8">
-          <div className="space-y-2">
-            <h2 className="text-4xl font-black text-slate-900 serif-font">Research Highlights</h2>
-            <p className="text-slate-500 font-medium">Click on the thumbnails to explore our key breakthroughs.</p>
-          </div>
-          <FlaskConical className="w-12 h-12 text-[#660099] opacity-20 hidden md:block" />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {RESEARCH_PROJECTS.map((project, idx) => (
-            <motion.div key={idx} whileHover={{ y: -8 }} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl overflow-hidden transition-all group">
-              <Link to={project.link} className="block relative aspect-[4/3] bg-slate-100">
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                   <div className="flex items-center text-white font-bold text-sm gap-2">Learn More <ArrowRight className="w-4 h-4" /></div>
-                </div>
-              </Link>
-              <div className="p-6"><h4 className="text-lg font-bold text-slate-900 group-hover:text-[#660099] transition-colors line-clamp-1">{project.title}</h4></div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
     </div>
   </div>
 );
