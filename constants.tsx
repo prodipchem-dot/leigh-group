@@ -219,27 +219,27 @@ export const GROUP_MEMBERS: GroupMember[] = [
 ];
 
 export const RESEARCH_PROJECTS: ResearchProject[] = [
-  { title: "Gel Contraction", image: "images/thumbs/Gelthumbnail.png", link: "https://www.catenane.net/pages/2025_GelContraction.html" },
-  { title: "Tape Reading Ratchet", image: "images/thumbs/TapeThumb.png", link: "https://www.catenane.net/pages/2022_TapeReadingRatchet.html" },
-  { title: "Rotary Motor", image: "images/thumbs/RotaryMotorThumb.png", link: "https://www.catenane.net/pages/2022_RotaryMotor.html" },
-  { title: "Phase Transfer Pump", image: "images/thumbs/PhasePumpThumb.png", link: "https://www.catenane.net/pages/2022_PhaseTransferPump.html" },
-  { title: "The Vernier", image: "images/thumbs/Vernier_Thumbnail.jpg", link: "https://www.catenane.net/pages/2022_Vernier_Knot.html" },
-  { title: "Catalysis Pump", image: "images/thumbs/CatPump_thumbnail.png", link: "https://www.catenane.net/pages/2021_Catalysis_Pump.html" },
-  { title: "2D Mol Woven Fabric", image: "images/thumbs/2Dmat_thumbnail.png", link: "https://www.catenane.net/pages/2020_2D_Material.html" },
-  { title: "The Endless Knot", image: "images/thumbs/endless_knot_thumbnail.png", link: "https://www.catenane.net/pages/2020_endless_knot.html" },
-  { title: "Tying different knots", image: "images/thumbs/5_2_knot_thumbnail.jpg", link: "https://www.catenane.net/pages/2020_molecular_5_2_knot.html" },
-  { title: "Pulsed Fuel Motors", image: "images/thumbs/pulsed_fuel_motor_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_chemical_fuelled_motor.html" },
-  { title: "A Molecular Assembler", image: "images/thumbs/assembler_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_molecular_assembler.html" },
-  { title: "Molecular 819 Knot", image: "images/thumbs/the819knotcover.jpg", link: "https://www.catenane.net/pages/2017_819knot.html" },
-  { title: "Knot Catalysis", image: "images/thumbs/knotcatalysiscover.jpg", link: "https://www.catenane.net/pages/2016_knot_catalysis.html" },
-  { title: "The NanoMotor", image: "images/thumbs/nanomotorcover.jpg", link: "https://www.catenane.net/pages/2016_autonomous_motor.html" },
-  { title: "Small-Molecule Robotics", image: "images/thumbs/Transporter2015.jpg", link: "https://www.catenane.net/pages/2015_molecular_transporter.html" },
-  { title: "Star of David Catenane", image: "images/thumbs/StarOfDavid.jpg", link: "https://www.catenane.net/pages/2014_star_of_david.html" },
-  { title: "Making Molecules", image: "images/thumbs/pep_synth_thumb.jpg", link: "https://www.catenane.net/pages/2013pep_synth.html" },
-  { title: "Pentafoil Knot", image: "images/knot_box_2011_stroke3.jpg", link: "https://www.catenane.net/pages/2012knot.html" },
-  { title: "Molecular Walker", image: "images/natchempaper2009.jpg", link: "https://www.catenane.net/pages/2010walker.html" },
-  { title: "Hybrid Rotaxanes", image: "images/naturepaper2009.jpg", link: "https://www.catenane.net/pages/2009hybrid_rotaxane.html" },
-  { title: "Information Ratchet", image: "images/mdhomepaper.jpg", link: "https://www.catenane.net/pages/2007mol_info_ratchet1.html" }
+  { title: "Gel Contraction", image: "images/research/Gelthumbnail.png", link: "https://www.catenane.net/pages/2025_GelContraction.html" },
+  { title: "Tape Reading Ratchet", image: "images/research/TapeThumb.png", link: "https://www.catenane.net/pages/2022_TapeReadingRatchet.html" },
+  { title: "Rotary Motor", image: "images/research/RotaryMotorThumb.png", link: "https://www.catenane.net/pages/2022_RotaryMotor.html" },
+  { title: "Phase Transfer Pump", image: "images/research/PhasePumpThumb.png", link: "https://www.catenane.net/pages/2022_PhaseTransferPump.html" },
+  { title: "The Vernier", image: "images/research/Vernier_Thumbnail.jpg", link: "https://www.catenane.net/pages/2022_Vernier_Knot.html" },
+  { title: "Catalysis Pump", image: "images/research/CatPump_thumbnail.png", link: "https://www.catenane.net/pages/2021_Catalysis_Pump.html" },
+  { title: "2D Mol Woven Fabric", image: "images/research/2Dmat_thumbnail.png", link: "https://www.catenane.net/pages/2020_2D_Material.html" },
+  { title: "The Endless Knot", image: "images/research/endless_knot_thumbnail.png", link: "https://www.catenane.net/pages/2020_endless_knot.html" },
+  { title: "Tying different knots", image: "images/research/5_2_knot_thumbnail.jpg", link: "https://www.catenane.net/pages/2020_molecular_5_2_knot.html" },
+  { title: "Pulsed Fuel Motors", image: "images/research/pulsed_fuel_motor_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_chemical_fuelled_motor.html" },
+  { title: "A Molecular Assembler", image: "images/research/assembler_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_molecular_assembler.html" },
+  { title: "Molecular 819 Knot", image: "images/research/the819knotcover.jpg", link: "https://www.catenane.net/pages/2017_819knot.html" },
+  { title: "Knot Catalysis", image: "images/research/knotcatalysiscover.jpg", link: "https://www.catenane.net/pages/2016_knot_catalysis.html" },
+  { title: "The NanoMotor", image: "images/research/nanomotorcover.jpg", link: "https://www.catenane.net/pages/2016_autonomous_motor.html" },
+  { title: "Small-Molecule Robotics", image: "images/research/Transporter2015.jpg", link: "https://www.catenane.net/pages/2015_molecular_transporter.html" },
+  { title: "Star of David Catenane", image: "images/research/StarOfDavid.jpg", link: "https://www.catenane.net/pages/2014_star_of_david.html" },
+  { title: "Making Molecules", image: "images/research/pep_synth_thumb.jpg", link: "https://www.catenane.net/pages/2013pep_synth.html" },
+  { title: "Pentafoil Knot", image: "images/research/knot_box_2011_stroke3.jpg", link: "https://www.catenane.net/pages/2012knot.html" },
+  { title: "Molecular Walker", image: "images/research/natchempaper2009.jpg", link: "https://www.catenane.net/pages/2010walker.html" },
+  { title: "Hybrid Rotaxanes", image: "images/research/naturepaper2009.jpg", link: "https://www.catenane.net/pages/2009hybrid_rotaxane.html" },
+  { title: "Information Ratchet", image: "images/research/mdhomepaper.jpg", link: "https://www.catenane.net/pages/2007mol_info_ratchet1.html" }
 ];
 
 export const PUBLICATIONS: { [year: string]: Publication[] } = {
