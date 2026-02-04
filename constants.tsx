@@ -47,6 +47,18 @@ export interface ResearchProject {
   title: string;
   image: string;
   link: string;
+  slug: string;
+}
+
+export interface ResearchHighlight {
+  title: string;
+  citation: string;
+  citationUrl: string;
+  content: string[]; // Array of paragraphs
+  mainImage?: string;
+  videoUrl?: string;
+  references?: { text: string; link?: string }[];
+  extraImages?: { src: string; caption: string }[];
 }
 
 export interface HomeAsset {
@@ -97,15 +109,15 @@ export const MISSION_STATEMENT = "We use chemical synthesis to build increasingl
 
 export const HOME_ASSETS = {
   hero: [
-    { image: "images/manchester1.png", link: "https://www.catenane.net/pages/vtour.html", alt: "Manchester Lab" },
-    { image: "images/manchester2.png", link: "https://www.catenane.net/pages/vtour.html", alt: "Manchester View" }
+    { image: "images/manchester1.png", link: "/vtour", alt: "Manchester Lab" },
+    { image: "images/manchester2.png", link: "/vtour", alt: "Manchester View" }
   ],
   research: [
-    { image: "images/general/research-map.png", link: "https://www.catenane.net/pages/research_highlights.html", alt: "Research Map" },
-    { image: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg", link: "https://www.catenane.net/pages/2016_knot_catalysis.html", alt: "Carta Marina Knot" }
+    { image: "images/general/research-map.png", link: "/research", alt: "Research Map" },
+    { image: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg", link: "/research/2016-knot-catalysis", alt: "Carta Marina Knot" }
   ],
   footerCards: [
-    { image: "images/thumbs/vtourmap_web.jpg", link: "https://www.catenane.net/pages/vtour.html", title: "Virtual Tour", subtitle: "Explore the Lab Environment" },
+    { image: "images/thumbs/vtourmap_web.jpg", link: "/vtour", title: "Virtual Tour", subtitle: "Explore the Lab Environment" },
     { image: "images/general/chemmap_thumb.jpg", link: "https://www.catenane.net/pages/links.html", title: "Molecular Map", subtitle: "Global Research Network" }
   ]
 };
@@ -222,28 +234,258 @@ export const GROUP_MEMBERS: GroupMember[] = [
 ];
 
 export const RESEARCH_PROJECTS: ResearchProject[] = [
-  { title: "Gel Contraction", image: "images/thumbs/Gelthumbnail.png", link: "https://www.catenane.net/pages/2025_GelContraction.html" },
-  { title: "Tape Reading Ratchet", image: "images/thumbs/TapeThumb.png", link: "https://www.catenane.net/pages/2022_TapeReadingRatchet.html" },
-  { title: "Rotary Motor", image: "images/thumbs/RotaryMotorThumb.png", link: "https://www.catenane.net/pages/2022_RotaryMotor.html" },
-  { title: "Phase Transfer Pump", image: "images/thumbs/PhasePumpThumb.png", link: "https://www.catenane.net/pages/2022_PhaseTransferPump.html" },
-  { title: "The Vernier", image: "images/thumbs/Vernier_Thumbnail.jpg", link: "https://www.catenane.net/pages/2022_Vernier_Knot.html" },
-  { title: "Catalysis Pump", image: "images/thumbs/CatPump_thumbnail.png", link: "https://www.catenane.net/pages/2021_Catalysis_Pump.html" },
-  { title: "2D Mol Woven Fabric", image: "images/thumbs/2Dmat_thumbnail.png", link: "https://www.catenane.net/pages/2020_2D_Material.html" },
-  { title: "The Endless Knot", image: "images/thumbs/endless_knot_thumbnail.png", link: "https://www.catenane.net/pages/2020_endless_knot.html" },
-  { title: "Tying different knots", image: "images/thumbs/5_2_knot_thumbnail.jpg", link: "https://www.catenane.net/pages/2020_molecular_5_2_knot.html" },
-  { title: "Pulsed Fuel Motors", image: "images/thumbs/pulsed_fuel_motor_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_chemical_fuelled_motor.html" },
-  { title: "A Molecular Assembler", image: "images/thumbs/assembler_thumbnail.jpg", link: "https://www.catenane.net/pages/2017_molecular_assembler.html" },
-  { title: "Molecular 819 Knot", image: "images/thumbs/the819knotcover.jpg", link: "https://www.catenane.net/pages/2017_819knot.html" },
-  { title: "Knot Catalysis", image: "images/thumbs/knotcatalysiscover.jpg", link: "https://www.catenane.net/pages/2016_knot_catalysis.html" },
-  { title: "The NanoMotor", image: "images/thumbs/nanomotorcover.jpg", link: "https://www.catenane.net/pages/2016_autonomous_motor.html" },
-  { title: "Small-Molecule Robotics", image: "images/thumbs/Transporter2015.jpg", link: "https://www.catenane.net/pages/2015_molecular_transporter.html" },
-  { title: "Star of David Catenane", image: "images/thumbs/StarOfDavid.jpg", link: "https://www.catenane.net/pages/2014_star_of_david.html" },
-  { title: "Making Molecules", image: "images/thumbs/pep_synth_thumb.jpg", link: "https://www.catenane.net/pages/2013pep_synth.html" },
-  { title: "Pentafoil Knot", image: "images/knot_box_2011_stroke3.jpg", link: "https://www.catenane.net/pages/2012knot.html" },
-  { title: "Molecular Walker", image: "images/natchempaper2009.jpg", link: "https://www.catenane.net/pages/2010walker.html" },
-  { title: "Hybrid Rotaxanes", image: "images/naturepaper2009.jpg", link: "https://www.catenane.net/pages/2009hybrid_rotaxane.html" },
-  { title: "Information Ratchet", image: "images/mdhomepaper.jpg", link: "https://www.catenane.net/pages/2007mol_info_ratchet1.html" }
+  { title: "Gel Contraction", image: "images/thumbs/Gelthumbnail.png", slug: "2025-gel-contraction", link: "/research/2025-gel-contraction" },
+  { title: "Tape Reading Ratchet", image: "images/thumbs/TapeThumb.png", slug: "2022-tape-reading", link: "/research/2022-tape-reading" },
+  { title: "Rotary Motor", image: "images/thumbs/RotaryMotorThumb.png", slug: "2022-rotary-motor", link: "/research/2022-rotary-motor" },
+  { title: "Phase Transfer Pump", image: "images/thumbs/PhasePumpThumb.png", slug: "2022-phase-transfer", link: "/research/2022-phase-transfer" },
+  { title: "The Vernier", image: "images/thumbs/Vernier_Thumbnail.jpg", slug: "2022-vernier-knot", link: "/research/2022-vernier-knot" },
+  { title: "Catalysis Pump", image: "images/thumbs/CatPump_thumbnail.png", slug: "2021-catalysis-pump", link: "/research/2021-catalysis-pump" },
+  { title: "2D Mol Woven Fabric", image: "images/thumbs/2Dmat_thumbnail.png", slug: "2020-2d-material", link: "/research/2020-2d-material" },
+  { title: "The Endless Knot", image: "images/thumbs/endless_knot_thumbnail.png", slug: "2020-endless-knot", link: "/research/2020-endless-knot" },
+  { title: "Tying different knots", image: "images/thumbs/5_2_knot_thumbnail.jpg", slug: "2020-5-2-knot", link: "/research/2020-5-2-knot" },
+  { title: "Pulsed Fuel Motors", image: "images/thumbs/pulsed_fuel_motor_thumbnail.jpg", slug: "2017-fuelled-motor", link: "/research/2017-fuelled-motor" },
+  { title: "A Molecular Assembler", image: "images/thumbs/assembler_thumbnail.jpg", slug: "2017-molecular-assembler", link: "/research/2017-molecular-assembler" },
+  { title: "Molecular 819 Knot", image: "images/thumbs/the819knotcover.jpg", slug: "2017-819-knot", link: "/research/2017-819-knot" },
+  { title: "Knot Catalysis", image: "images/thumbs/knotcatalysiscover.jpg", slug: "2016-knot-catalysis", link: "/research/2016-knot-catalysis" },
+  { title: "The NanoMotor", image: "images/thumbs/nanomotorcover.jpg", slug: "2016-autonomous-motor", link: "/research/2016-autonomous-motor" },
+  { title: "Small-Molecule Robotics", image: "images/thumbs/Transporter2015.jpg", slug: "2015-transporter", link: "/research/2015-transporter" },
+  { title: "Star of David Catenane", image: "images/thumbs/StarOfDavid.jpg", slug: "2014-star-of-david", link: "/research/2014-star-of-david" },
+  { title: "Making Molecules", image: "images/thumbs/pep_synth_thumb.jpg", slug: "2013-peptide-synthesizer", link: "/research/2013-peptide-synthesizer" },
+  { title: "Pentafoil Knot", image: "images/knot_box_2011_stroke3.jpg", slug: "2012-pentafoil-knot", link: "/research/2012-pentafoil-knot" },
+  { title: "Molecular Walker", image: "images/natchempaper2009.jpg", slug: "2010-walker", link: "/research/2010-walker" },
+  { title: "Hybrid Rotaxanes", image: "images/naturepaper2009.jpg", slug: "2009-hybrid-rotaxane", link: "/research/2009-hybrid-rotaxane" },
+  { title: "Information Ratchet", image: "images/mdhomepaper.jpg", slug: "2007-information-ratchet", link: "/research/2007-information-ratchet" }
 ];
+
+export const RESEARCH_HIGHLIGHT_CONTENT: Record<string, ResearchHighlight> = {
+  "2025-gel-contraction": {
+    title: "Transducing chemical energy through catalysis",
+    citation: "Peng-Lai Wang, Stefan Borsley, Martin J. Power, Alessandro Cavasso, Nicolas Giuseppone & David A. Leigh, Nature, 637, 594–600 (2025)",
+    citationUrl: "https://t.co/YWomGAutpU",
+    mainImage: "images/article_pictures/2025_GelContraction/Gelpicture1.png",
+    videoUrl: "https://www.catenane.net/media/Cartoonvideo.mp4",
+    content: [
+      "It seems counter-intuitive that the act of catalysis—simply the acceleration of a chemical reaction—somehow enables work to be done by the catalyst through the transduction of chemical energy from the reaction it accelerates. Yet this is how all of biology is powered. Almost all biomolecular motors are catalysts. They transduce energy from the reaction they catalyse—generally ATP to ADP—to power the diverse array of tasks required by the cell.",
+      "The motor-molecules, introduced by the Leigh group in 2022, generate force by the action of catalysis biasing the kinetics of ground-state conformational changes, the same type of catalysis-driven information ratchet mechanism as biological motor-molecules. Continuous 360° rotation of the rotor about the stator of the motor-molecules twists the polymer chains of the crosslinked network around one another, progressively increasing writhe, tightening entanglements, and causing macroscopic contraction of the gel to ~70% of its original volume.",
+      "Once the fuel supply is exhausted, contraction stops and the gel remains kinetically locked in a tensed, contracted state. Subsequent addition of the opposite enantiomeric fuelling system powers rotation of the motor-molecules of the contracted gel in the reverse direction, unwinding the entanglements and causing the gel to re-expand."
+    ]
+  },
+  "2022-tape-reading": {
+    title: "A Read-Only Molecular Turing Machine",
+    citation: "Yansong Ren, Romain Jamagne, Daniel J. Tetlow, David A. Leigh, Nature, 612, 78–82 (2022)",
+    citationUrl: "https://www.nature.com/articles/s41586-022-05305-9",
+    mainImage: "images/article_pictures/2022TapeReading/Turing.png",
+    videoUrl: "https://www.catenane.net/media/TapeVideo.mp4",
+    content: [
+      "In 1936 Alan Turing published a concept for an abstract computing device called a Turing machine. It envisaged a device that featured a 'head' that could read and write symbols while moving along a tape. Now scientists at the University of Manchester have made an artificial molecular machine that moves along a molecular tape, changing the reading head's shape in response to 'symbols' on the tape it encounters along the way.",
+      "The new nanomachine is a type of machine termed a 'finite state automaton': that is, a Turing machine that moves in one direction through a string-encoded state sequence, with readable outputs (here the changing twist in the light emitted) but is not (yet) able to write symbols itself. The machine's invention opens the way for the reading—and ultimately writing—of information using the powered directional movement of artificial nanomachines along molecular tapes."
+    ]
+  },
+  "2022-rotary-motor": {
+    title: "There’s plenty of va-va-voom at the bottom!",
+    citation: "Stefan Borsley, Elisabeth Kreidt, David A. Leigh, Benjamin M. W. Roberts, Nature, 604, 80–85 (2022)",
+    citationUrl: "https://www.nature.com/articles/s41586-022-04450-5",
+    mainImage: "images/article_pictures/2022RotaryMotor/Feynman.png",
+    videoUrl: "https://www.catenane.net/media/RotaryVid2.mp4",
+    content: [
+      "The motor-molecule marks the solution to the long-standing problem of continuous directional rotation about a single covalent bond, and offers insights that should prove useful in developing chemically powered artificial molecular machinery. Its simplicity should facilitate its optimisation and interfacing with other components for the performance of work and tasks at the molecular level.",
+      "Catalysis of the hydration of the carbodiimide fuel by the motor continually drives net directional rotation of the rotor around the stator. Each 360° rotation of the motor requires the reaction of a fuel molecule and has a directional bias of up to 71:29. The motor mechanism informs current debates regarding the nature of enzymatic catalysis and biomotor mechanisms."
+    ]
+  },
+  "2022-phase-transfer": {
+    title: "Adsorption glow up!",
+    citation: "Dean Thomas, Daniel J. Tetlow, Yansong Ren, Salma Kassem, Ulvi Karaca & David A. Leigh, Nat. Nanotechnol. (2022)",
+    citationUrl: "https://www.nature.com/articles/s41565-022-01097-1",
+    mainImage: "images/article_pictures/2022PhaseTransfer/TopImage.png",
+    videoUrl: "https://www.catenane.net/media/PhaseTransfer.mp4",
+    content: [
+      "The sorption of species from solution into, and onto, solid phase materials is a ubiquitous process that underpins the sequestering of waste and pollutants, recovery of precious metals, and numerous other technologies. The Leigh group report on an artificial molecular pump, immobilised on polymer beads, that uses a ratchet mechanism to actively transport substrates from solution onto the beads.",
+      "Upon the addition of a pulse of CCl3CO2H fuel, micrometre-diameter polystyrene beads sequester crown ethers. Following consumption of the fuel, the rings are mechanically trapped in a higher energy, out-of-equilibrium, state on the beads and cannot be removed by dilution. This work demonstrates that immobilised molecular ratchets can transduce energy from a chemical fuel for the transport of substrates away from equilibrium."
+    ]
+  },
+  "2022-vernier-knot": {
+    title: "Vernier Entanglements",
+    citation: "Zoe Ashbridge et al, Science, 375, 1035-1041 (2022)",
+    citationUrl: "https://www.science.org/doi/10.1126/science.abm9247",
+    mainImage: "images/article_pictures/Vernier_Knot_2022/Underwater.jpg",
+    content: [
+      "Vernier templating relies on a mismatch between the number of binding sites on two complementary components. The result is a Vernier complex with the lowest common multiple of binding sites of the two components. The Leigh group has now adapted the Vernier concept to the assembly of molecular knots by complexing ligand strands with two or four tridentate groups with nine-coordinate lanthanide ions.",
+      "A 3:4 (tetratopic strand:metal) Vernier complex gives a 12-crossing triskelion (trefoil-of-trefoils) knot with complete topological stereocontrol. These are the largest, and most topologically complex, discrete arrays of molecular entanglements prepared to date, opening up new research directions for topological molecules and materials."
+    ]
+  },
+  "2021-catalysis-pump": {
+    title: "Pumping through Catalysis",
+    citation: "Shuntaro Amano, Stephen D. P. Fielden and David A. Leigh, Nature, 594, 529-534 (2021)",
+    citationUrl: "https://www.nature.com/articles/s41586-021-03575-3",
+    mainImage: "images/article_pictures/Cat_Pump_2021/1.png",
+    videoUrl: "https://www.catenane.net/media/CatPump.mp4",
+    content: [
+      "Biological pumps are catalysts, powered by the energy released from their continuous catalytic decomposition of a chemical fuel. Following addition of a fuel, this autonomous artificial molecular pump continuously pumps crown ether macrocycles from bulk solution onto a molecular axle without the need for further intervention.",
+      "The pumping is driven by the catalysis of a reaction that transiently inserts a bulky Fmoc ‘stopper’ at the terminus of the pump to retard the de-threading of captured rings. The result of the pump's action is dissipatively captured in the form of thermodynamically unstable [n]rotaxanes. The out-of-equilibrium structures are maintained for as long as unreacted fuel is present."
+    ]
+  },
+  "2020-2d-material": {
+    title: "2D Molecular Weaving",
+    citation: "David P. August et al, Nature, 588, 429-435 (2020)",
+    citationUrl: "https://t.co/QsWnDNwmT1?amp=1",
+    mainImage: "images/article_pictures/2D_Material_2020/1.jpg",
+    videoUrl: "https://www.youtube.com/embed/TRR5pDYw8og",
+    content: [
+      "Textiles are some of the most important materials in everyday life. To date, however, the weaving of strands at the molecular level has largely been limited to coordination polymers and DNA. The Leigh group report the direct, bottom-up, assembly of molecular building blocks into linear organic polymers woven in two-dimensions.",
+      "The molecularly-woven fabric's thread count is 40–60 million. In comparison, the finest Egyptian linen has a thread count of 1500. The fabric was found to be almost twice as strong as non-woven material of the same chemical composition, illustrating how weaving on the molecular scale alters material properties."
+    ]
+  },
+  "2020-endless-knot": {
+    title: "Endless forms most beautiful",
+    citation: "David A. Leigh et al, Nat Chem, 13, 117-122 (2021)",
+    citationUrl: "https://go.nature.com/386OLz3",
+    mainImage: "images/article_pictures/endless_knot_2020/1.jpg",
+    videoUrl: "https://www.catenane.net/media/endless.mp4",
+    content: [
+      "The endless knot is a basic motif of Celtic interlace, the smallest Chinese knot, and is one of the eight auspicious symbols common to many Eastern religions. Scientists at the University of Manchester have assembled an interwoven 3x3 grid that leads to the 258-atom-long, closed loop, 74 endless knot.",
+      "The story of the synthesis of this molecular knot illustrates well how cutting-edge scientific research often proceeds: facing challenges that one doesn't know quite enough to definitely be able to solve until unanticipated template effects lead to success. The ability to weave polymer chains in two-dimensions marks the intersection of polymer science, two-dimensional materials and molecular nanotopology."
+    ]
+  },
+  "2020-5-2-knot": {
+    title: "Thou Shalt Knot…",
+    citation: "David A. Leigh et al, Nature, 584, 562-568 (2020)",
+    citationUrl: "https://www.nature.com/articles/s41586-020-2614-0",
+    mainImage: "images/article_pictures/5_2_knot_2020/5_2_knot_info.jpg",
+    videoUrl: "https://www.catenane.net/media/52%20knot.mp4",
+    content: [
+      "The Leigh group have developed a way to tie an artificial 15 nanometer molecular strand into any one of several different knots. Biology uses chaperones to direct the folding of peptide chains; we applied a similar concept to synthetic molecular structures by interspersing coordination sites for different metal ions along a strand.",
+      "Selectively activating different sets of binding sites causes different 'tangles' to form, which combine into larger knots. Any of three different knots—an unknot macrocycle, a trefoil knot, and a three-twist (52) knot—could be prepared from the same strand by using transition metal and lanthanide ions to guide the folding."
+    ]
+  },
+  "2017-fuelled-motor": {
+    title: "Chemically Fuelled Molecular Machinery",
+    citation: "Sundus Erbas-Cakmak et al, Science, 358, 340-343 (2017)",
+    citationUrl: "http://science.sciencemag.org/content/358/6361/340",
+    mainImage: "images/article_pictures/chemical_fuelled_motor_2017/machines%20infograph.jpg",
+    videoUrl: "https://www.catenane.net/media/171211_Molecular_motor_2-catenane_web.mp4",
+    content: [
+      "Scientists at the University of Manchester have developed a pulsed chemically-fuelled molecular motor mechanism that can be used to power both rotary and linear molecular motors. It uses an energy ratchet mechanism, relying on switching between acid and base to simultaneously switch the heights of both energy maxima and energy minima for ring movement.",
+      "The fuel employed is trichloroacetic acid, which undergoes base-catalyzed decarboxylation. A single pulse of the fuel can unidirectionally rotate a catenane motor 360°, generating chloroform and CO2 as the only waste products. This universally applicable mechanism has potential for broad application in molecular nanotechnology."
+    ]
+  },
+  "2017-molecular-assembler": {
+    title: "Building with a Programmable Molecular Robot",
+    citation: "Salma Kassem et al, Nature, 549, 374-378 (2017)",
+    citationUrl: "http://rdcu.be/v2q1",
+    mainImage: "images/article_pictures/assembler2017/assembler_cover.jpg",
+    videoUrl: "https://www.catenane.net/media/assembler%20animation.mp4",
+    content: [
+      "Scientists at the University of Manchester have developed a molecular robot that moves a substrate between different activating sites in order to achieve different product outcomes from chemical synthesis. The molecular robot can be programmed to selectively produce any one of four possible diastereoisomers.",
+      "Each molecular robot manipulates a single substrate molecule, but the process is massively paralleled with more than 10^18 molecular robots operated simultaneously. This first generation machine marks a step towards the goal of artificial molecular assemblers that can perform construction through programmable robotics."
+    ]
+  },
+  "2017-819-knot": {
+    title: "A Synthetic Molecular 819 Knot",
+    citation: "Jonathan J. Danon et al, Science, 355, 159-162 (2017)",
+    citationUrl: "http://science.sciencemag.org/content/355/6321/159",
+    mainImage: "images/article_pictures/819knot2017/819knot-cut.jpg",
+    videoUrl: "https://www.catenane.net/media/2017_Knot_819_molecule_flyaround.mp4",
+    content: [
+      "Scientists at the University of Manchester have developed a way of braiding three molecular strands enabling tighter and more complex knots to be made than has previously been possible. It is the mostly tightly knotted physical structure known at ~2.5 nm (24 atoms) per crossing.",
+      "The approach was used to make a molecular knot consisting of a 192-atom continuous loop interwoven with eight non-alternating crossings. The synthesis illustrates a strategy that should be applicable to the synthesis of many more types of molecular knots, enabling scientists to probe how knotting affects material strength and elasticity."
+    ]
+  },
+  "2016-knot-catalysis": {
+    title: "Allosteric Knot Catalysis",
+    citation: "Vanesa Marcos et al, Science, 352, 1555-1559 (2016)",
+    citationUrl: "http://science.sciencemag.org/content/352/6293/1555",
+    mainImage: "images/article_pictures/knotcatalysis2016/CartaMarinaKnot.jpg",
+    content: [
+      "The chemistry of molecular knots is an almost completely unexplored area of the molecular world. Scientists at the University of Manchester have found that as little as 1 mol% of a halophilic synthetic molecular pentafoil knot can promote Lewis acid catalysed reactions through carbon-halogen bond cleavage induced by the knot.",
+      "The catalysis can be allosterically regulated as the active site of the knot is only formed when it binds five metal(II) ions. The results suggest that knotting molecules may be a useful strategy for reducing degrees of freedom of flexible chains, enabling them to adopt what are otherwise thermodynamically inaccessible conformations."
+    ]
+  },
+  "2016-autonomous-motor": {
+    title: "Cracking Nanomotor, Gromit!",
+    citation: "Miriam R. Wilson et al, Nature, 534, 235-240 (2016)",
+    citationUrl: "http://www.nature.com/nature/journal/v534/n7606/full/nature18013.html",
+    mainImage: "images/article_pictures/nanomotor2016/figure3.jpg",
+    videoUrl: "https://www.catenane.net/media/ChemMotorAnim.mp4",
+    content: [
+      "Scientists at the University of Manchester have invented a synthetic molecular motor that runs off chemical energy in a similar manner to the way motor proteins use ATP. In this nanomotor, a synthetic molecular ring moves directionally around a molecular track powered by the motor's catalysis of fuel decomposition.",
+      "The motor mechanism depends on information transfer about the position of the ring to the track, acting as an 'information ratchet'. This breakthrough explain how catalysis can lead to directional motion of components and how energy released from a reaction enables work to be done."
+    ]
+  },
+  "2015-transporter": {
+    title: "Molecular Robotics",
+    citation: "Salma Kassem et al, Nature Chem, 8, 138-143 (2016)",
+    citationUrl: "http://www.nature.com/nchem/journal/vaop/ncurrent/pdf/nchem.2410.pdf",
+    mainImage: "images/roboticarmwithmolecule.png",
+    videoUrl: "https://www.catenane.net/media/MolRobotArmVideoNatChem2016LowResv2.mp4",
+    content: [
+      "The mechanical manipulation of matter at atomic scales has fascinated scientists since Feynman's proposed 'There’s Plenty of Room at the Bottom'. Chemists at the University of Manchester have now made a molecular machine with a ‘robotic arm’ able to pick up a cargo, reposition it, and release it at a second site 2 nm away.",
+      "This relocation of molecular fragments without exchange with the bulk is the first step towards controlled manipulation of structures through programmable robotics. Such nanotechnology has the potential to revolutionize how molecules and materials are made."
+    ]
+  },
+  "2014-star-of-david": {
+    title: "A Star of David Catenane",
+    citation: "David A. Leigh et al, Nature Chem, 6, 978–982 (2014)",
+    citationUrl: "https://www.catenane.net/pdfs/articles/Leigh%20StarofDavidCat%20NatChem%202014.pdf",
+    mainImage: "images/StarOfDavid.png",
+    videoUrl: "https://www.catenane.net/media/2014StarOfDavidCatXRay.mp4",
+    content: [
+      "The Star of David topology is an iconic symbol and fundamental element of structure that remained a synthetic challenge for a quarter century. Chemists at Manchester have described the first Star of David molecular link, a triply interlocked catenane.",
+      "The structure features two triply-entwined 114-membered rings. Linking and entwining molecular rings may lead to new generations of materials that are strong but light and flexible, reminiscent of the advantages of medieval chainmail over heavy suits of armour."
+    ]
+  },
+  "2013-peptide-synthesizer": {
+    title: "Making molecules that make molecules",
+    citation: "B. Lewandowski et al, Science, 339, 189-193 (2013)",
+    citationUrl: "https://www.catenane.net/pdfs/articles/Leigh%20Sequential%20Peptide%20Synthesis%20Science%202013.pdf",
+    mainImage: "images/article_pictures/pepsynth_fig1.png",
+    videoUrl: "https://www.catenane.net/media/2013peptsynth.mp4",
+    content: [
+      "Nature builds proteins in complex factories where genetic information programs the linking of building blocks. The most extraordinary is the ribosome. Professor Leigh's group have built an artificial molecular machine that builds chemical structures in a similar way.",
+      "The machine features a ring that moves along a molecular track, picking up building blocks and connecting them in order. When scientists learn how to use molecular machines for synthesis, it will potentially revolutionize the approach to functional material design."
+    ]
+  },
+  "2012-pentafoil-knot": {
+    title: "A Synthetic Molecular Pentafoil Knot",
+    citation: "Jean-François Ayme et al, Nature Chem, 4, 15-20 (2012)",
+    citationUrl: "https://www.catenane.net/pdfs/articles/2012knot_naturechem.pdf",
+    mainImage: "images/article_pictures/knotcover_mid.jpg",
+    videoUrl: "https://www.catenane.net/media/2012hologram.mp4",
+    content: [
+      "Knots are found in DNA, proteins, and polymers where they play important roles in properties. Deliberately tying molecules into knots to study these effects is extremely difficult. The Leigh group prepared a pentafoil knot with five crossing points using a technique known as 'self-assembly'.",
+      "The building blocks were chemically programmed to spontaneously wrap themselves into the desired star shape. Making such structures makes it easier to understand why entanglements have important effects on material properties and aids in making new improved materials."
+    ]
+  },
+  "2010-walker": {
+    title: "A Synthetic Small Molecule that Walks down a Track",
+    citation: "Max von Delius et al, Nature Chem, 2, 96-101 (2010)",
+    citationUrl: "https://www.catenane.net/pdfs/articles/2010walker_naturechem.pdf",
+    mainImage: "images/article_pictures/walker_mid.jpg",
+    content: [
+      "Molecular motors are used throughout biology to drive systems away from equilibrium and perform tasks. This system is the first small-molecule system in which a ‘walker’ can be transported directionally along a track in a manner reminiscent of motor proteins.",
+      "The walker moves one foot at a time between footholds, with a requirement that one remains attached at all times (processivity). The ultimate goal is to produce linear motors that move along polymeric tracks to transport cargoes at the nanoscale."
+    ]
+  },
+  "2009-hybrid-rotaxane": {
+    title: "Hybrid Organic-Inorganic Rotaxanes",
+    citation: "Chin-Fa Lee et al, Nature, 458, 314-318 (2009)",
+    citationUrl: "https://www.catenane.net/pdfs/articles/2009hybrid_rotaxane_nature.pdf",
+    mainImage: "images/article_pictures/nature2009_mid.jpg",
+    content: [
+      "Organic chemistry relies on carbon's tetravalency, while metals impart magnetic and catalytic properties. This work describes the first discrete rotaxane molecules in which inorganic and organic components are linked together mechanically at the molecular level.",
+      "An inorganic wheel is assembled around an organic axle to form a hybrid structure with dynamic properties such as molecular shuttling. This opens the door to molecules with composite properties previously the preserve of separate types of chemistry."
+    ]
+  },
+  "2007-information-ratchet": {
+    title: "Exercising Demons: A Molecular Information Ratchet",
+    citation: "Viviana Serreli et al, Nature, 445, 523-527 (2007)",
+    citationUrl: "https://www.catenane.net/pdfs/articles/2007mdpaper.pdf",
+    mainImage: "images/article_pictures/mdcoversmall.jpg",
+    content: [
+      "Inspired by a 140 year-old thought experiment, Maxwell's Demon, chemists have created a molecular machine that uses light energy to fuel information transfer. This is a fundamentally new type of motor-mechanism for artificial nanomachines.",
+      "The demon open and closes a gate connecting two boxes to sort molecules. In the synthetic system, information transfer between components enables directional motion. This highlights the fundamental link between entropy and information at the molecular scale."
+    ]
+  }
+};
 
 export const PUBLICATIONS: { [year: string]: Publication[] } = {
   "2026": [

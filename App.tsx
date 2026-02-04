@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useLocation, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Atom, 
@@ -35,9 +35,12 @@ import {
   Save,
   Plus,
   Trash2,
-  Download
+  Download,
+  Info,
+  Maximize2,
+  Book
 } from 'lucide-react';
-import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS } from './constants';
+import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publication, GROUP_MEMBERS, GroupMember, PROF_BIO, RESEARCH_PROJECTS, ResearchProject, HOME_ASSETS, RESEARCH_HIGHLIGHT_CONTENT } from './constants';
 import MolecularCanvas from './components/MolecularCanvas';
 import Assistant from './components/Assistant';
 
@@ -58,7 +61,7 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
     { name: 'Prof. Leigh', path: '/david', icon: <Award className="w-4 h-4" /> },
     { name: 'People', path: '/group', icon: <Users className="w-4 h-4" /> },
     { name: 'Publications', path: '/literature', icon: <BookOpen className="w-4 h-4" /> },
-    { name: 'Virtual Tour', path: '#', icon: <Compass className="w-4 h-4" /> },
+    { name: 'Virtual Tour', path: '/vtour', icon: <Compass className="w-4 h-4" /> },
     { name: 'Group Matters', path: '#', icon: <MessageSquare className="w-4 h-4" /> },
   ];
 
@@ -81,7 +84,7 @@ const Navbar = ({ onToggleEdit, isEditing }: { onToggleEdit: () => void, isEditi
             <Link 
               key={link.name}
               to={link.path}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname === link.path ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${location.pathname.startsWith(link.path) && (link.path !== '/' || location.pathname === '/') ? 'bg-purple-50 text-[#660099]' : 'text-slate-600 hover:text-[#660099] hover:bg-slate-100'}`}
             >
               <span>{link.name}</span>
             </Link>
@@ -160,7 +163,7 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
   };
 
   const addProject = () => {
-    updateField('projects', [...content.projects, { title: 'New Project', image: 'https://images.unsplash.com/photo-1532187875685-d60320641329?auto=format&fit=crop&q=80&w=400', link: '#' }]);
+    updateField('projects', [...content.projects, { title: 'New Project', image: 'https://images.unsplash.com/photo-1532187875685-d60320641329?auto=format&fit=crop&q=80&w=400', slug: 'new-project', link: '/research/new-project' }]);
   };
 
   const removeProject = (index: number) => {
@@ -195,9 +198,9 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
           </div>
           <div className="lg:col-span-6 flex justify-center gap-4">
              {content.heroGallery.map((hero: any, idx: number) => (
-                <a key={idx} href={hero.link} target="_blank" rel="noopener noreferrer" className="w-1/2 block">
+                <Link key={idx} to={hero.link} className="w-1/2 block">
                   <img src={hero.image} alt={hero.alt} className="w-full h-auto rounded-[2rem] shadow-lg hover:scale-105 transition-transform" />
-                </a>
+                </Link>
              ))}
           </div>
         </div>
@@ -220,14 +223,14 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
                         <button onClick={() => removeProject(idx)} className="text-red-500 hover:text-red-700 transition-colors"><Trash2 className="w-3 h-3" /></button>
                       </div>
                     ) : (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="block">
+                      <Link to={project.link} className="block">
                         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 shadow-sm transition-all group-hover:shadow-md group-hover:border-purple-300">
                           <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                             <span className="text-white text-[10px] font-black uppercase tracking-widest">{project.title}</span>
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     )}
                   </div>
                 ))}
@@ -286,18 +289,18 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
               <div className="space-y-12">
                  {content.researchGallery.map((asset: any, idx: number) => (
                     <div key={idx} className="space-y-4">
-                      <a href={asset.link} target="_blank" rel="noopener noreferrer" className="block"><img src={asset.image} alt={asset.alt} className="w-full rounded-[3rem] shadow-xl hover:shadow-2xl transition-all" /></a>
+                      <Link to={asset.link} className="block"><img src={asset.image} alt={asset.alt} className="w-full rounded-[3rem] shadow-xl hover:shadow-2xl transition-all" /></Link>
                       {idx === 0 && <p className="text-xs text-slate-400 font-bold uppercase text-center tracking-[0.2em]">Group's Research Interests Map</p>}
                     </div>
                  ))}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
                  {content.footerGallery.map((card: any, idx: number) => (
-                    <a key={idx} href={card.link} target="_blank" rel="noopener noreferrer" className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
+                    <Link key={idx} to={card.link} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all group">
                       <h4 className="text-lg font-black text-slate-900 mb-2 flex items-center gap-3">{idx === 0 ? <Compass className="text-[#660099]" /> : <Map className="text-[#ffcc00]" />}{card.title}</h4>
                       <p className="text-xs text-slate-400 font-bold uppercase mb-6 tracking-widest">{card.subtitle}</p>
                       <img src={card.image} alt={card.title} className="w-full h-40 object-cover rounded-2xl group-hover:scale-[1.02] transition-transform" />
-                    </a>
+                    </Link>
                  ))}
               </div>
             </section>
@@ -305,6 +308,111 @@ const HomePage = ({ isEditing }: { isEditing: boolean }) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const ResearchLayout = ({ children, activeSlug }: { children: React.ReactNode, activeSlug?: string }) => {
+  return (
+    <div className="pt-40 pb-32 bg-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <aside className="lg:col-span-3 space-y-6">
+          <div className="sticky top-32">
+             <h3 className="text-xs font-black uppercase tracking-[0.25em] text-slate-400 mb-6 flex items-center gap-2">
+                <Book className="w-4 h-4" /> Research Topics
+             </h3>
+             <nav className="space-y-1">
+                {RESEARCH_PROJECTS.map((proj) => (
+                   <Link 
+                    key={proj.slug}
+                    to={`/research/${proj.slug}`}
+                    className={`block px-4 py-2 text-sm font-bold rounded-xl transition-all ${activeSlug === proj.slug ? 'bg-purple-50 text-[#660099] shadow-sm' : 'text-slate-500 hover:text-[#660099] hover:bg-slate-50'}`}
+                   >
+                    {proj.title}
+                   </Link>
+                ))}
+                <div className="pt-4 mt-4 border-t border-slate-100">
+                   <Link to="/research" className="flex items-center gap-2 px-4 py-2 text-xs font-black uppercase tracking-widest text-[#660099] hover:translate-x-1 transition-transform">
+                      <ArrowRight className="w-3 h-3" /> Overview
+                   </Link>
+                </div>
+             </nav>
+          </div>
+        </aside>
+        <main className="lg:col-span-9">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+};
+
+const ResearchHighlightPage = () => {
+  const { slug } = useParams();
+  const content = RESEARCH_HIGHLIGHT_CONTENT[slug || ""];
+
+  if (!content) return (
+    <ResearchLayout>
+      <div className="text-center py-20">
+        <h2 className="text-3xl font-black serif-font text-slate-900">Project data coming soon...</h2>
+        <Link to="/research" className="text-[#660099] font-bold mt-4 block underline">Back to Overview</Link>
+      </div>
+    </ResearchLayout>
+  );
+
+  return (
+    <ResearchLayout activeSlug={slug}>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-10">
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-5xl font-black text-slate-900 serif-font leading-tight">{content.title}</h1>
+          <div className="flex items-start gap-4 p-6 bg-slate-50 rounded-[2rem] border border-slate-100">
+             <Quote className="w-8 h-8 text-purple-200 flex-shrink-0" />
+             <div className="space-y-2">
+                <p className="text-sm font-bold text-slate-700 leading-relaxed italic">{content.citation}</p>
+                <a href={content.citationUrl} target="_blank" className="inline-flex items-center text-[10px] font-black uppercase tracking-widest text-[#660099] hover:text-purple-800">
+                   View Original Publication <ExternalLink className="ml-1 w-3 h-3" />
+                </a>
+             </div>
+          </div>
+        </div>
+
+        {content.videoUrl && (
+          <div className="aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-slate-900">
+            {content.videoUrl.includes('youtube') ? (
+               <iframe className="w-full h-full" src={content.videoUrl} title={content.title} frameBorder="0" allowFullScreen></iframe>
+            ) : (
+              <video className="w-full h-full object-cover" controls autoPlay loop muted>
+                 <source src={content.videoUrl} type="video/mp4" />
+              </video>
+            )}
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-8 space-y-6">
+            {content.content.map((p, i) => (
+              <p key={i} className="text-lg text-slate-600 leading-relaxed serif-font italic pr-4">{p}</p>
+            ))}
+          </div>
+          <div className="lg:col-span-4">
+            {content.mainImage && (
+              <div className="rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white">
+                <img src={content.mainImage} alt={content.title} className="w-full h-auto" />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="pt-10 border-t border-slate-100 flex justify-between items-center">
+           <Link to="/research" className="inline-flex items-center gap-3 px-6 py-3 bg-purple-50 text-[#660099] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#660099] hover:text-white transition-all shadow-sm">
+              <ChevronRight className="w-4 h-4 rotate-180" /> Back to Research
+           </Link>
+           <div className="flex gap-4">
+              <button className="p-3 bg-slate-50 text-slate-400 rounded-full hover:text-[#660099] transition-colors"><Twitter className="w-5 h-5" /></button>
+              <button className="p-3 bg-slate-50 text-slate-400 rounded-full hover:text-[#660099] transition-colors"><ExternalLink className="w-5 h-5" /></button>
+           </div>
+        </div>
+      </motion.div>
+    </ResearchLayout>
   );
 };
 
@@ -445,6 +553,88 @@ const PublicationsPage = () => {
     </div>
   );
 };
+
+const VirtualTourPage = () => (
+  <div className="pt-40 pb-32 px-6 bg-white min-h-screen">
+    <div className="max-w-6xl mx-auto space-y-20">
+      <div className="text-center space-y-8">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-24 h-24 bg-purple-50 text-[#660099] rounded-[2rem] flex items-center justify-center mx-auto border border-purple-100 shadow-xl">
+          <Compass className="w-12 h-12" />
+        </motion.div>
+        <div>
+          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4 uppercase">Virtual Tour</h1>
+          <p className="text-xl md:text-2xl text-slate-500 max-w-3xl mx-auto italic font-medium leading-relaxed">
+            Explore the Sir Robert Robinson Laboratory at the University of Manchester.
+          </p>
+        </div>
+        <div className="w-24 h-1 bg-[#ffcc00] mx-auto rounded-full"></div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="lg:col-span-4 space-y-8">
+          <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden group">
+            <Info className="absolute -top-4 -right-4 w-24 h-24 text-purple-100 group-hover:scale-110 transition-transform" />
+            <div className="relative z-10 space-y-6">
+              <h3 className="text-2xl font-black text-[#660099] serif-font">Our Facility</h3>
+              <p className="text-slate-600 leading-relaxed">
+                The Leigh group is housed in the <span className="font-bold text-slate-900">Sir Robert Robinson Laboratory</span>, a custom-designed state-of-the-art facility for advanced organic synthesis in the 21st century on the 4th Floor of the Chemistry Building.
+              </p>
+              <div className="space-y-4">
+                <div className="flex gap-4 items-start">
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc00] mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-slate-500 font-semibold">30 x 2m fumehoods in the main lab</p>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc00] mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-slate-500 font-semibold">600 MHz NMR spectrometer with cryoprobe</p>
+                </div>
+                <div className="flex gap-4 items-start">
+                  <div className="w-2 h-2 rounded-full bg-[#ffcc00] mt-2 flex-shrink-0"></div>
+                  <p className="text-sm text-slate-500 font-semibold">Mass spectrometers & microwave synthesizers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-purple-50 p-8 rounded-[2.5rem] border border-purple-100 shadow-sm">
+            <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+              <FlaskConical className="text-[#660099]" /> Manchester Chemistry
+            </h3>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              The University of Manchester has outstanding facilities to support organic chemistry, including NMR spectroscopy at 800, 600, 500, 400 and 300 MHz and state-of-the-art mass spectrometry and X-ray crystallography equipment.
+            </p>
+          </div>
+        </div>
+
+        <div className="lg:col-span-8">
+          <div className="group relative bg-white p-4 rounded-[3rem] border border-slate-100 shadow-2xl transition-all hover:shadow-purple-100">
+             <a href="https://www.catenane.net/images/general/vtourhigh.jpg" target="_blank" rel="noopener noreferrer" className="block relative overflow-hidden rounded-[2.5rem]">
+                <img 
+                  src="images/general/vtourmap_web.jpg" 
+                  alt="Virtual Tour of the Leigh Lab" 
+                  className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.02]" 
+                />
+                <div className="absolute inset-0 bg-[#660099]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                   <div className="bg-white/90 px-6 py-3 rounded-full shadow-xl flex items-center gap-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <Maximize2 className="text-[#660099] w-5 h-5" />
+                      <span className="font-black text-[10px] uppercase tracking-widest text-[#660099]">View Full Resolution Map</span>
+                   </div>
+                </div>
+             </a>
+             <div className="mt-8 flex justify-between items-center px-4">
+                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">Laboratory Floor Plan • 4th Floor</p>
+                <div className="flex gap-2">
+                   <div className="w-3 h-3 rounded-full bg-purple-200"></div>
+                   <div className="w-3 h-3 rounded-full bg-[#ffcc00]"></div>
+                   <div className="w-3 h-3 rounded-full bg-slate-200"></div>
+                </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 const DavidLeighPage = () => {
   return (
@@ -595,7 +785,7 @@ const GroupPage = () => (
           <Users className="w-12 h-12" />
         </motion.div>
         <div>
-          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4">Manchester Team</h1>
+          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight mb-4 uppercase">Manchester Team</h1>
           <p className="text-xl md:text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto italic font-medium">"A diverse community of international researchers dedicated to exploring the boundaries of chemical synthesis."</p>
         </div>
         <div className="w-24 h-1 bg-[#ffcc00] mx-auto rounded-full"></div>
@@ -614,7 +804,7 @@ const ResearchPage = () => (
     <div className="max-w-7xl mx-auto px-6 space-y-32">
       <section className="space-y-12 text-center">
         <div className="space-y-6">
-          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight">Research Frontiers</h1>
+          <h1 className="text-5xl md:text-8xl font-black text-slate-900 serif-font tracking-tight uppercase">Research Frontiers</h1>
           <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">In 2018 our group commissioned a short video from <strong>A Capella Science</strong> to introduce the topic of molecular robotics. The result was <strong>‘Nanobot’</strong>.</p>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -637,12 +827,12 @@ const ResearchPage = () => (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {RESEARCH_PROJECTS.map((project, idx) => (
             <motion.div key={idx} whileHover={{ y: -8 }} className="bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl overflow-hidden transition-all group">
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="block relative aspect-[4/3] bg-slate-100">
+              <Link to={project.link} className="block relative aspect-[4/3] bg-slate-100">
                 <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                    <div className="flex items-center text-white font-bold text-sm gap-2">Learn More <ArrowRight className="w-4 h-4" /></div>
                 </div>
-              </a>
+              </Link>
               <div className="p-6"><h4 className="text-lg font-bold text-slate-900 group-hover:text-[#660099] transition-colors line-clamp-1">{project.title}</h4></div>
             </motion.div>
           ))}
@@ -716,9 +906,11 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<motion.div key="home" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><HomePage isEditing={isEditing} /></motion.div>} />
               <Route path="/research" element={<motion.div key="research" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchPage /></motion.div>} />
+              <Route path="/research/:slug" element={<motion.div key="research-slug" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchHighlightPage /></motion.div>} />
               <Route path="/david" element={<motion.div key="david" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><DavidLeighPage /></motion.div>} />
               <Route path="/group" element={<motion.div key="group" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupPage /></motion.div>} />
               <Route path="/literature" element={<motion.div key="literature" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><PublicationsPage /></motion.div>} />
+              <Route path="/vtour" element={<motion.div key="vtour" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><VirtualTourPage /></motion.div>} />
             </Routes>
           </AnimatePresence>
         </main>
