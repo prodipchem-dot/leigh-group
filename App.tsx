@@ -96,11 +96,11 @@ const Navbar = () => {
             <img 
               src="images/UoM_logo.png" 
               alt="University of Manchester Logo" 
-              className="h-12 md:h-16 w-auto object-contain"
+              className="h-10 md:h-14 w-auto object-contain"
             />
           </a>
           
-          <div className="w-px h-10 bg-slate-200 hidden sm:block"></div>
+          <div className="w-px h-8 bg-slate-200 hidden sm:block"></div>
           
           <Link to="/" className="group flex flex-col">
             <h1 className="text-xl font-extrabold tracking-tight text-[#660099] group-hover:text-purple-700 transition-colors uppercase leading-none">Leigh group</h1>
@@ -178,17 +178,17 @@ const HomePage = () => {
           <h2 className="text-3xl font-black text-slate-900 serif-font">{content.welcomeTitle}</h2>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20 bg-slate-50 p-8 rounded-[3rem] border border-slate-100">
-          <div className="lg:col-span-8 aspect-video rounded-[2rem] overflow-hidden shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center mb-20 bg-slate-50 p-6 rounded-[2.5rem] border border-slate-100">
+          <div className="lg:col-span-2 aspect-video rounded-[1.5rem] overflow-hidden shadow-xl bg-black">
             <iframe className="w-full h-full" src="https://www.youtube.com/embed/ObvxPSQNMGc?rel=0&showinfo=0" title="Nanobot Intro" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
           </div>
-          <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4">
-             {content.heroGallery.map((hero: any, idx: number) => (
-                <a key={idx} href={hero.link} target="_blank" rel="noopener noreferrer" className="block transform transition-transform hover:scale-105">
-                  <img src={hero.image} alt={hero.alt} className="w-full h-auto rounded-2xl shadow-lg border-2 border-white" />
-                </a>
-             ))}
-          </div>
+          {content.heroGallery.map((hero: any, idx: number) => (
+             <div key={idx} className="lg:col-span-1">
+               <a href={hero.link} target="_blank" rel="noopener noreferrer" className="block transform transition-transform hover:scale-105">
+                 <img src={hero.image} alt={hero.alt} className="w-full h-auto rounded-xl shadow-md border-2 border-white" />
+               </a>
+             </div>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -738,7 +738,7 @@ const ResearchLayout = ({ children, activeSlug }: { children: React.ReactNode, a
         <aside className="lg:col-span-3 space-y-6">
           <div className="sticky top-32">
              <h3 className="text-xs font-black uppercase tracking-[0.25em] text-slate-400 mb-6 flex items-center gap-2">
-                < Book className="w-4 h-4" /> Research Topics
+                <Book className="w-4 h-4" /> Research Topics
              </h3>
              <nav className="space-y-1">
                 {RESEARCH_PROJECTS.map((proj) => (
@@ -1023,7 +1023,7 @@ const PublicationsPage = () => {
           <div className="absolute top-0 left-0 w-2 h-full bg-[#ffcc00]"></div>
           <Award className="w-16 h-16 text-[#ffcc00] mx-auto" />
           <h4 className="text-3xl font-bold text-slate-900 serif-font">Complete Research Legacy</h4>
-          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed text-lg">The Leigh Group has pioneered mechanical bonding, chemical topology, and artificial molecular motors for over three decades. This comprehensive list represents our commitment to scientific discovery at the notation scale.</p>
+          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed text-lg">The Leigh Group has pioneered mechanical bonding, chemical topology, and artificial molecular motors for over three decades. This comprehensive list represents our commitment to scientific discovery at the nanoscale.</p>
           <Link to="/" className="inline-flex items-center text-[#660099] font-bold hover:underline gap-2 mt-4">Back to overview <ChevronRight className="w-4 h-4" /></Link>
         </div>
       </div>
