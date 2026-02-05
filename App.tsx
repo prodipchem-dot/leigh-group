@@ -49,6 +49,17 @@ import { SCIENCE_DOMAINS, GROUP_STATS, MISSION_STATEMENT, PUBLICATIONS, Publicat
 import MolecularCanvas from './components/MolecularCanvas';
 import Assistant from './components/Assistant';
 
+// ScrollToTop component to reset scroll position on route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -1082,6 +1093,7 @@ const Footer = () => (
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col selection:bg-purple-100">
         <Navbar />
         <main className="flex-1">

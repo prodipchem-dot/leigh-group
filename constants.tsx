@@ -400,7 +400,7 @@ export const HOME_ASSETS = {
 };
 
 export const PROF_BIO: ProfBio = {
- name: "David A Leigh",
+  name: "David A Leigh",
   titles: ["FRS", "FRSE", "FRSC", "MAE"],
   education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
   career: [
@@ -486,7 +486,7 @@ export const PROF_BIO: ProfBio = {
 };
 
 export const GROUP_MEMBERS: GroupMember[] = [
-    { name: "Adam Lehchilli", qualification: "MSci, University of Strasbourg, France", email: "ku.ca.retsehcnam.dargtsop@illihchel.mada", image: "images/team/Adam.jpg" },
+   { name: "Adam Lehchilli", qualification: "MSci, University of Strasbourg, France", email: "ku.ca.retsehcnam.dargtsop@illihchel.mada", image: "images/team/Adam.jpg" },
   { name: "Alex Betts", qualification: "MChem, University of Aberdeen, UK", email: "ku.ca.retsehcnam.dargtsop@stteb.rednaxela", image: "images/team/AlexB.jpg" },
   { name: "Axel Troncossi", qualification: "MChem, Wageningen University & Research, Netherlands", email: "ku.ca.retsehcnam.dargtsop@issocnort.lexa", image: "images/team/axelt.jpg" },
   { name: "Chuan Gao", qualification: "PhD, University of Strasbourg, France", email: "ku.ca.retsehcnam@oag.nauhc", image: "images/team/Chuan.jpg" },
@@ -518,7 +518,7 @@ export const SHANGHAI_MEMBERS: GroupMember[] = [
 ];
 
 export const PUBLICATIONS: Record<string, Publication[]> = {
-"2026": [
+  "2026": [
     {
       year: "2026",
       title: "Chiral catalysis-driven rotary molecular motors",
