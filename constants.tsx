@@ -66,7 +66,7 @@ export interface ResearchHighlight {
 
 // Map visibility configuration
 export const MAP_THEME = {
-  ocean: '#e0f2fe', // Lighter, clearer ocean
+  ocean: '#ffffff', // Lighter, clearer ocean
   border: '#1e293b', // Sharper border
   borderOpacity: 0.7,
   landDefault: '#94a3b8',
