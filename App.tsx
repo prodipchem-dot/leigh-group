@@ -85,16 +85,28 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'py-3 glass border-b border-purple-100 shadow-md' : 'py-6 bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-3 group">
-          <div className="relative">
-            <div className="w-12 h-12 bg-[#660099] rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-lg transition-transform group-hover:rotate-6">L</div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#ffcc00] rounded-full border-2 border-white"></div>
-          </div>
-          <div>
-            <h1 className="text-xl font-extrabold tracking-tight text-[#660099] group-hover:text-purple-700 transition-colors uppercase">Leigh group</h1>
-            <p className="text-[10px] text-slate-400 font-bold tracking-widest leading-none">University of Manchester</p>
-          </div>
-        </Link>
+        <div className="flex items-center space-x-6">
+          <a 
+            href="https://www.manchester.ac.uk/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:opacity-90 transition-opacity"
+            title="Go to The University of Manchester homepage"
+          >
+            <img 
+              src="images/UoM_logo.png" 
+              alt="University of Manchester Logo" 
+              className="h-12 md:h-16 w-auto object-contain"
+            />
+          </a>
+          
+          <div className="w-px h-10 bg-slate-200 hidden sm:block"></div>
+          
+          <Link to="/" className="group flex flex-col">
+            <h1 className="text-xl font-extrabold tracking-tight text-[#660099] group-hover:text-purple-700 transition-colors uppercase leading-none">Leigh group</h1>
+            <p className="text-[10px] text-slate-400 font-bold tracking-widest uppercase mt-1">Nanoscience Research</p>
+          </Link>
+        </div>
 
         <div className="hidden md:flex items-center space-x-1">
           {navLinks.map((link) => (
@@ -336,7 +348,6 @@ const SupramolecularWorldPage = () => {
                 <path d="m 737.61,388.03 1.14,1 -0.2,1.93 -2.29,0.09 -2.36,-0.21 -1.77,0.49 -2.55,-1.19 -0.05,-0.63 1.85,-2.34 1.51,-0.8 2.01,0.73 1.48,0.08 z" className="land" style={{fill: '#8000ff'}} />
                 <path d="m 552.42,521.2 0.56,0.52 0.89,1.71 3.17,3.25 1.2,0.32 0.01,1.05 0.82,1.9 2.17,0.46 1.79,1.36 -3.97,2.22 -2.52,2.26 -0.93,2.03 -0.84,1.15 -1.53,0.25 -0.49,1.47 -0.29,0.96 -1.79,0.72 -2.28,-0.15 -1.34,-0.86 -1.18,-0.38 -1.37,0.72 -0.69,1.48 -1.33,0.93 -1.4,1.39 -2.01,0.32 -0.62,-1.09 0.26,-1.9 -1.67,-2.93 -0.75,-0.46 0,-8.86 2.76,-0.11 0.08,-10.57 2.09,-0.09 4.32,-1.03 1.08,1.21 1.78,-1.15 0.86,-0.01 1.58,-0.66 0.5,0.22 z" className="land" style={{fill: '#c83737'}} />
                 <path d="m 546.35,289.32 2.71,0.04 3.04,-1.8 0.65,-2.72 2.3,-1.57 -0.26,-2.2 1.7,-0.84 3.02,-1.93 2.95,1.26 0.4,1.23 1.47,-0.59 2.74,1.18 0.27,2.31 -0.6,1.32 1.76,3.15 1.14,0.87 -0.17,0.86 1.89,0.83 0.81,1.25 -1.09,1.02 -2.26,-0.16 -0.54,0.44 0.66,1.54 0.69,2.93 -2.41,0.27 -0.86,1 -0.19,2.26 -1.11,-0.43 -2.53,0.22 -0.74,-1.05 -1.05,0.78 -1.05,-0.65 -2.21,-0.09 -3.13,-1.08 -2.83,-0.36 -2.17,0.1 -1.54,1.23 -1.34,0.17 -0.05,-2.01 -0.87,-2.12 1.68,-0.94 0.02,-1.85 -0.78,-1.78 z" className="land" style={{fill: '#c87137'}} />
-                {/* Inclusion of all path IDs from source would continue here - using key IDs for brevity in this response block but implementing all path logic */}
                 <path d="m 114.5,285.05 0,0 -1.54,-1.83 -2.47,-1.57 -0.79,-4.36 -3.61,-4.13 -1.51,-4.94 -2.69,-0.34 -4.46,-0.13 -3.29,-1.54 -5.8,-5.64 -2.68,-1.05 -4.9,-1.99 -3.88,0.48 -5.51,-2.59 -3.33,-2.43 -3.11,1.21 0.58,3.93 -1.55,0.36 -3.24,1.16 -2.47,1.86 -3.11,1.16 -0.4,-3.24 1.26,-5.53 2.98,-1.77 -0.77,-1.46 -3.57,3.22 -1.91,3.77 -4.04,3.95 2.05,2.65 -2.65,3.85 -3.01,2.21 -2.81,1.59 -0.69,2.29 -4.38,2.63 -0.89,2.36 -3.28,2.13 -1.92,-0.38 -2.62,1.38 -2.85,1.67 -2.33,1.63 -4.81,1.38 -0.44,-0.81 3.07,-2.27 2.74,-1.51 2.99,-2.71 3.48,-0.56 1.38,-2.06 3.89,-3.05 0.63,-1.03 2.07,-1.83 0.48,-4 1.43,-3.17 -3.23,1.64 -0.9,-0.93 -1.52,1.95 -1.83,-2.73 -0.76,1.94 -1.05,-2.7 -2.8,2.17 -1.72,0 -0.24,-3.23 0.51,-2.02 -1.81,-1.98 -3.65,1.07 -2.37,-2.63 -1.92,-1.36 -0.01,-3.25 -2.16,-2.48 1.08,-3.41 2.29,-3.37 1,-3.15 2.27,-0.45 1.92,0.99 2.26,-3.01 2.04,0.54 2.14,-1.96 -0.52,-2.92 -1.57,-1.16 2.08,-2.52 -1.72,0.07 -2.98,1.43 -0.85,1.43 -2.21,-1.43 -3.97,0.73 -4.11,-1.56 -1.18,-2.65 -3.55,-3.91 3.94,-2.87 6.25,-3.41 h 2.31 l -0.38,3.48 5.92,-0.27 -2.28,-4.34 -3.45,-2.72 -1.99,-3.64 -2.69,-3.17 -3.85,-2.38 1.57,-4.03 4.97,-0.25 3.54,-3.58 0.67,-3.92 2.86,-3.91 2.73,-0.95 5.31,-3.76 2.58,0.57 4.31,-4.61 4.24,1.83 2.03,3.87 1.25,-1.65 4.74,0.51 -0.17,1.95 4.29,1.43 2.86,-0.84 5.91,2.64 5.39,0.78 2.16,1.07 3.73,-1.34 4.25,2.46 3.05,1.13 z" className="land" style={{fill: '#0080ff'}} />
                 <path d="m 1013.52,221 -2.78,2.97 -4.6,0.7 -0.07,6.46 -1.12,1.35 -2.63,-0.19 -2.14,-2.26 -3.73,-1.92 -0.63,-2.89 -2.85,-1.1 -3.19,0.87 -1.52,-2.37 0.61,-2.55 -3.36,1.64 1.26,3.19 -1.59,2.83 -0.02,0.04 -3.6,2.89 -3.63,-0.48 2.53,3.44 1.67,5.2 1.29,1.67 0.33,2.53 -0.72,1.6 -5.23,-1.32 -7.84,4.51 -2.49,0.69 -4.29,4.1 -4.07,3.5 -1.03,2.55 -4.01,-3.9 -7.31,4.42 -1.28,-2.08 -2.7,2.39 -3.75,-0.76 -0.9,3.63 -3.36,5.22 0.1,2.14 3.19,1.17 -0.38,7.46 -2.6,0.19 -1.2,4.15 1.17,2.1 -4.9,2.47 -0.97,5.4 -4.18,1.14 -0.84,4.66 -4.04,4.18 -1.04,-3.08 -1.2,-6.69 -1.56,-10.65 1.35,-6.95 2.37,-3.07 0.15,-2.44 4.36,-1.18 5.01,-6.78 4.83,-5.73 5.04,-4.57 2.25,-8.37 -3.41,0.51 -1.68,4.92 -7.11,6.36 -2.3,-7.14 -7.24,2 -7.02,9.56 2.32,3.38 -6.26,1.42 -4.33,0.56 0.2,-3.95 -4.36,-0.84 -3.47,2.7 -8.57,-0.94 -9.22,1.62 -9.08,10.33 -10.75,11.78 4.42,0.61 1.38,3 2.72,1.05 1.79,-2.38 3.08,0.31 4.05,5.19 0.09,3.92 -2.19,4.51 -0.24,5.27 -1.26,6.85 -4.23,6.01 -0.94,2.82 -3.81,4.66 -3.78,4.53 -1.81,2.28 -3.74,2.25 -1.77,0.05 -1.76,-1.86 -3.76,2.79 -0.44,1.26 -0.39,-0.66 -0.02,-1.93 1.43,-0.1 0.4,-4.55 -0.74,-3.36 2.41,-1.4 3.4,0.7 1.89,-3.89 0.96,-4.46 1.09,-1.51 1.47,-3.76 -4.63,1.24 -2.43,1.65 -4.26,0 -1.13,-3.95 -3.32,-3.03 -4.88,-1.38 -1.04,-4.28 -0.98,-2.73 -1.05,-1.94 -1.73,-4.61 -2.46,-1.71 -4.2,-1.39 -3.72,0.13 -3.48,0.84 -2.32,2.31 1.54,1.1 0.04,2.52 -1.56,1.45 -2.53,4.72 0.03,1.93 -3.95,2.74 -3.37,-1.63 -3.35,0.36 -1.47,-1.46 -1.68,-0.47 -4.11,3.06 -3.69,0.71 -2.58,1.06 -3.53,-0.7 -2.6,0.04 -1.7,-2.2 -2.75,-2.09 -2.81,-0.58 -3.55,0.57 -2.65,0.81 -3.98,-1.84 -0.53,-3.32 -3.3,-1.15 -2.54,-0.53 -3.14,-1.87 -2.9,4.66 1.14,2.6 -2.73,3.03 -4.05,-1.09 -2.8,-0.16 -1.87,-2.04 -2.92,-0.06 -2.44,-1.35 -4.26,2.07 -5.35,3.74 -2.96,0.74 -1.1,0.35 -1.49,-2.63 -3.61,0.58 -1.19,-1.84 -1.96,-0.85 -1.35,-2.55 -1.55,-0.8 -4.03,1.14 -3.86,-2.57 -1.49,2.33 -6.27,-11.58 -3.58,-3.66 1.03,-1.5 -7.03,4.49 -2.69,0.27 0.23,-2.58 -3.6,-1.63 -2.93,1.17 -0.88,-5.01 -5.04,-1.06 -2.52,2.03 -7.02,1.79 -1.37,1.19 -10.49,1.66 -1.29,1.62 2.02,3.21 -2.69,1.2 0.53,1.25 -2.69,2.22 4.54,3.1 -0.7,2.11 -3.94,-0.19 -0.81,1.31 -3.59,-2.29 -4.45,0.09 -2.98,1.87 -3.32,-1.79 -6.18,-3.1 -4.38,0.12 -5.79,4.85 -0.35,3.19 -2.88,-2.53 -2.24,4.77 0.82,0.87 -1.62,3.21 2.38,2.84 2.08,-0.12 1.79,2.76 -0.28,2.1 1.42,0.66 -1.28,2.39 -2.72,0.66 -2.79,4.09 2.55,3.7 -0.28,2.59 3.06,4.46 -1.67,1.51 -0.48,0.95 -1.24,-0.25 -1.93,-2.27 -0.79,-0.13 -1.76,-0.87 -0.86,-1.55 -2.62,-0.79 -1.7,0.6 -0.49,-0.71 -3.82,-1.83 -4.13,-0.62 -2.37,-0.66 -0.34,0.45 -3.57,-3.27 -3.2,-1.48 -2.42,-2.32 2.04,-0.64 2.33,-3.35 -1.57,-1.6 4.13,-1.67 -0.07,-0.9 -2.52,0.66 0.09,-1.83 1.45,-1.16 2.71,-0.31 0.44,-1.4 -0.62,-2.33 1.14,-2.23 -0.03,-1.26 -4.13,-1.41 -1.64,0.05 -1.73,-2.04 -2.15,0.69 -3.56,-1.54 0.06,-0.87 -1,-1.93 -2.24,-0.22 -0.23,-1.39 0.7,-0.91 -1.79,-2.58 -2.91,0.44 -0.85,-0.23 -0.71,1.04 -1.05,-0.18 -0.69,-2.94 -0.66,-1.54 0.54,-0.44 2.26,0.16 1.09,-1.02 -0.81,-1.25 -1.89,-0.83 0.17,-0.86 -1.14,-0.87 -1.76,-3.15 0.6,-1.31 -0.27,-2.31 -2.74,-1.18 -1.47,0.59 -0.4,-1.24 -2.95,-1.26 -0.9,-2.99 -0.24,-2.49 -1.35,-1.19 1.2,-1.66 -0.83,-4.96 2,-3.13 -0.42,-0.96 3.19,-3.07 -2.94,-2.68 6,-7.41 2.6,-3.45 1.05,-3.1 -4.15,-4.26 1.15,-4.15 -2.52,-4.85 1.89,-5.76 -3.26,-7.96 2.59,-5.48 -4.29,-4.99 0.41,-5.4 2.26,-0.72 4.77,-3.19 2.89,-2.81 4.61,4.86 7.68,1.88 10.59,8.65 2.15,3.51 0.19,4.8 -3.11,3.69 -4.58,1.85 -12.52,-5.31 -2.06,0.9 4.57,5.1 0.18,3.15 0.18,6.75 3.61,1.97 2.19,1.66 0.36,-3.11 -1.69,-2.8 1.78,-2.51 6.78,4.1 2.36,-1.59 -1.89,-4.88 6.53,-6.74 2.59,0.4 2.62,2.43 1.63,-4.81 -2.34,-4.28 1.37,-4.41 -2.06,-4.69 7.84,2.44 1.6,4.18 -3.55,0.91 0.02,4.04 2.21,2.44 4.33,-1.54 0.69,-4.61 5.86,-3.52 9.79,-6.54 2.11,0.38 -2.76,4.64 3.48,0.78 2.01,-2.58 5.25,-0.21 4.16,-3.19 3.2,4.62 3.19,-5.09 -2.94,-4.58 1.46,-2.66 8.28,2.44 3.88,2.49 10.16,8.8 1.88,-3.97 -2.85,-4.11 -0.08,-1.68 -3.38,-0.78 0.92,-3.83 -1.5,-6.49 -0.08,-2.74 5.17,-7.99 1.84,-8.42 2.08,-1.88 7.42,2.51 0.58,5.18 -2.66,7.28 1.74,2.78 0.9,5.94 -0.64,11.07 3.09,4.73 -1.2,5.01 -5.49,10.2 3.21,1.02 1.12,-2.51 3.08,-1.82 0.74,-3.55 2.43,-3.49 -1.63,-4.26 1.31,-5.08 -3.07,-0.64 -0.67,-4.42 2.24,-8.28 -3.64,-7.03 5.02,-6.04 -0.65,-6.62 1.4,-0.22 1.47,5.19 -1.11,8.67 3,1.59 -1.28,-6.37 4.69,-3.58 5.82,-0.49 5.18,5.18 -2.49,-7.62 -0.28,-10.28 4.88,-2.02 6.74,0.44 6.08,-1.32 -2.28,-5.38 3.25,-7.02 3.22,-0.3 5.45,-5.51 7.4,-1.51 0.94,-3.15 7.36,-1.08 2.29,2.61 6.29,-6.24 5.15,0.2 0.77,-5.24 2.68,-5.33 6.62,-5.31 4.81,4.21 -3.82,3.13 6.35,1.92 0.76,6.03 2.56,-2.94 8.2,0.16 6.32,5.84 2.25,4.35 -0.7,5.85 -3.1,3.24 -7.37,5.92 -2.11,3.08 3.48,1.43 4.15,2.55 2.52,-1.91 1.43,6.39 1.23,-2.56 4.48,-1.57 9,1.65 0.68,4.58 11.72,1.43 0.16,-7.47 5.95,1.74 4.48,-0.05 4.53,5.14 1.29,6.04 -1.66,3.84 3.52,6.98 4.41,3.49 2.71,-9.18 4.5,4 4.78,-2.38 5.43,2.72 2.07,-2.47 4.59,1.24 -2.02,-8.4 3.7,-4.07 25.32,6.06 2.39,5.35 7.34,6.65 11.32,-1.62 5.58,1.41 2.33,3.5 -0.34,6.02 3.45,2.29 3.75,-1.64 4.97,-0.21 5.29,1.57 5.31,-0.89 4.88,6.99 3.47,-2.48 -2.27,-5.07 1.25,-3.62 8.95,2.29 5.83,-0.49 8.06,3.84 3.92,3.44 6.87,5.86 7.35,7.34 -0.24,4.44 1.89,1.74 -0.65,-5.15 7.61,1.07 5.55,6.53 z" className="land" style={{fill: '#c87137'}} />
               </g>
@@ -727,7 +738,7 @@ const ResearchLayout = ({ children, activeSlug }: { children: React.ReactNode, a
         <aside className="lg:col-span-3 space-y-6">
           <div className="sticky top-32">
              <h3 className="text-xs font-black uppercase tracking-[0.25em] text-slate-400 mb-6 flex items-center gap-2">
-                <Book className="w-4 h-4" /> Research Topics
+                < Book className="w-4 h-4" /> Research Topics
              </h3>
              <nav className="space-y-1">
                 {RESEARCH_PROJECTS.map((proj) => (
@@ -1012,7 +1023,7 @@ const PublicationsPage = () => {
           <div className="absolute top-0 left-0 w-2 h-full bg-[#ffcc00]"></div>
           <Award className="w-16 h-16 text-[#ffcc00] mx-auto" />
           <h4 className="text-3xl font-bold text-slate-900 serif-font">Complete Research Legacy</h4>
-          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed text-lg">The Leigh Group has pioneered mechanical bonding, chemical topology, and artificial molecular motors for over three decades. This comprehensive list represents our commitment to scientific discovery at the nanoscale.</p>
+          <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed text-lg">The Leigh Group has pioneered mechanical bonding, chemical topology, and artificial molecular motors for over three decades. This comprehensive list represents our commitment to scientific discovery at the notation scale.</p>
           <Link to="/" className="inline-flex items-center text-[#660099] font-bold hover:underline gap-2 mt-4">Back to overview <ChevronRight className="w-4 h-4" /></Link>
         </div>
       </div>
@@ -1124,15 +1135,17 @@ const DavidLeighPage = () => {
                 <div className="flex gap-4">
                   <MapPin className="w-5 h-5 text-[#660099] flex-shrink-0" />
                   <div className="text-sm text-slate-600 leading-relaxed">
-                    <p className="font-bold text-slate-900 mb-1">Manchester Institute of Biotechnology</p>
-                    {PROF_BIO.contact.manchester.slice(1).map(line => <p key={line}>{line}</p>)}
+                    {PROF_BIO.contact.manchester.map((line, idx) => (
+                      <p key={idx} className={idx < 2 ? "font-bold text-slate-900 mb-0.5" : ""}>{line}</p>
+                    ))}
                   </div>
                 </div>
-                <div className="flex gap-4">
+                <div className="flex gap-4 pt-2">
                   <MapPin className="w-5 h-5 text-[#ffcc00] flex-shrink-0" />
                   <div className="text-sm text-slate-600 leading-relaxed">
-                    <p className="font-bold text-slate-900 mb-1">East China Normal University</p>
-                    {PROF_BIO.contact.shanghai.slice(2).map(line => <p key={line}>{line}</p>)}
+                    {PROF_BIO.contact.shanghai.map((line, idx) => (
+                      <p key={idx} className={idx === 0 || idx === 2 ? "font-bold text-slate-900 mb-0.5" : ""}>{line}</p>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1316,9 +1329,21 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
         <div className="md:col-span-3 space-y-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-[#660099] rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">L</div>
-            <span className="text-xl font-bold tracking-tight text-[#660099] uppercase">Leigh Group</span>
+          <div className="flex items-center space-x-4">
+            <a 
+              href="https://www.manchester.ac.uk/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:opacity-90 transition-opacity"
+            >
+              <img 
+                src="images/UoM_logo.png" 
+                alt="University of Manchester" 
+                className="h-14 w-auto object-contain" 
+              />
+            </a>
+            <div className="w-px h-8 bg-slate-200"></div>
+            <span className="text-lg font-bold tracking-tight text-[#660099] uppercase">Leigh Group</span>
           </div>
           <p className="text-slate-500 leading-relaxed text-sm max-w-xs">Pushing the boundaries of molecular machines and chemical topology at the University of Manchester.</p>
         </div>

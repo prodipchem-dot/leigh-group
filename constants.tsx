@@ -421,8 +421,24 @@ export const PROF_BIO: ProfBio = {
   ],
   interviews: [],
   contact: {
-    manchester: ["Manchester Institute of Biotechnology", "University of Manchester", "Manchester M1 7DN", "UK"],
-    shanghai: ["School of Chemistry and Molecular Engineering", "East China Normal University", "Shanghai 200241", "China"],
+    manchester: [
+      "Royal Society Research Professor &",
+      "Sir Samuel Hall Professor of Chemistry",
+      "Department of Chemistry",
+      "The University of Manchester",
+      "Oxford Road",
+      "MANCHESTER",
+      "M13 9PL",
+      "United Kingdom"
+    ],
+    shanghai: [
+      "Distinguished Professor",
+      "School of Chemistry and Molecular Engineering",
+      "East China Normal University",
+      "SHANGHAI",
+      "200062",
+      "China"
+    ],
     email: "david.leigh@manchester.ac.uk",
     twitter: "@LeighGroup",
     scholar: "https://scholar.google.com/citations?user=Y_D_S8QAAAAJ",
