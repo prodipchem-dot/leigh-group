@@ -511,13 +511,11 @@ const ResearchHighlightPage = () => {
         </div>
 
         {content.videoUrl && (
-          <div className="aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-slate-900">
+          <div key={content.videoUrl} className="aspect-video rounded-[3rem] overflow-hidden shadow-2xl bg-slate-900">
             {content.videoUrl.includes('youtube.com/embed') ? (
                <iframe className="w-full h-full" src={content.videoUrl} title={content.title} frameBorder="0" allowFullScreen></iframe>
             ) : (
-              <video className="w-full h-full object-cover" controls autoPlay loop muted>
-                 <source src={content.videoUrl} type="video/mp4" />
-              </video>
+              <video key={content.videoUrl} src={content.videoUrl} className="w-full h-full object-cover" controls autoPlay loop muted />
             )}
           </div>
         )}
@@ -1090,29 +1088,37 @@ const Footer = () => (
   </footer>
 );
 
+const AppContent = () => {
+  const location = useLocation();
+
+  return (
+    <div className="min-h-screen flex flex-col selection:bg-purple-100">
+      <Navbar />
+      <main className="flex-1">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<motion.div key="home" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><HomePage /></motion.div>} />
+            <Route path="/research" element={<motion.div key="research" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchPage /></motion.div>} />
+            <Route path="/research/:slug" element={<motion.div key={location.pathname} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchHighlightPage /></motion.div>} />
+            <Route path="/david" element={<motion.div key="david" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><DavidLeighPage /></motion.div>} />
+            <Route path="/group" element={<motion.div key="group" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupPage /></motion.div>} />
+            <Route path="/literature" element={<motion.div key="literature" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><PublicationsPage /></motion.div>} />
+            <Route path="/vtour" element={<motion.div key="vtour" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><VirtualTourPage /></motion.div>} />
+            <Route path="/group-matters" element={<motion.div key="group-matters" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupMattersPage /></motion.div>} />
+          </Routes>
+        </AnimatePresence>
+      </main>
+      <Footer />
+      <Assistant />
+    </div>
+  );
+};
+
 const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col selection:bg-purple-100">
-        <Navbar />
-        <main className="flex-1">
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<motion.div key="home" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><HomePage /></motion.div>} />
-              <Route path="/research" element={<motion.div key="research" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchPage /></motion.div>} />
-              <Route path="/research/:slug" element={<motion.div key="research-slug" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><ResearchHighlightPage /></motion.div>} />
-              <Route path="/david" element={<motion.div key="david" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><DavidLeighPage /></motion.div>} />
-              <Route path="/group" element={<motion.div key="group" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupPage /></motion.div>} />
-              <Route path="/literature" element={<motion.div key="literature" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><PublicationsPage /></motion.div>} />
-              <Route path="/vtour" element={<motion.div key="vtour" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><VirtualTourPage /></motion.div>} />
-              <Route path="/group-matters" element={<motion.div key="group-matters" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}><GroupMattersPage /></motion.div>} />
-            </Routes>
-          </AnimatePresence>
-        </main>
-        <Footer />
-        <Assistant />
-      </div>
+      <AppContent />
     </Router>
   );
 };
