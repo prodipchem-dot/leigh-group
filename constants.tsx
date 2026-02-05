@@ -416,7 +416,7 @@ export const HOME_ASSETS = {
 };
 
 export const PROF_BIO: ProfBio = {
-  name: "David A Leigh",
+ name: "David A Leigh",
   titles: ["FRS", "FRSE", "FRSC", "MAE"],
   education: "B.Sc. (1984); Ph. D. (1987) University of Sheffield",
   career: [
